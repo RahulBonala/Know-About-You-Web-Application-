@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Know About You | Identity Analytics</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* --- PROFESSIONAL STYLING --- */
+        :root {
+            --bg-color: #f8fafc;
+            --text-primary: #1e293b;
+            --text-secondary: #64748b;
+            --primary-blue: #2563eb;
+            --primary-dark: #1d4ed8;
+            --secondary-slate: #0f172a;
+            --white: #ffffff;
+            --border-color: #e2e8f0;
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        /* Views */
+        .hidden {
+            display: none !important;
+        }
+
+        .view {
+            display: none;
+            min-height: 100vh;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        .view.active {
+            display: flex;
+        }
+
+        .view.scrollable {
+            justify-content: flex-start;
+            height: auto;
+            padding-top: 40px;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Buttons */
+        .btn {
+            padding: 12px 24px;
+            border-radius: 8px;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.2s;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .btn-primary {
+            background: var(--primary-blue);
+            color: white;
+            box-shadow: 0 4px 6px rgba(37, 99, 235, 0.2);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            border: 1px solid var(--secondary-slate);
+            color: var(--secondary-slate);
+        }
+
+        /* Cards */
+        .card {
+            background: var(--white);
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: var(--shadow-md);
+            width: 100%;
+            max-width: 500px;
+            border: 1px solid var(--border-color);
+        }
+
+        /* Inputs */
+        input {
+            width: 100%;
+            padding: 12px;
+            margin: 8px 0 20px;
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
+            font-size: 1rem;
+            transition: border 0.2s;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: var(--primary-blue);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        label {
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: var(--secondary-slate);
+        }
+
+        /* Loading Spinner */
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 4px solid #e2e8f0;
+            border-top: 4px solid var(--primary-blue);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Results Grid */
+        .results-container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding-bottom: 60px;
+        }
+
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+            width: 100%;
+        }
+
+        .result-card {
+            background: var(--white);
+            padding: 30px;
+            border-radius: 16px;
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-sm);
+            border-left: 5px solid var(--primary-blue);
+            transition: transform 0.2s;
+        }
+
+        .result-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .result-card h3 {
+            color: var(--primary-blue);
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #f1f5f9;
+            padding-bottom: 10px;
+        }
+
+        .result-card p {
+            color: var(--text-primary);
+            font-size: 1.05rem;
+        }
+
+        /* Mobile Adjustments */
+        @media(max-width: 768px) {
+            .results-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .card {
+                padding: 25px;
+            }
+
+            h1 {
+                font-size: 2rem !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="view-landing" class="view active">
+        <h1
+            style="font-size: 3rem; font-weight: 800; color: var(--secondary-slate); margin-bottom: 15px; text-align: center;">
+            Know About You.</h1>
+        <p
+            style="color: var(--text-secondary); font-size: 1.2rem; margin-bottom: 40px; text-align: center; max-width: 600px;">
+            Data-driven insights into your timeline, career, and psychology.<br>
+            <span style="font-size: 0.9rem; opacity: 0.8;">(No Database. No Tracking. Just Analysis.)</span>
+        </p>
+        <div style="display: flex; gap: 15px;">
+            <button class="btn btn-secondary" onclick="runPrank()">Login</button>
+            <button class="btn btn-primary" onclick="switchView('view-terms')">Get Started</button>
+        </div>
+    </div>
+
+    <div id="view-prank" class="view">
+        <div style="text-align: center;">
+            <img src="https://media.giphy.com/media/10yXFkBJ0MwGQ0/giphy.gif"
+                style="width: 300px; border-radius: 12px; margin-bottom: 20px; box-shadow: 0 10px 20px rgba(0,0,0,0.1);">
+            <h2 style="color: var(--secondary-slate); margin-bottom: 10px;">Login? We don't have a database!</h2>
+            <p style="color: var(--text-secondary);">We are too cheap to buy storage. Redirecting you...</p>
+        </div>
+    </div>
+
+    <div id="view-terms" class="view">
+        <div class="card">
+            <h2 style="margin-bottom: 20px;">Terms of Service</h2>
+            <div
+                style="background: #f8fafc; padding: 20px; border-radius: 8px; font-size: 0.95rem; color: #64748b; margin-bottom: 20px;">
+                <p style="margin-bottom: 10px;">1. By clicking Proceed, you acknowledge that you are about to receive
+                    AI-generated life advice, which is roughly as reliable as a fortune cookie.</p>
+                <p style="margin-bottom: 10px;">2. We don't have a database. Your data vanishes when you close this tab
+                    (we are too cheap for cloud storage).</p>
+                <p>3. If the AI insults you, remember: it's just a language model predicting the next token. Don't take
+                    it personally.</p>
+            </div>
+            <label style="display: flex; gap: 10px; align-items: center; cursor: pointer;">
+                <input type="checkbox" id="terms-check"
+                    onchange="document.getElementById('btn-terms').disabled = !this.checked">
+                I agree (I read nothing)
+            </label>
+            <button id="btn-terms" class="btn btn-primary" style="width: 100%; margin-top: 25px;" disabled
+                onclick="switchView('view-form')">Proceed</button>
+        </div>
+    </div>
+
+    <div id="view-form" class="view scrollable">
+        <div class="card" id="input-card" style="margin-bottom: 50px;">
+            <h2 style="margin-bottom: 25px; color: var(--secondary-slate);">Initialize Analysis</h2>
+            <label>Full Name</label>
+            <input type="text" id="inp-name" placeholder="John Doe">
+            <label>Date of Birth</label>
+            <input type="date" id="inp-dob">
+            <label>Time of Birth</label>
+            <input type="time" id="inp-tob">
+            <label>Place of Birth</label>
+            <input type="text" id="inp-pob" placeholder="City, Country">
+            <button class="btn btn-primary" style="width: 100%; margin-top: 10px;" onclick="startAnalysis()">Analyze
+                Identity</button>
+        </div>
+
+        <div id="loading-box" class="hidden" style="text-align: center; margin-top: 50px;">
+            <div class="spinner"></div>
+            <h3 id="loading-text" style="color: var(--secondary-slate);">Connecting to Neural Net...</h3>
+            <p style="color: var(--text-secondary); margin-top: 10px; font-size: 0.9rem;">(This may take up to 15
+                seconds)</p>
+        </div>
+
+        <div id="results-area" class="results-container hidden">
+            <div
+                style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; border-bottom: 1px solid #e2e8f0; padding-bottom: 20px;">
+                <h2 style="font-size: 2rem; color: var(--secondary-slate);">Analysis Report</h2>
+                <button class="btn btn-secondary" onclick="location.reload()">Reset</button>
+            </div>
+            <div id="results-grid" class="results-grid"></div>
+        </div>
+    </div>
+
+    <script>
+        // *** API CONFIGURATION ***
+        const API_KEY = 'AIzaSyAEeHwZFLK4wadFYuLwAEgircOTLASHLzQ'; // Your working key
+
+        // --- View Navigation ---
+        function switchView(id) {
+            document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+            if (id === 'view-form') window.scrollTo(0, 0);
+        }
+
+        function runPrank() {
+            switchView('view-prank');
+            setTimeout(() => switchView('view-landing'), 3500);
+        }
+
+        // --- Auto-Detect Model Logic ---
+        async function getBestModel() {
+            try {
+                // Try finding the best available model dynamically
+                const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models?key=${API_KEY}`);
+                const data = await response.json();
+                if (data.error) return "models/gemini-1.5-flash"; // Fallback
+
+                const available = data.models.filter(m => m.supportedGenerationMethods.includes("generateContent"));
+
+                // Prioritize Flash for speed, then Pro
+                let best = available.find(m => m.name.includes("flash"));
+                if (!best) best = available.find(m => m.name.includes("pro"));
+
+                return best ? best.name : "models/gemini-1.5-flash";
+            } catch (e) {
+                return "models/gemini-1.5-flash"; // Safe fallback
+            }
+        }
+
+        // --- Main Logic ---
+        async function startAnalysis() {
+            const name = document.getElementById('inp-name').value;
+            const dob = document.getElementById('inp-dob').value;
+            const tob = document.getElementById('inp-tob').value;
+            const pob = document.getElementById('inp-pob').value;
+
+            if (!name || !dob) { alert("Please enter at least Name and Date of Birth."); return; }
+
+            // UI Transition
+            document.getElementById('input-card').classList.add('hidden');
+            document.getElementById('loading-box').classList.remove('hidden');
+
+            const modelName = await getBestModel();
+
+            // Funny loading messages
+            const messages = ["Triangulating star positions...", "Running Gemini AI protocols...", "Judging your life choices...", "Formatting beautiful JSON...", "Almost there..."];
+            let msgIdx = 0;
+            const msgInterval = setInterval(() => {
+                document.getElementById('loading-text').innerText = messages[msgIdx++ % messages.length];
+            }, 1200);
+
+            const prompt = `
+            Act as a witty, data-driven life analyst. Analyze this user:
+            Name: ${name}, DOB: ${dob}, Time: ${tob}, Place: ${pob}.
+            
+            Return a strictly valid JSON object (no markdown, no code blocks) with these 7 keys:
+            - timeline (string: likely milestones)
+            - strengths (string: personality traits)
+            - career (string: 5 suitable paths)
+            - decisions (string: logic vs impulse)
+            - relationships (string: communication style)
+            - energy (string: productivity peaks)
+            - lessons (string: 3 life lessons)
+            `;
+
+            try {
+                const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/${modelName}:generateContent?key=${API_KEY}`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] })
+                });
+
+                if (!response.ok) {
+                    const err = await response.json();
+                    if (err.error?.message?.includes("overloaded")) {
+                        throw new Error("AI Servers are busy. Please click 'Reset' and try again in 10 seconds.");
+                    }
+                    throw new Error("Connection failed. Please try again.");
+                }
+
+                const data = await response.json();
+                const rawText = data.candidates[0].content.parts[0].text;
+
+                // Robust JSON Cleaning
+                let cleanJson = rawText.replace(/```json/g, '').replace(/```/g, '').trim();
+                const first = cleanJson.indexOf('{');
+                const last = cleanJson.lastIndexOf('}');
+                if (first !== -1 && last !== -1) cleanJson = cleanJson.substring(first, last + 1);
+
+                const parsedData = JSON.parse(cleanJson);
+
+                clearInterval(msgInterval);
+                renderResults(parsedData);
+
+            } catch (error) {
+                clearInterval(msgInterval);
+                alert("Error: " + error.message);
+                // Reset UI on error
+                document.getElementById('loading-box').classList.add('hidden');
+                document.getElementById('input-card').classList.remove('hidden');
+            }
+        }
+
+        function renderResults(data) {
+            document.getElementById('loading-box').classList.add('hidden');
+            document.getElementById('results-area').classList.remove('hidden');
+
+            const container = document.getElementById('results-grid');
+            container.innerHTML = "";
+
+            const sections = [
+                { key: 'timeline', icon: '📅', title: 'Life Timeline' },
+                { key: 'strengths', icon: '💪', title: 'Strengths & Weaknesses' },
+                { key: 'career', icon: '💼', title: 'Career Patterns' },
+                { key: 'decisions', icon: '🧠', title: 'Decision Style' },
+                { key: 'relationships', icon: '❤️', title: 'Relationship Dynamics' },
+                { key: 'energy', icon: '⚡', title: 'Energy Map' },
+                { key: 'lessons', icon: '🎓', title: 'Life Lessons' }
+            ];
+
+            sections.forEach(sec => {
+                // Find matching key case-insensitively
+                const dataKey = Object.keys(data).find(k => k.toLowerCase().includes(sec.key));
+                if (dataKey && data[dataKey]) {
+                    const div = document.createElement('div');
+                    div.className = 'result-card';
+                    div.innerHTML = `<h3>${sec.icon} ${sec.title}</h3><p>${data[dataKey].replace(/\n/g, '<br>')}</p>`;
+                    container.appendChild(div);
+                }
+            });
+        }
+    </script>
+</body>
+
+</html>
