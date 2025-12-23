@@ -212,6 +212,74 @@
             h1 {
                 font-size: 2rem !important;
             }
+
+            .results-container {
+                flex-direction: column;
+            }
+
+            .results-sidebar {
+                width: 100% !important;
+                margin-bottom: 30px;
+                position: static !important;
+            }
+        }
+
+        /* New Split Layout */
+        .results-container {
+            display: flex;
+            gap: 30px;
+            align-items: flex-start;
+        }
+
+        .results-sidebar {
+            width: 300px;
+            flex-shrink: 0;
+            background: white;
+            padding: 25px;
+            border-radius: 16px;
+            box-shadow: var(--shadow-md);
+            border: 1px solid var(--border-color);
+            position: sticky;
+            top: 20px;
+        }
+
+        .results-main {
+            flex-grow: 1;
+            width: 100%;
+        }
+
+        .user-detail-item {
+            margin-bottom: 15px;
+            border-bottom: 1px solid #f1f5f9;
+            padding-bottom: 10px;
+        }
+
+        .user-detail-item:last-child {
+            border-bottom: none;
+        }
+
+        .user-detail-label {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .user-detail-value {
+            font-size: 1.1rem;
+            color: var(--secondary-slate);
+            font-weight: 500;
+        }
+
+        .astro-badge {
+            display: inline-block;
+            background: #eff6ff;
+            color: var(--primary-dark);
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-top: 5px;
         }
     </style>
 </head>
@@ -243,24 +311,38 @@
     </div>
 
     <div id="view-terms" class="view">
-        <div class="card">
-            <h2 style="margin-bottom: 20px;">Terms of Service</h2>
+        <div class="card" style="max-width: 600px;">
+            <h2 style="margin-bottom: 20px; color: var(--secondary-slate);">Terms & "Conditions"</h2>
             <div
-                style="background: #f8fafc; padding: 20px; border-radius: 8px; font-size: 0.95rem; color: #64748b; margin-bottom: 20px;">
-                <p style="margin-bottom: 10px;">1. By clicking Proceed, you acknowledge that you are about to receive
-                    AI-generated life advice, which is roughly as reliable as a fortune cookie.</p>
-                <p style="margin-bottom: 10px;">2. We don't have a database. Your data vanishes when you close this tab
-                    (we are too cheap for cloud storage).</p>
-                <p>3. If the AI insults you, remember: it's just a language model predicting the next token. Don't take
-                    it personally.</p>
+                style="background: #f8fafc; padding: 25px; border-radius: 12px; font-size: 0.95rem; color: #475569; margin-bottom: 25px; text-align: left; border: 1px dashed #cbd5e1;">
+
+                <p style="margin-bottom: 12px;"><strong>🚫 No Database, No Money:</strong> We don't collect your data
+                    because we don't have a backend database. We are too broke to afford cloud storage, so we literally
+                    *can't* steal your data even if we wanted to.</p>
+
+                <p style="margin-bottom: 12px;"><strong>🧂 A Pinch of Salt:</strong> This entire analysis is generated
+                    by AI (Gemini). It might be hallucinating. If it says you are a "legendary potato," just roll with
+                    it. Do not base major life decisions on this.</p>
+
+                <p style="margin-bottom: 12px;"><strong>🤖 AI Disclaimer:</strong> The stars didn't write this, a neural
+                    network did. It might be wrong. It implies nothing. It's for fun.</p>
+
+                <p style="margin-bottom: 12px;"><strong>🌪️ Data Vanishing Act:</strong> Once you reload this page, your
+                    data is gone forever (poof!). We prefer it that way, and honestly, so should you.</p>
+
+                <p><strong>😄 Have Fun:</strong> Don't take it seriously. Life is too short to be offended by a robot.
+                </p>
             </div>
-            <label style="display: flex; gap: 10px; align-items: center; cursor: pointer;">
+
+            <label
+                style="display: flex; gap: 10px; align-items: center; cursor: pointer; justify-content: center; margin-bottom: 20px;">
                 <input type="checkbox" id="terms-check"
                     onchange="document.getElementById('btn-terms').disabled = !this.checked">
-                I agree (I read nothing)
+                <span style="user-select: none;">I agree (I actually read the funny parts)</span>
             </label>
-            <button id="btn-terms" class="btn btn-primary" style="width: 100%; margin-top: 25px;" disabled
-                onclick="switchView('view-form')">Proceed</button>
+
+            <button id="btn-terms" class="btn btn-primary" style="width: 100%;" disabled
+                onclick="switchView('view-form')">Proceed to Destiny</button>
         </div>
     </div>
 
@@ -275,8 +357,11 @@
             <input type="time" id="inp-tob">
             <label>Place of Birth</label>
             <input type="text" id="inp-pob" placeholder="City, Country">
-            <button class="btn btn-primary" style="width: 100%; margin-top: 10px;" onclick="startAnalysis()">Analyze
-                Identity</button>
+
+            <div style="display: flex; gap: 10px; margin-top: 15px;">
+                <button class="btn btn-secondary" style="flex: 1;" onclick="resetFormInput()">Reset</button>
+                <button class="btn btn-primary" style="flex: 2;" onclick="startAnalysis()">Analyze Identity</button>
+            </div>
         </div>
 
         <div id="loading-box" class="hidden" style="text-align: center; margin-top: 50px;">
@@ -287,12 +372,36 @@
         </div>
 
         <div id="results-area" class="results-container hidden">
-            <div
-                style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; border-bottom: 1px solid #e2e8f0; padding-bottom: 20px;">
-                <h2 style="font-size: 2rem; color: var(--secondary-slate);">Analysis Report</h2>
-                <button class="btn btn-secondary" onclick="location.reload()">Reset</button>
+            <!-- Left Sidebar: User Details & Astro -->
+            <div class="results-sidebar">
+                <h3
+                    style="margin-bottom: 20px; color: var(--secondary-slate); border-bottom: 2px solid var(--primary-blue); padding-bottom: 10px;">
+                    Subject Profile</h3>
+
+                <div id="user-details-render">
+                    <!-- Populated by JS -->
+                </div>
+
+                <div style="margin-top: 30px;">
+                    <h3 style="margin-bottom: 15px; color: var(--secondary-slate); font-size: 1rem;">Cosmic Coordinates
+                    </h3>
+                    <div id="astro-details-render">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+
+                <button class="btn btn-secondary" style="width: 100%; margin-top: 30px;"
+                    onclick="location.reload()">Start Over</button>
             </div>
-            <div id="results-grid" class="results-grid"></div>
+
+            <!-- Right Side: Analysis Cards -->
+            <div class="results-main">
+                <div style="margin-bottom: 20px;">
+                    <h2 style="font-size: 2rem; color: var(--secondary-slate);">Identity Analysis</h2>
+                    <p style="color: var(--text-secondary);">Here is what the algorithm thinks of you.</p>
+                </div>
+                <div id="results-grid" class="results-grid"></div>
+            </div>
         </div>
     </div>
 
@@ -332,6 +441,14 @@
             }
         }
 
+        // --- Input Reset ---
+        function resetFormInput() {
+            document.getElementById('inp-name').value = '';
+            document.getElementById('inp-dob').value = '';
+            document.getElementById('inp-tob').value = '';
+            document.getElementById('inp-pob').value = '';
+        }
+
         // --- Main Logic ---
         async function startAnalysis() {
             const name = document.getElementById('inp-name').value;
@@ -348,7 +465,7 @@
             const modelName = await getBestModel();
 
             // Funny loading messages
-            const messages = ["Triangulating star positions...", "Running Gemini AI protocols...", "Judging your life choices...", "Formatting beautiful JSON...", "Almost there..."];
+            const messages = ["Triangulating star positions...", "Running Gemini AI protocols...", "Judging your life choices...", "Formatting beautiful JSON...", "Calculating Tithi & Yog...", "Almost there..."];
             let msgIdx = 0;
             const msgInterval = setInterval(() => {
                 document.getElementById('loading-text').innerText = messages[msgIdx++ % messages.length];
@@ -358,14 +475,22 @@
             Act as a witty, data-driven life analyst. Analyze this user:
             Name: ${name}, DOB: ${dob}, Time: ${tob}, Place: ${pob}.
             
-            Return a strictly valid JSON object (no markdown, no code blocks) with these 7 keys:
-            - timeline (string: likely milestones)
-            - strengths (string: personality traits)
-            - career (string: 5 suitable paths)
-            - decisions (string: logic vs impulse)
-            - relationships (string: communication style)
-            - energy (string: productivity peaks)
-            - lessons (string: 3 life lessons)
+            Return a strictly valid JSON object (no markdown, no code blocks) with the following specific keys:
+
+            1. "tithi" (string: approx tithi based on date)
+            2. "yog" (string: approx yog)
+            3. "moon_sign" (string: calculated moon sign)
+            4. "nakshatra" (string: calculated nakshatra)
+            5. "timeline" (string: likely milestones)
+            6. "strengths" (string: personality traits)
+            7. "career" (string: 5 suitable paths)
+            8. "decisions" (string: logic vs impulse)
+            9. "relationships" (string: communication style)
+            10. "energy" (string: productivity peaks)
+            11. "lessons" (string: 3 life lessons)
+            12. "gemstone" (string: a lucky gemstone and why)
+
+            Make the tone witty but insightful.
             `;
 
             try {
@@ -395,7 +520,8 @@
                 const parsedData = JSON.parse(cleanJson);
 
                 clearInterval(msgInterval);
-                renderResults(parsedData);
+                // Pass user input details too
+                renderResults(parsedData, { name, dob, tob, pob });
 
             } catch (error) {
                 clearInterval(msgInterval);
@@ -406,10 +532,53 @@
             }
         }
 
-        function renderResults(data) {
+        function renderResults(data, userDetails) {
             document.getElementById('loading-box').classList.add('hidden');
             document.getElementById('results-area').classList.remove('hidden');
 
+            // 1. Render User Details Sidebar
+            const userHTML = `
+                <div class="user-detail-item">
+                    <div class="user-detail-label">Name</div>
+                    <div class="user-detail-value">${userDetails.name}</div>
+                </div>
+                <div class="user-detail-item">
+                    <div class="user-detail-label">DOB</div>
+                    <div class="user-detail-value">${userDetails.dob}</div>
+                </div>
+                <div class="user-detail-item">
+                    <div class="user-detail-label">Time</div>
+                    <div class="user-detail-value">${userDetails.tob || 'N/A'}</div>
+                </div>
+                <div class="user-detail-item">
+                    <div class="user-detail-label">Place</div>
+                    <div class="user-detail-value">${userDetails.pob || 'N/A'}</div>
+                </div>
+            `;
+            document.getElementById('user-details-render').innerHTML = userHTML;
+
+            // 2. Render Astro Details Sidebar
+            const astroHTML = `
+                <div class="user-detail-item">
+                    <div class="user-detail-label">Tithi</div>
+                    <div class="user-detail-value">${data.tithi || '?'}</div>
+                </div>
+                <div class="user-detail-item">
+                    <div class="user-detail-label">Yog</div>
+                    <div class="user-detail-value">${data.yog || '?'}</div>
+                </div>
+                <div class="user-detail-item">
+                    <div class="user-detail-label">Moon Sign</div>
+                    <div class="user-detail-value">${data.moon_sign || '?'}</div>
+                </div>
+                <div class="user-detail-item">
+                    <div class="user-detail-label">Nakshatra</div>
+                    <div class="user-detail-value">${data.nakshatra || '?'}</div>
+                </div>
+            `;
+            document.getElementById('astro-details-render').innerHTML = astroHTML;
+
+            // 3. Render Grid Cards (The 8 Prompts)
             const container = document.getElementById('results-grid');
             container.innerHTML = "";
 
@@ -420,7 +589,8 @@
                 { key: 'decisions', icon: '🧠', title: 'Decision Style' },
                 { key: 'relationships', icon: '❤️', title: 'Relationship Dynamics' },
                 { key: 'energy', icon: '⚡', title: 'Energy Map' },
-                { key: 'lessons', icon: '🎓', title: 'Life Lessons' }
+                { key: 'lessons', icon: '🎓', title: 'Life Lessons' },
+                { key: 'gemstone', icon: '💎', title: 'Lucky Essence' }
             ];
 
             sections.forEach(sec => {
