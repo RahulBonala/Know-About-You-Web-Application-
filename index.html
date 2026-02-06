@@ -236,6 +236,8 @@
 
             .results-sidebar {
                 width: 100% !important;
+                flex-direction: column;
+                /* Stack vertically on mobile */
                 margin-bottom: 30px;
                 position: static !important;
             }
@@ -244,21 +246,41 @@
         /* New Split Layout */
         .results-container {
             display: flex;
+            flex-direction: column;
+            /* Changed from row to column */
             gap: 30px;
             align-items: flex-start;
         }
 
         .results-sidebar {
-            width: 300px;
+            width: 100%;
+            /* Full width */
             flex-shrink: 0;
             background: white;
             padding: 25px;
             border-radius: 16px;
             box-shadow: var(--shadow-md);
             border: 1px solid var(--border-color);
-            position: sticky;
-            top: 20px;
+            position: static;
+            /* Remove sticky */
+
+            /* Horizontal Layout */
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            gap: 30px;
+            align-items: flex-start;
         }
+
+        /* Ensure sections inside horizontal bar take space */
+        .results-sidebar>div {
+            flex: 1;
+        }
+
+        /* Specific fix for the button container in sidebar if needed, 
+           since "Start Over" button was directly inside in previous HTML structure check needed.
+           Actually in the existing HTML, button is a direct child. 
+        */
 
         .results-main {
             flex-grow: 1;
@@ -266,9 +288,10 @@
         }
 
         .user-detail-item {
-            margin-bottom: 15px;
+            margin-bottom: 10px;
+            /* Reduced margin for compact horizontal view */
             border-bottom: 1px solid #f1f5f9;
-            padding-bottom: 10px;
+            padding-bottom: 5px;
         }
 
         .user-detail-item:last-child {
@@ -390,25 +413,34 @@
 
         <div id="results-area" class="results-container hidden">
             <!-- Left Sidebar: User Details & Astro -->
+            <!-- Top Bar: User Details & Astro -->
             <div class="results-sidebar">
-                <h3
-                    style="margin-bottom: 20px; color: var(--secondary-slate); border-bottom: 2px solid var(--primary-blue); padding-bottom: 10px;">
-                    Subject Profile</h3>
-
-                <div id="user-details-render">
-                    <!-- Populated by JS -->
+                <!-- Col 1: Subject Profile -->
+                <div>
+                    <h3
+                        style="margin-bottom: 20px; color: var(--secondary-slate); border-bottom: 2px solid var(--primary-blue); padding-bottom: 10px;">
+                        Subject Profile</h3>
+                    <div id="user-details-render">
+                        <!-- Populated by JS -->
+                    </div>
                 </div>
 
-                <div style="margin-top: 30px;">
-                    <h3 style="margin-bottom: 15px; color: var(--secondary-slate); font-size: 1rem;">Cosmic Coordinates
+                <!-- Col 2: Cosmic Coordinates -->
+                <div>
+                    <h3
+                        style="margin-bottom: 15px; color: var(--secondary-slate); font-size: 1rem; border-bottom: 2px solid var(--primary-blue); padding-bottom: 10px;">
+                        Cosmic Coordinates
                     </h3>
                     <div id="astro-details-render">
                         <!-- Populated by JS -->
                     </div>
                 </div>
 
-                <button class="btn btn-secondary" style="width: 100%; margin-top: 30px;"
-                    onclick="location.reload()">Start Over</button>
+                <!-- Col 3: Action -->
+                <div style="display: flex; align-items: center; justify-content: center;">
+                    <button class="btn btn-secondary" style="width: 100%;" onclick="location.reload()">Start
+                        Over</button>
+                </div>
             </div>
 
             <!-- Right Side: Analysis Cards -->
