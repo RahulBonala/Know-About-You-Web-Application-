@@ -33,7 +33,7 @@ const forms = {
 };
 
 // API Configuration
-const API_KEY = 'AIzaSyAOD6cjx3Ebi0yLaBPnqaf5SFQv-UZ1tpM';
+const API_KEY = 'AIzaSyCqW8AuOnS5JGxZjcXzqFvOMB0mXsmE0U0';
 const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${API_KEY}`;
 
 // --- Navigation Logic ---
