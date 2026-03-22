@@ -133,8 +133,8 @@
     .btn-ghost { background: transparent; color: var(--text-mid); border: 1px solid var(--rim); }
     .btn-ghost:hover { border-color: rgba(255,255,255,0.2); color: var(--text-bright); }
     
-    .btn-outline-gold { background: var(--gold-soft); color: var(--gold); border: 1px solid var(--gold-glow); }
-    .btn-outline-gold:hover { background: rgba(232,184,75,0.2); transform: translateY(-2px); }
+    .btn-outline-gold { border: 1px solid var(--gold); color: var(--gold); background: transparent; }
+    .btn-outline-gold:hover { background: rgba(232, 184, 75, 0.1); box-shadow: 0 0 15px var(--gold-glow); }
     
     .btn-danger { background: transparent; color: var(--danger); border: 1px solid rgba(248,113,113,0.3); }
     .btn-danger:hover { background: rgba(248,113,113,0.1); }
@@ -340,7 +340,7 @@
     .oracle-header { grid-column: 1 / -1; display: flex; justify-content: space-between; align-items: center; background: var(--panel); border-radius: 12px; padding: 20px 32px; border: 1px solid var(--cyan-soft); }
     .oracle-dateinfo { font-size: 1.1rem; color: var(--text-bright); display: flex; align-items: center; gap: 12px; }
     .oracle-quote { font-size: clamp(1.4rem, 4vw, 2rem); color: var(--gold); text-align: center; margin: 24px 0; padding: 0 20px; line-height: 1.4; grid-column: 1/-1;}
-    .focus-word { font-size: clamp(2.5rem, 6vw, 3.5rem); background: linear-gradient(90deg, var(--gold), var(--cyan)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; line-height: 1.2; text-align: center; margin-bottom: 16px; }
+    .focus-word { font-size: clamp(2.5rem, 6vw, 3.5rem); background: linear-gradient(90deg, var(--gold), var(--cyan)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; line-height: 1.2; text-align: center; margin-bottom: 16px; }
 
     /* Toast Notification */
     .toast {
@@ -799,11 +799,11 @@
       const res = await fetch(`/api/models`);
       if(res.ok) {
         const data = await res.json();
-        const flash = data.models.find(m => m.name.includes('gemini-1.5-flash'));
+        const flash = data.models.find(m => m.name.includes('gemini-2.5-flash') || m.name.includes('gemini-2.0-flash') || m.name.includes('gemini-1.5-flash') || m.name.includes('flash'));
         if(flash) return flash.name;
       }
     } catch(e) {}
-    return 'models/gemini-1.5-flash';
+    return 'models/gemini-2.0-flash';
   }
   async function fetchGemini(promptText) {
     const model = await getBestModel();
