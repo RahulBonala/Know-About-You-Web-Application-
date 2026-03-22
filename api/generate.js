@@ -31,13 +31,14 @@ module.exports = async function handler(req, res) {
     });
 
     if (!response.ok) {
-        throw new Error(`API Error: ${response.statusText}`);
+        const errorText = await response.text();
+        return res.status(response.status).json({ error: `API Error: ${response.status}`, details: errorText, keyExists: !!API_KEY });
     }
 
     const data = await response.json();
     return res.status(200).json(data);
   } catch (error) {
-    console.error(error);
-    return res.status(500).json({ error: 'Failed to generate content' });
+    console.error("Catch block error:", error.toString());
+    return res.status(500).json({ error: 'Failed to generate content', stack: error.toString(), keyExists: !!process.env.GEMINI_API_KEY });
   }
 };
