@@ -1,5 +1,5 @@
 module.exports = async function handler(req, res) {
-  const API_KEY = process.env.GEMINI_API_KEY;
+  const API_KEY = process.env.GEMINI_API_KEY || process.env.API_KEY;
   try {
     const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models?key=${API_KEY}`);
     const data = await response.json();

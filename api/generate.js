@@ -1,5 +1,5 @@
 module.exports = async function handler(req, res) {
-  const API_KEY = process.env.GEMINI_API_KEY;
+  const API_KEY = process.env.GEMINI_API_KEY || process.env.API_KEY;
   
   if (req.method === 'OPTIONS') {
     return res.status(200).end();
@@ -32,7 +32,13 @@ module.exports = async function handler(req, res) {
 
     if (!response.ok) {
         const errorText = await response.text();
-        return res.status(response.status).json({ error: `API Error: ${response.status}`, details: errorText, keyExists: !!API_KEY });
+        const availableKeys = Object.keys(process.env).filter(k => k.includes('KEY') || k.includes('API') || k.includes('GEMINI'));
+        return res.status(response.status).json({ 
+            error: `API Error: ${response.status}`, 
+            details: errorText, 
+            keyExists: !!API_KEY,
+            availableKeys 
+        });
     }
 
     const data = await response.json();
