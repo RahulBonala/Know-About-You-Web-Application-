@@ -2,9 +2,28 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>KnowYou: Cosmic Identity Engine</title>
-  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KnowYou: Cosmic Identity Engine — AI-Powered Astrology & Numerology</title>
+  <meta name="description" content="Discover your cosmic identity through AI-powered numerology, Vedic astrology, Chinese zodiac, and personality analysis. No database, no tracking — your data vanishes on refresh.">
+  <meta name="theme-color" content="#040a14">
+  <meta name="color-scheme" content="dark">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="KnowYou: Cosmic Identity Engine">
+  <meta property="og:description" content="A cosmic identity engine that weaves numerology, astrology, and AI into a deep psychological mirror.">
+  <meta property="og:url" content="https://know-about-you.vercel.app/">
+  <meta property="og:site_name" content="KnowYou">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="KnowYou: Cosmic Identity Engine">
+  <meta name="twitter:description" content="Discover your cosmic identity through AI-powered numerology, Vedic astrology, and personality analysis.">
+
+  <!-- Favicon (inline SVG data URI) -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✦</text></svg>">
+
+  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600;1,700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -36,6 +55,16 @@
     }
     
     * { box-sizing: border-box; margin: 0; padding: 0; }
+    
+    .skip-link {
+      position: absolute; left: -9999px; top: auto; width: 1px; height: 1px; overflow: hidden;
+      z-index: 9999; padding: 12px 24px; background: var(--gold); color: var(--void);
+      font-weight: 700; text-decoration: none; border-radius: 0 0 8px 0;
+    }
+    .skip-link:focus { left: 0; width: auto; height: auto; }
+    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+
+    :focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
     
     body {
       background-color: var(--void);
@@ -306,7 +335,7 @@
     .score-bar-wrap { margin-bottom: 16px; }
     .score-bar-labels { display: flex; justify-content: space-between; font-size: 0.85rem; margin-bottom: 6px; color: var(--text-bright); }
     .score-bar-bg { height: 6px; background: var(--layer); border-radius: 3px; overflow: hidden; }
-    .score-bar-fill { height: 100%; border-radius: 3px; width: 0%; transition: width 1.5s cubic-bezier(0.1, 0.7, 0.1, 1); }
+    .score-bar-fill { height: 100%; border-radius: 3px; width: 0%; transition: width 1.5s cubic-bezier(0.1, 0.7, 0.1, 1); background: linear-gradient(90deg, var(--gold), var(--cyan)); }
     
     .gem-display { text-align: center; padding: 20px; background: var(--layer); border-radius: 8px; margin-bottom: 16px; }
     .gem-name { font-size: 1.8rem; color: var(--gold); }
@@ -353,6 +382,10 @@
     }
     .toast.show { bottom: 32px; }
     
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+    }
+    
     /* Responsive Adjustments */
     @media (max-width: 900px) {
       .chart-layout { grid-template-columns: 1fr; }
@@ -377,21 +410,22 @@
   </style>
 </head>
 <body>
+  <a href="#view-landing" class="skip-link">Skip to main content</a>
   <!-- Background Elements -->
-  <canvas id="cosmos-canvas"></canvas>
-  <div class="nebula-bg nebula-1"></div>
-  <div class="nebula-bg nebula-2"></div>
-  <div class="nebula-bg nebula-3"></div>
-  <div id="toast" class="toast"></div>
+  <canvas id="cosmos-canvas" aria-hidden="true"></canvas>
+  <div class="nebula-bg nebula-1" aria-hidden="true"></div>
+  <div class="nebula-bg nebula-2" aria-hidden="true"></div>
+  <div class="nebula-bg nebula-3" aria-hidden="true"></div>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
 
   <!-- VIEW 1: LANDING -->
-  <section id="view-landing" class="view active">
-    <nav class="navbar">
-      <div class="logo">✦ KnowYou</div>
+  <main id="view-landing" class="view active">
+    <nav class="navbar" aria-label="Primary navigation">
+      <div class="logo" aria-label="KnowYou home">✦ KnowYou</div>
       <div class="pill pill-gold">AI Identity Engine</div>
     </nav>
     <div class="hero">
-      <svg class="pulse-eye" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+      <svg class="pulse-eye" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" role="img">
         <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
         <circle cx="12" cy="12" r="3"></circle>
       </svg>
@@ -416,15 +450,15 @@
       <div id="restore-notice" class="restore-notice hidden">
         <span>💾 You have a saved session</span>
         <button class="btn btn-primary btn-sm" onclick="restoreSession()">Restore it →</button>
-        <button class="restore-close" onclick="clearStorage(true)">✕</button>
+        <button class="restore-close" onclick="clearStorage(true)" aria-label="Dismiss saved session notice">✕</button>
       </div>
     </div>
-  </section>
+  </main>
 
   <!-- VIEW 2: PRANK -->
   <section id="view-prank" class="view">
     <div class="glass-card">
-      <img src="https://media.giphy.com/media/10yXFkBJ0MwGQ0/giphy.gif" alt="Database Joke">
+      <img src="https://media.giphy.com/media/10yXFkBJ0MwGQ0/giphy.gif" alt="Animated reaction GIF — there is no database to log into" loading="lazy">
       <h2 class="serif">Login? We don't have a database!</h2>
       <p>We are too broke for cloud storage... redirecting you back.</p>
     </div>
@@ -468,25 +502,25 @@
       <p style="margin-bottom:24px">Your birth data is the key to the celestial map.</p>
       
       <div class="form-group">
-        <label>Full Name</label>
+        <label for="inp-name">Full Name</label>
         <input type="text" id="inp-name" autocomplete="name" placeholder="e.g. Nicola Tesla">
       </div>
       <div class="form-row">
         <div class="form-group">
-          <label>Date of Birth <span>*</span></label>
-          <input type="date" id="inp-dob">
+          <label for="inp-dob">Date of Birth <span aria-hidden="true">*</span><span class="sr-only"> (required)</span></label>
+          <input type="date" id="inp-dob" required aria-required="true">
         </div>
         <div class="form-group">
-          <label>Time of Birth (Optional)</label>
+          <label for="inp-time">Time of Birth (Optional)</label>
           <input type="time" id="inp-time">
         </div>
       </div>
       <div class="form-group">
-        <label>Place of Birth (Optional)</label>
+        <label for="inp-place">Place of Birth (Optional)</label>
         <input type="text" id="inp-place" placeholder="e.g. Smiljan, Croatia">
       </div>
       <div class="form-group">
-        <label>What's most on your mind? (Optional)</label>
+        <label for="inp-focus">What's most on your mind? (Optional)</label>
         <input type="text" id="inp-focus" placeholder="e.g. Career transition, love, etc.">
       </div>
       
@@ -497,7 +531,7 @@
     </div>
 
     <!-- STATE B: LOADING -->
-    <div id="loading-state-card" class="glass-card hidden">
+    <div id="loading-state-card" class="glass-card hidden" role="status" aria-live="polite" aria-label="Analysis in progress">
       <div class="spinner-box">
         <div class="ring ring1"></div>
         <div class="ring ring2"></div>
@@ -545,27 +579,27 @@
       </div>
 
       <!-- Tabs Bar -->
-      <nav class="tabs-nav">
-        <button class="tab-btn active" data-target="tab-overview" onclick="switchTab(this)">Overview</button>
-        <button class="tab-btn" data-target="tab-personality" onclick="switchTab(this)">Personality</button>
-        <button class="tab-btn" data-target="tab-cosmic" onclick="switchTab(this)">Cosmic</button>
-        <button class="tab-btn" data-target="tab-timeline" onclick="switchTab(this)">Timeline</button>
-        <button class="tab-btn" data-target="tab-future" onclick="switchTab(this)">Future Focus</button>
-        <button class="tab-btn" data-target="tab-chart" onclick="switchTab(this)">✦ Birth Chart</button>
-        <button class="tab-btn" data-target="tab-compat" onclick="switchTab(this)">⚭ Compatibility</button>
-        <button class="tab-btn" data-target="tab-oracle" onclick="switchTab(this)">🔮 Daily Oracle</button>
+      <nav class="tabs-nav" role="tablist" aria-label="Analysis result tabs">
+        <button class="tab-btn active" data-target="tab-overview" onclick="switchTab(this)" role="tab" aria-selected="true">Overview</button>
+        <button class="tab-btn" data-target="tab-personality" onclick="switchTab(this)" role="tab" aria-selected="false">Personality</button>
+        <button class="tab-btn" data-target="tab-cosmic" onclick="switchTab(this)" role="tab" aria-selected="false">Cosmic</button>
+        <button class="tab-btn" data-target="tab-timeline" onclick="switchTab(this)" role="tab" aria-selected="false">Timeline</button>
+        <button class="tab-btn" data-target="tab-future" onclick="switchTab(this)" role="tab" aria-selected="false">Future Focus</button>
+        <button class="tab-btn" data-target="tab-chart" onclick="switchTab(this)" role="tab" aria-selected="false">Birth Chart</button>
+        <button class="tab-btn" data-target="tab-compat" onclick="switchTab(this)" role="tab" aria-selected="false">Compatibility</button>
+        <button class="tab-btn" data-target="tab-oracle" onclick="switchTab(this)" role="tab" aria-selected="false">Daily Oracle</button>
       </nav>
 
       <!-- TAB: Overview -->
-      <div id="tab-overview" class="tab-content active"></div>
+      <div id="tab-overview" class="tab-content active" role="tabpanel"></div>
       <!-- TAB: Personality -->
-      <div id="tab-personality" class="tab-content"></div>
+      <div id="tab-personality" class="tab-content" role="tabpanel"></div>
       <!-- TAB: Cosmic -->
-      <div id="tab-cosmic" class="tab-content"></div>
+      <div id="tab-cosmic" class="tab-content" role="tabpanel"></div>
       <!-- TAB: Timeline -->
-      <div id="tab-timeline" class="tab-content"></div>
+      <div id="tab-timeline" class="tab-content" role="tabpanel"></div>
       <!-- TAB: Future Focus -->
-      <div id="tab-future" class="tab-content"></div>
+      <div id="tab-future" class="tab-content" role="tabpanel"></div>
       
       <!-- TAB: Birth Chart -->
       <div id="tab-chart" class="tab-content">
@@ -584,9 +618,9 @@
           <h2 class="serif">⚭ Chemistry Analysis</h2>
           <p>Test your cosmic resonance with another soul.</p>
           <div class="compat-form-grid">
-            <div class="form-group"><label>Their Name</label><input type="text" id="comp-name"></div>
-            <div class="form-group"><label>Their DOB <span>*</span></label><input type="date" id="comp-dob"></div>
-            <div class="form-group card-wide"><label>Relationship Type</label>
+            <div class="form-group"><label for="comp-name">Their Name</label><input type="text" id="comp-name"></div>
+            <div class="form-group"><label for="comp-dob">Their DOB <span aria-hidden="true">*</span></label><input type="date" id="comp-dob" required aria-required="true"></div>
+            <div class="form-group card-wide"><label for="comp-type">Relationship Type</label>
               <select id="comp-type">
                 <option value="Romantic Partner">💑 Romantic Partner</option>
                 <option value="Close Friend">🤝 Close Friend</option>
@@ -650,15 +684,12 @@
     document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
     getEl(id).classList.add('active');
   }
-  function runPrank() {
-    switchView('view-prank');
-    setTimeout(() => switchView('view-landing'), 3200);
-  }
   function switchTab(btnEl) {
     const parent = btnEl.closest('.view') || document;
-    parent.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    parent.querySelectorAll('.tab-btn').forEach(b => { b.classList.remove('active'); b.setAttribute('aria-selected', 'false'); });
     parent.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
     btnEl.classList.add('active');
+    btnEl.setAttribute('aria-selected', 'true');
     const target = btnEl.getAttribute('data-target');
     getEl(target).classList.add('active');
   }
@@ -771,11 +802,16 @@
     if(hideNotice) getEl('restore-notice').classList.add('hidden');
   }
   function restoreSession() {
-    const data = JSON.parse(localStorage.getItem(STORE_KEY));
-    if(!data) return;
-    switchView('view-form');
-    renderResults(data.parsed, data.user);
-    getEl('save-restore-bar').style.display = 'flex';
+    try {
+      const data = JSON.parse(localStorage.getItem(STORE_KEY));
+      if(!data) return;
+      switchView('view-form');
+      renderResults(data.parsed, data.user);
+      getEl('save-restore-bar').style.display = 'flex';
+    } catch(_e) {
+      clearStorage();
+      showToast("Saved session was corrupted. Starting fresh.");
+    }
   }
   function checkSavedSession() {
     const raw = localStorage.getItem(STORE_KEY);
@@ -791,7 +827,9 @@
     if(!window._lastUser || !window._lastParsed) return;
     let u = window._lastUser, p = window._lastParsed;
     let text = `✦ My Cosmic Identity Report\n${u.name} · ${u.dob} · ${u.place}\n${u.zodiac} · ${u.chinese.element} ${u.chinese.animal} · Life Path ${u.lp}\nNakshatra: ${p.nakshatra} | Moon: ${p.moon_sign}\n\nGenerated by KnowYou — Cosmic Identity Engine`;
-    navigator.clipboard.writeText(text).then(() => showToast("Copied to clipboard!"));
+    navigator.clipboard.writeText(text)
+      .then(() => showToast("Copied to clipboard!"))
+      .catch(() => showToast("Could not copy — try manually."));
   }
   /* API INTEGRATION */
   async function getBestModel() {
@@ -812,9 +850,8 @@
     const res = await fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
     if(!res.ok) {
       const errorData = await res.json().catch(() => ({}));
-      console.error("Backend Error Details:", JSON.stringify(errorData, null, 2));
-      const googleMsg = errorData.details?.error?.message || errorData.error || res.statusText || "Generic Error occurred";
-      throw new Error("API Error: " + googleMsg);
+      const googleMsg = errorData.error || res.statusText || "An error occurred";
+      throw new Error(googleMsg);
     }
     const data = await res.json();
     let text = data.candidates[0].content.parts[0].text;
@@ -869,7 +906,6 @@
       getEl('loading-state-card').classList.add('hidden');
       getEl('form-state-card').classList.remove('hidden');
       showToast("Cosmic interference detected. Please try again.");
-      console.error(err);
     }
   }
 
@@ -1040,7 +1076,7 @@
     getEl('compat-loading').classList.remove('hidden');
 
     let u1 = window._lastUser;
-    let lcExp = calcLifePathNumber(cdob), cZodiac = calcWesternZodiac(cdob), cCh = calcChineseZodiac(cdob);
+    let lcExp = calcLifePathNumber(cdob), cZodiac = calcWesternZodiac(cdob);
 
     const promptText = `
       Calculate compatibility. Person A: ${u1.dob}, ${u1.zodiac}, LP:${u1.lp}. Person B: ${cdob}, ${cZodiac}, LP:${lcExp}. Type: ${ctype}.
