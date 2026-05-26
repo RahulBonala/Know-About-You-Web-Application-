@@ -70,7 +70,12 @@ module.exports = async function handler(req, res) {
       return res.status(400).json({ error: `promptText exceeds maximum length of ${MAX_PROMPT_LENGTH}`, status: 400 });
     }
 
-    const fallbackModels = ['models/gemini-2.0-flash', 'models/gemini-2.0-flash-lite'];
+    const fallbackModels = [
+      'models/gemini-2.5-flash',
+      'models/gemini-2.5-flash-lite',
+      'models/gemini-2.0-flash',
+      'models/gemini-2.0-flash-lite',
+    ];
     if (model && typeof model === 'string' && model.startsWith('models/')) {
       fallbackModels.unshift(model);
     }
@@ -96,13 +101,20 @@ module.exports = async function handler(req, res) {
         return res.status(200).json(data);
       }
 
+      const errBody = await response.text().catch(() => '');
+      console.error(
+        `Model ${currentModel} returned ${response.status}:`,
+        errBody.slice(0, 500),
+      );
+
       if (i < uniqueModels.length - 1) {
-        console.warn(`Model ${currentModel} returned ${response.status}, trying next fallback`);
+        console.warn(`Trying next fallback model after ${currentModel} failure`);
         continue;
       }
 
       return res.status(response.status).json({
         error: `AI model unavailable (${response.status})`,
+        details: errBody.slice(0, 300),
         status: response.status,
       });
     }

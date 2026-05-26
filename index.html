@@ -850,14 +850,26 @@
     const res = await fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
     if(!res.ok) {
       const errorData = await res.json().catch(() => ({}));
-      const googleMsg = errorData.error || res.statusText || "An error occurred";
-      throw new Error(googleMsg);
+      const baseMsg = errorData.error || res.statusText || "An error occurred";
+      const fullMsg = errorData.details ? `${baseMsg}: ${errorData.details}` : baseMsg;
+      throw new Error(fullMsg);
     }
     const data = await res.json();
-    let text = data.candidates[0].content.parts[0].text;
-    text = text.replace(/```json/g, '').replace(/```/g, '').trim();
-    let start = text.indexOf('{'), end = text.lastIndexOf('}');
-    return JSON.parse(text.substring(start, end+1));
+    const textPart = data && data.candidates && data.candidates[0] && data.candidates[0].content && data.candidates[0].content.parts && data.candidates[0].content.parts[0] && data.candidates[0].content.parts[0].text;
+    if(!textPart) {
+      const finishReason = data && data.candidates && data.candidates[0] && data.candidates[0].finishReason;
+      throw new Error(`Gemini returned no content${finishReason ? ` (finishReason: ${finishReason})` : ' (possible safety block)'}`);
+    }
+    const cleaned = textPart.replace(/```json/g, '').replace(/```/g, '').trim();
+    const start = cleaned.indexOf('{'), end = cleaned.lastIndexOf('}');
+    if(start < 0 || end < 0) {
+      throw new Error(`Gemini did not return JSON: ${cleaned.slice(0, 120)}`);
+    }
+    try {
+      return JSON.parse(cleaned.substring(start, end + 1));
+    } catch(_e) {
+      throw new Error(`Malformed JSON from Gemini: ${cleaned.slice(0, 120)}`);
+    }
   }
 
   /* MAIN FLOW */
@@ -905,7 +917,9 @@
       clearInterval(tInt); clearInterval(fInt);
       getEl('loading-state-card').classList.add('hidden');
       getEl('form-state-card').classList.remove('hidden');
-      showToast("Cosmic interference detected. Please try again.");
+      console.error('Gemini call failed:', err);
+      const msg = err && err.message ? `Error: ${String(err.message).slice(0, 160)}` : "Cosmic interference detected. Please try again.";
+      showToast(msg);
     }
   }
 
