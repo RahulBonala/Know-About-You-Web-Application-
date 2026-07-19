@@ -4,12 +4,12 @@ A cosmic identity engine that weaves numerology, astrology, and AI into a deep p
 
 ## Tech Stack
 
-| Layer | Technology |
-|-------|-----------|
+| Layer    | Technology                                      |
+| -------- | ----------------------------------------------- |
 | Frontend | Vanilla HTML, CSS, JavaScript (single-page app) |
-| Backend | Vercel Serverless Functions (Node.js) |
-| AI | Google Gemini API (2.0 Flash) |
-| Hosting | Vercel |
+| Backend  | Vercel Serverless Functions (Node.js)           |
+| AI       | Google Gemini API (2.0 Flash)                   |
+| Hosting  | Vercel                                          |
 
 ## Features
 
@@ -47,11 +47,11 @@ cp .env.example .env
 
 ### Environment Variables
 
-| Variable | Required | Description |
-|----------|----------|-------------|
-| `GEMINI_API_KEY` | Yes | Google Gemini API key |
-| `PORT` | No | Local dev server port (default: 3000) |
-| `ALLOWED_ORIGINS` | No | Comma-separated allowed origins for CORS |
+| Variable          | Required | Description                              |
+| ----------------- | -------- | ---------------------------------------- |
+| `GEMINI_API_KEY`  | Yes      | Google Gemini API key                    |
+| `PORT`            | No       | Local dev server port (default: 3000)    |
+| `ALLOWED_ORIGINS` | No       | Comma-separated allowed origins for CORS |
 
 ### Development
 
@@ -91,11 +91,11 @@ npm run validate    # Run lint + format check together
 
 ## API Endpoints
 
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| POST | `/api/generate` | Send a prompt to Gemini, get AI analysis |
-| GET | `/api/models` | List available Gemini models |
-| GET | `/api/health` | Health check (returns `{ status: "ok" }`) |
+| Method | Endpoint        | Description                               |
+| ------ | --------------- | ----------------------------------------- |
+| POST   | `/api/generate` | Send a prompt to Gemini, get AI analysis  |
+| GET    | `/api/models`   | List available Gemini models              |
+| GET    | `/api/health`   | Health check (returns `{ status: "ok" }`) |
 
 ## Deployment
 

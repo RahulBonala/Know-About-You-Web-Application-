@@ -1,900 +1,2025 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>KnowYou: Cosmic Identity Engine — AI-Powered Astrology & Numerology</title>
-  <meta name="description" content="Discover your cosmic identity through AI-powered numerology, Vedic astrology, Chinese zodiac, and personality analysis. No database, no tracking — your data vanishes on refresh.">
-  <meta name="theme-color" content="#040a14">
-  <meta name="color-scheme" content="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>KnowYou: Cosmic Identity Engine — AI-Powered Astrology & Numerology</title>
+    <meta
+      name="description"
+      content="Discover your cosmic identity through AI-powered numerology, Vedic astrology, Chinese zodiac, and personality analysis. No database, no tracking — your data vanishes on refresh."
+    />
+    <meta name="theme-color" content="#19140f" />
+    <meta name="color-scheme" content="dark" />
 
-  <!-- Open Graph -->
-  <meta property="og:type" content="website">
-  <meta property="og:title" content="KnowYou: Cosmic Identity Engine">
-  <meta property="og:description" content="A cosmic identity engine that weaves numerology, astrology, and AI into a deep psychological mirror.">
-  <meta property="og:url" content="https://know-about-you.vercel.app/">
-  <meta property="og:site_name" content="KnowYou">
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="KnowYou: Cosmic Identity Engine" />
+    <meta
+      property="og:description"
+      content="A cosmic identity engine that weaves numerology, astrology, and AI into a deep psychological mirror."
+    />
+    <meta property="og:url" content="https://know-about-you.vercel.app/" />
+    <meta property="og:site_name" content="KnowYou" />
 
-  <!-- Twitter -->
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="KnowYou: Cosmic Identity Engine">
-  <meta name="twitter:description" content="Discover your cosmic identity through AI-powered numerology, Vedic astrology, and personality analysis.">
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="KnowYou: Cosmic Identity Engine" />
+    <meta
+      name="twitter:description"
+      content="Discover your cosmic identity through AI-powered numerology, Vedic astrology, and personality analysis."
+    />
 
-  <!-- Favicon (inline SVG data URI) -->
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✦</text></svg>">
+    <!-- Favicon (inline SVG data URI) -->
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✦</text></svg>"
+    />
 
-  <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600;1,700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  
-  <style>
-    /* ====== DESIGN SYSTEM ====== */
-    :root {
-      --void:        #040a14;
-      --deep:        #07111f;
-      --layer:       #0c1a2e;
-      --panel:       #0f2240;
-      --glass:       rgba(15,34,64,0.7);
-      --rim:         rgba(80,140,220,0.15);
-      --gold:        #e8b84b;
-      --gold-soft:   rgba(232,184,75,0.12);
-      --gold-glow:   rgba(232,184,75,0.3);
-      --cyan:        #38c4d4;
-      --cyan-soft:   rgba(56,196,212,0.1);
-      --violet:      #8b5cf6;
-      --violet-soft: rgba(139,92,246,0.12);
-      --text-bright: #d4e8f8;
-      --text-mid:    #7ea8cc;
-      --text-dim:    #4a6888;
-      --success:     #34d399;
-      --danger:      #f87171;
-      --shadow-gold: 0 0 40px rgba(232,184,75,0.15);
-      --shadow-deep: 0 20px 60px rgba(0,0,0,0.6);
-      --border-glow: 1px solid rgba(232,184,75,0.25);
-    }
-    
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    
-    .skip-link {
-      position: absolute; left: -9999px; top: auto; width: 1px; height: 1px; overflow: hidden;
-      z-index: 9999; padding: 12px 24px; background: var(--gold); color: var(--void);
-      font-weight: 700; text-decoration: none; border-radius: 0 0 8px 0;
-    }
-    .skip-link:focus { left: 0; width: auto; height: auto; }
-    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600;1,700&family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
 
-    :focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
-    
-    body {
-      background-color: var(--void);
-      color: var(--text-bright);
-      font-family: 'Outfit', sans-serif;
-      overflow-x: hidden;
-      min-height: 100vh;
-      line-height: 1.6;
-    }
+    <style>
+      /* ====== DESIGN SYSTEM ====== */
+      :root {
+        /* "Rahul Orange" v1 — signature orange on warm ink darks */
+        --void: #19140f;
+        --deep: #1e1812;
+        --layer: #241d16;
+        --panel: #2b2118;
+        --glass: rgba(36, 29, 22, 0.7);
+        --rim: rgba(251, 247, 240, 0.12);
+        --brand: #ff6b1a;
+        --brand-soft: rgba(255, 107, 26, 0.14);
+        --brand-glow: rgba(255, 107, 26, 0.3);
+        --cyan: #38c4d4;
+        --cyan-soft: rgba(56, 196, 212, 0.1);
+        --violet: #8b5cf6;
+        --violet-soft: rgba(139, 92, 246, 0.12);
+        --text-bright: #fbf7f0;
+        --text-mid: #c9bcab;
+        --text-dim: #8f8271;
+        --success: #34d399;
+        --danger: #f87171;
+        --shadow-brand: 0 0 40px rgba(255, 107, 26, 0.15);
+        --shadow-deep: 0 20px 60px rgba(0, 0, 0, 0.6);
+        --border-glow: 1px solid rgba(255, 107, 26, 0.25);
+      }
 
-    h1, h2, h3, h4, h5, h6 { margin-bottom: 0.5rem; line-height: 1.2; }
-    .serif { font-family: 'Cormorant Garamond', serif; }
-    
-    /* Global Backgrounds */
-    #cosmos-canvas {
-      position: fixed; top: 0; left: 0;
-      width: 100%; height: 100%;
-      pointer-events: none; z-index: 0;
-    }
-    
-    .nebula-bg {
-      position: fixed; pointer-events: none; z-index: 0;
-      width: 800px; height: 800px; border-radius: 50%; opacity: 0.8;
-      filter: blur(80px);
-    }
-    .nebula-1 { top: -20%; left: -10%; background: radial-gradient(circle, var(--violet-soft), transparent 70%); }
-    .nebula-2 { bottom: -20%; right: -10%; background: radial-gradient(circle, var(--gold-soft), transparent 70%); }
-    .nebula-3 { top: 40%; left: 50%; transform: translateX(-50%); background: radial-gradient(circle, var(--cyan-soft), transparent 70%); }
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
 
-    /* ====== ANIMATIONS ====== */
-    @keyframes cosmicFade {
-      0% { opacity: 0; transform: translateY(20px) scale(0.98); }
-      100% { opacity: 1; transform: translateY(0) scale(1); }
-    }
-    @keyframes cardReveal {
-      0% { opacity: 0; transform: translateY(15px); }
-      100% { opacity: 1; transform: translateY(0); }
-    }
-    @keyframes spinnerRing1 { 100% { transform: rotate(360deg); } }
-    @keyframes spinnerRing2 { 100% { transform: rotate(-360deg); } }
-    @keyframes pulsePulse { 0%,100% { transform: scale(1); opacity:0.8;} 50% { transform: scale(1.3); opacity:1;} }
-    @keyframes floatFact {
-      0%, 100% { opacity: 0; transform: translateY(10px); }
-      10%, 90% { opacity: 1; transform: translateY(0); }
-    }
+      .skip-link {
+        position: absolute;
+        left: -9999px;
+        top: auto;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+        z-index: 9999;
+        padding: 12px 24px;
+        background: var(--brand);
+        color: var(--void);
+        font-weight: 700;
+        text-decoration: none;
+        border-radius: 0 0 8px 0;
+      }
+      .skip-link:focus {
+        left: 0;
+        width: auto;
+        height: auto;
+      }
+      .sr-only {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+      }
 
-    /* ====== VIEW SYSTEM ====== */
-    .view {
-      display: none;
-      position: relative; z-index: 10;
-      flex-direction: column; align-items: center;
-      min-height: 100vh; width: 100%;
-      padding: 40px 20px;
-    }
-    .view.active {
-      display: flex;
-      animation: cosmicFade 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
-    }
-    
-    /* ====== COMPONENTS ====== */
-    .glass-card {
-      background: var(--glass);
-      backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-      border: var(--border-glow);
-      border-radius: 16px;
-      box-shadow: var(--shadow-deep);
-      padding: 32px; width: 100%; text-align: left;
-    }
-    .glass-card p { color: var(--text-mid); }
-    
-    .hidden { display: none !important; }
+      :focus-visible {
+        outline: 2px solid var(--brand);
+        outline-offset: 2px;
+      }
 
-    /* BUTTONS */
-    .btn {
-      display: inline-flex; align-items: center; justify-content: center;
-      padding: 13px 28px; border-radius: 8px; font-family: 'Outfit', sans-serif;
-      font-weight: 600; font-size: 0.95rem; cursor: pointer; border: none;
-      transition: all 0.25s ease; position: relative; overflow: hidden;
-      text-decoration: none; text-align: center;
-    }
-    .btn::after {
-      content: ''; position: absolute; inset: 0; background: rgba(255,255,255,0);
-      transition: background 0.2s;
-    }
-    .btn:hover::after { background: rgba(255,255,255,0.06); }
-    .btn:active { transform: scale(0.97); }
-    .btn:disabled { opacity: 0.35; cursor: not-allowed; transform: none !important; }
+      body {
+        background-color: var(--void);
+        color: var(--text-bright);
+        font-family: 'Inter', sans-serif;
+        overflow-x: hidden;
+        min-height: 100vh;
+        line-height: 1.6;
+      }
 
-    .btn-primary {
-      background: linear-gradient(135deg, #f3ca63, var(--gold)); color: var(--void);
-      box-shadow: var(--shadow-gold);
-    }
-    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 0 60px rgba(232,184,75,0.3); }
-    
-    .btn-ghost { background: transparent; color: var(--text-mid); border: 1px solid var(--rim); }
-    .btn-ghost:hover { border-color: rgba(255,255,255,0.2); color: var(--text-bright); }
-    
-    .btn-outline-gold { border: 1px solid var(--gold); color: var(--gold); background: transparent; }
-    .btn-outline-gold:hover { background: rgba(232, 184, 75, 0.1); box-shadow: 0 0 15px var(--gold-glow); }
-    
-    .btn-danger { background: transparent; color: var(--danger); border: 1px solid rgba(248,113,113,0.3); }
-    .btn-danger:hover { background: rgba(248,113,113,0.1); }
-    
-    .btn-lg { padding: 1rem 2.5rem; font-size: 1.125rem; }
-    .btn-sm { padding: 6px 16px; font-size: 0.82rem; }
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        margin-bottom: 0.5rem;
+        line-height: 1.2;
+      }
+      .serif {
+        font-family: 'Fraunces', serif;
+      }
 
-    /* TAGS & PILLS */
-    .pill {
-      font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em;
-      padding: 4px 12px; border-radius: 999px; font-weight: 600;
-      border: 1px solid var(--rim); color: var(--text-mid);
-    }
-    .pill-gold { color: var(--gold); border-color: var(--gold-glow); background: var(--gold-soft); }
-    .pill-cyan { color: var(--cyan); border-color: var(--cyan-soft); background: rgba(56,196,212,0.15); }
-    .pill-violet { color: var(--violet); border-color: var(--violet-soft); background: rgba(139,92,246,0.15); }
-    .pill-green { color: var(--success); border-color: rgba(52,211,153,0.2); background: rgba(52,211,153,0.1); }
+      /* Global Backgrounds */
+      #cosmos-canvas {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 0;
+      }
 
-    /* ====== LANDING ====== */
-    .navbar { width: 100%; max-width: 1200px; display: flex; justify-content: space-between; align-items: center; padding: 20px 40px; }
-    .logo { color: var(--gold); font-size: 1.8rem; font-weight: 600; letter-spacing: -0.02em; }
-    .hero { max-width: 800px; text-align: center; margin-top: 8vh; padding: 0 20px; }
-    .pulse-eye { width: 64px; height: 64px; animation: pulsePulse 3s infinite ease-in-out; margin-bottom: 24px; filter: drop-shadow(0 0 10px var(--gold)); }
-    .hero h1 { font-size: clamp(3.5rem, 8vw, 7rem); font-weight: 300; letter-spacing: -0.02em; line-height: 1.1; margin-bottom: 24px; }
-    .hero h1 i { color: var(--gold); font-style: italic; }
-    .hero p { font-size: 1.15rem; color: var(--text-mid); max-width: 520px; margin: 0 auto 40px; }
-    .feature-pills { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-bottom: 48px; }
-    .cta-row { display: flex; justify-content: center; gap: 16px; margin-bottom: 32px; }
-    .disclaimer { font-size: 0.85rem; color: var(--text-dim); }
-    
-    .restore-notice {
-      margin-top: 24px; padding: 12px 24px; border-radius: 99px; background: var(--layer);
-      border: 1px solid var(--rim); display: inline-flex; align-items: center; gap: 16px;
-      font-size: 0.9rem;
-    }
-    .restore-notice .btn-sm { font-size: 0.75rem; padding: 4px 12px; }
-    .restore-close { background: none; border: none; color: var(--text-dim); cursor: pointer; font-size: 1rem; }
+      .nebula-bg {
+        position: fixed;
+        pointer-events: none;
+        z-index: 0;
+        width: 800px;
+        height: 800px;
+        border-radius: 50%;
+        opacity: 0.8;
+        filter: blur(80px);
+      }
+      .nebula-1 {
+        top: -20%;
+        left: -10%;
+        background: radial-gradient(circle, var(--violet-soft), transparent 70%);
+      }
+      .nebula-2 {
+        bottom: -20%;
+        right: -10%;
+        background: radial-gradient(circle, var(--brand-soft), transparent 70%);
+      }
+      .nebula-3 {
+        top: 40%;
+        left: 50%;
+        transform: translateX(-50%);
+        background: radial-gradient(circle, var(--cyan-soft), transparent 70%);
+      }
 
-    /* ====== PRANK & TERMS ====== */
-    #view-prank .glass-card { max-width: 460px; text-align: center; }
-    #view-prank img { width: 100%; border-radius: 8px; margin-bottom: 24px; }
-    #view-terms .glass-card { max-width: 600px; }
-    .terms-box {
-      background: var(--deep); border: 1px solid var(--rim); border-radius: 8px;
-      padding: 20px; max-height: 280px; overflow-y: auto; margin: 24px 0;
-      font-size: 0.9rem; color: var(--text-mid);
-    }
-    .terms-box::-webkit-scrollbar { width: 6px; }
-    .terms-box::-webkit-scrollbar-track { background: var(--deep); }
-    .terms-box::-webkit-scrollbar-thumb { background: var(--rim); border-radius: 3px; }
-    .terms-box h4 { color: var(--text-bright); margin: 16px 0 8px; }
-    .terms-box h4:first-child { margin-top: 0; }
-    .checkbox-row { display: flex; align-items: center; gap: 12px; margin-bottom: 24px; cursor: pointer; user-select: none; }
-    .checkbox-row input[type="checkbox"] { width: 18px; height: 18px; accent-color: var(--gold); }
+      /* ====== ANIMATIONS ====== */
+      @keyframes cosmicFade {
+        0% {
+          opacity: 0;
+          transform: translateY(20px) scale(0.98);
+        }
+        100% {
+          opacity: 1;
+          transform: translateY(0) scale(1);
+        }
+      }
+      @keyframes cardReveal {
+        0% {
+          opacity: 0;
+          transform: translateY(15px);
+        }
+        100% {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      @keyframes spinnerRing1 {
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+      @keyframes spinnerRing2 {
+        100% {
+          transform: rotate(-360deg);
+        }
+      }
+      @keyframes pulsePulse {
+        0%,
+        100% {
+          transform: scale(1);
+          opacity: 0.8;
+        }
+        50% {
+          transform: scale(1.3);
+          opacity: 1;
+        }
+      }
+      @keyframes floatFact {
+        0%,
+        100% {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+        10%,
+        90% {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
 
-    /* ====== FORM ====== */
-    #form-state-card { max-width: 520px; width: 100%; }
-    .progress-dots { display: flex; gap: 8px; margin-bottom: 12px; }
-    .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--rim); transition: 0.3s; }
-    .dot.active { background: var(--gold); }
-    .step-tag { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--gold); margin-bottom: 24px; display: block; }
-    .form-group { margin-bottom: 20px; }
-    .form-group label { display: block; font-size: 0.85rem; font-weight: 500; color: var(--text-bright); margin-bottom: 8px; }
-    .form-group label span { color: var(--danger); font-size: 1.1rem; }
-    .form-group input, .form-group select {
-      width: 100%; padding: 14px 16px; background: var(--layer); border: 1px solid var(--rim);
-      border-radius: 8px; color: var(--text-bright); font-family: 'Outfit'; font-size: 1rem; outline: none; transition: 0.2s;
-    }
-    .form-group input:focus, .form-group select:focus { border-color: var(--gold-glow); box-shadow: inset 0 0 0 1px var(--gold-glow); }
-    .form-group input[type="date"], .form-group input[type="time"] { color-scheme: dark; }
-    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-    .form-actions { display: flex; justify-content: flex-end; gap: 12px; margin-top: 32px; }
-    
-    /* ====== LOADING SPINNER ====== */
-    #loading-state-card { max-width: 520px; text-align: center; background: transparent; box-shadow: none; border: none; padding-top: 60px; }
-    .spinner-box { width: 140px; height: 140px; position: relative; margin: 0 auto 40px; }
-    .ring { position: absolute; border-radius: 50%; border: 2px solid transparent; }
-    .ring1 { inset: 0; border-top-color: var(--gold); animation: spinnerRing1 1.2s linear infinite; }
-    .ring2 { inset: 10px; border-right-color: var(--cyan); animation: spinnerRing2 0.9s linear infinite; }
-    .ring3 { inset: 22px; border-bottom-color: var(--violet); animation: spinnerRing1 0.7s linear infinite; }
-    .spinner-dot { position: absolute; inset: 60px; background: var(--gold); border-radius: 50%; animation: pulsePulse 1s infinite alternate; box-shadow: 0 0 20px var(--gold); }
-    #loading-text { font-family: 'Cormorant Garamond'; font-size: 1.8rem; color: var(--gold); margin-bottom: 8px; height: 2.2rem; }
-    .loading-sub { color: var(--text-dim); font-size: 0.9rem; margin-bottom: 40px; }
-    .fact-panel { 
-      background: rgba(0,0,0,0.2); border: 1px solid var(--rim); border-radius: 8px; padding: 20px;
-      font-size: 0.95rem; color: var(--text-mid); min-height: 80px; display: flex; align-items: center; justify-content: center;
-    }
-    .fact-text { animation: floatFact 4s infinite; }
+      /* ====== VIEW SYSTEM ====== */
+      .view {
+        display: none;
+        position: relative;
+        z-index: 10;
+        flex-direction: column;
+        align-items: center;
+        min-height: 100vh;
+        width: 100%;
+        padding: 40px 20px;
+      }
+      .view.active {
+        display: flex;
+        animation: cosmicFade 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+      }
 
-    /* ====== RESULTS DASHBOARD ====== */
-    #results-area { width: 100%; max-width: 1100px; display: flex; flex-direction: column; gap: 24px; padding-bottom: 80px; }
-    
-    /* Save/Restore Notice in Results */
-    #save-restore-bar { background: var(--gold-soft); border: 1px solid var(--gold-glow); border-radius: 8px; padding: 12px 20px; font-size: 0.9rem; color: var(--text-bright); display: none; justify-content: space-between; align-items: center; }
+      /* ====== COMPONENTS ====== */
+      .glass-card {
+        background: var(--glass);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border: var(--border-glow);
+        border-radius: 16px;
+        box-shadow: var(--shadow-deep);
+        padding: 32px;
+        width: 100%;
+        text-align: left;
+      }
+      .glass-card p {
+        color: var(--text-mid);
+      }
 
-    /* Identity Banner */
-    .identity-banner {
-      background: linear-gradient(135deg, var(--layer), rgba(139,92,246,0.05));
-      border: var(--border-glow); border-radius: 16px; padding: 32px 40px;
-      display: flex; justify-content: space-between; align-items: flex-end;
-      flex-wrap: wrap; gap: 24px; position: relative; overflow: hidden;
-    }
-    .banner-bg-pattern { position: absolute; inset: 0; opacity: 0.05; pointer-events: none; background-image: radial-gradient(var(--gold) 1px, transparent 1px); background-size: 20px 20px; }
-    .identity-left { position: relative; z-index: 1; }
-    #res-tag { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.15em; color: var(--text-mid); margin-bottom: 8px; display: block; }
-    #res-name { font-size: clamp(2rem, 5vw, 2.8rem); line-height: 1.1; margin-bottom: 8px; color: var(--text-bright); }
-    #res-meta { font-size: 1rem; color: var(--text-dim); }
-    .identity-right { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: flex-end; gap: 16px; }
-    .banner-pills { display: flex; gap: 8px; flex-wrap: wrap; justify-content: flex-end; }
-    .banner-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+      .hidden {
+        display: none !important;
+      }
 
-    /* Cosmic Stats Bar */
-    .stats-bar {
-      display: grid; grid-template-columns: repeat(4, 1fr); background: var(--glass);
-      border: var(--border-glow); border-radius: 12px; backdrop-filter: blur(10px);
-    }
-    .stat-item {
-      padding: 20px; text-align: center; position: relative;
-    }
-    .stat-item:not(:last-child)::after {
-      content: ''; position: absolute; right: 0; top: 20%; bottom: 20%; width: 1px; background: var(--rim);
-    }
-    .stat-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-dim); margin-bottom: 8px; }
-    .stat-val { font-size: 1.5rem; color: var(--gold); }
+      /* BUTTONS */
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 13px 28px;
+        border-radius: 8px;
+        font-family: 'Inter', sans-serif;
+        font-weight: 600;
+        font-size: 0.95rem;
+        cursor: pointer;
+        border: none;
+        transition: all 0.25s ease;
+        position: relative;
+        overflow: hidden;
+        text-decoration: none;
+        text-align: center;
+      }
+      .btn::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: rgba(255, 255, 255, 0);
+        transition: background 0.2s;
+      }
+      .btn:hover::after {
+        background: rgba(255, 255, 255, 0.06);
+      }
+      .btn:active {
+        transform: scale(0.97);
+      }
+      .btn:disabled {
+        opacity: 0.35;
+        cursor: not-allowed;
+        transform: none !important;
+      }
 
-    /* Tabs Bar */
-    .tabs-nav {
-      position: sticky; top: 0; z-index: 50; display: flex; gap: 8px; 
-      background: rgba(4,10,20,0.85); backdrop-filter: blur(16px);
-      padding: 16px 0; overflow-x: auto; scrollbar-width: none;
-      border-bottom: 1px solid var(--rim);
-    }
-    .tabs-nav::-webkit-scrollbar { display: none; }
-    .tab-btn {
-      background: transparent; border: none; color: var(--text-mid); font-family: 'Outfit';
-      font-size: 0.95rem; font-weight: 500; padding: 8px 16px; border-radius: 99px;
-      cursor: pointer; white-space: nowrap; transition: 0.3s;
-    }
-    .tab-btn:hover { color: var(--text-bright); background: var(--layer); }
-    .tab-btn.active { color: var(--gold); background: var(--gold-soft); }
-    .tab-btn[data-target="tab-compat"].active { color: var(--violet); background: var(--violet-soft); }
-    .tab-btn[data-target="tab-oracle"].active { color: var(--cyan); background: var(--cyan-soft); }
+      .btn-primary {
+        background: linear-gradient(135deg, #f3ca63, var(--brand));
+        color: var(--void);
+        box-shadow: var(--shadow-brand);
+      }
+      .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 0 60px rgba(232, 184, 75, 0.3);
+      }
 
-    .tab-content { display: none; grid-template-columns: repeat(2, 1fr); gap: 20px; opacity: 0; }
-    .tab-content.active { display: grid; animation: cosmicFade 0.5s ease forwards; }
+      .btn-ghost {
+        background: transparent;
+        color: var(--text-mid);
+        border: 1px solid var(--rim);
+      }
+      .btn-ghost:hover {
+        border-color: rgba(255, 255, 255, 0.2);
+        color: var(--text-bright);
+      }
 
-    /* Analysis Card */
-    .analysis-card {
-      background: var(--panel); border: 1px solid var(--rim); border-radius: 12px;
-      padding: 24px; opacity: 0; animation: cardReveal 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
-      display: flex; flex-direction: column; height: 100%; transition: transform 0.3s;
-    }
-    .analysis-card:hover { transform: translateY(-3px); border-color: rgba(255,255,255,0.1); }
-    .card-icon { font-size: 1.5rem; margin-bottom: 16px; display: inline-block; }
-    .card-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.15em; color: var(--gold); margin-bottom: 8px; }
-    .card-title { font-size: 1.6rem; color: var(--text-bright); margin-bottom: 16px; line-height: 1.2; }
-    .card-body { font-size: 0.95rem; color: var(--text-mid); line-height: 1.6; flex-grow: 1; }
-    
-    .card-highlight { background: linear-gradient(145deg, var(--panel), rgba(139,92,246,0.1)); border-color: var(--gold-glow); box-shadow: var(--shadow-gold); }
-    .card-wide { grid-column: span 2; }
-    .card-full { grid-column: 1 / -1; }
+      .btn-outline-gold {
+        border: 1px solid var(--brand);
+        color: var(--brand);
+        background: transparent;
+      }
+      .btn-outline-gold:hover {
+        background: rgba(232, 184, 75, 0.1);
+        box-shadow: 0 0 15px var(--brand-glow);
+      }
 
-    /* Custom Content Renderers */
-    .timeline-list { list-style: none; padding-left: 12px; border-left: 2px solid var(--rim); }
-    .timeline-list li { position: relative; padding-left: 20px; padding-bottom: 24px; color: var(--text-mid); }
-    .timeline-list li::before { content: ''; position: absolute; left: -17px; top: 6px; width: 10px; height: 10px; border-radius: 50%; background: var(--gold); box-shadow: 0 0 10px var(--gold); border: 24px solid var(--void); border-width: 4px; }
-    .timeline-list li:last-child { padding-bottom: 0; }
-    
-    .score-bar-wrap { margin-bottom: 16px; }
-    .score-bar-labels { display: flex; justify-content: space-between; font-size: 0.85rem; margin-bottom: 6px; color: var(--text-bright); }
-    .score-bar-bg { height: 6px; background: var(--layer); border-radius: 3px; overflow: hidden; }
-    .score-bar-fill { height: 100%; border-radius: 3px; width: 0%; transition: width 1.5s cubic-bezier(0.1, 0.7, 0.1, 1); background: linear-gradient(90deg, var(--gold), var(--cyan)); }
-    
-    .gem-display { text-align: center; padding: 20px; background: var(--layer); border-radius: 8px; margin-bottom: 16px; }
-    .gem-name { font-size: 1.8rem; color: var(--gold); }
-    .mantra-text { font-size: 1.6rem; color: var(--gold); text-align: center; margin: 20px 0; }
-    
-    /* Birth Chart Layout */
-    .chart-layout { display: grid; grid-template-columns: 460px 1fr; gap: 32px; grid-column: 1 / -1; align-items: start; }
-    .chart-left { display: flex; flex-direction: column; align-items: center; background: var(--panel); border: 1px solid var(--rim); border-radius: 16px; padding: 32px; }
-    .chart-wheel-container { width: 100%; max-width: 420px; aspect-ratio: 1/1; position: relative; }
-    #chart-canvas { width: 100%; height: 100%; }
-    .chart-legend { display: flex; gap: 16px; margin-top: 24px; font-size: 0.85rem; }
-    .legend-item { display: flex; align-items: center; gap: 8px; color: var(--text-mid); }
-    .legend-dot { width: 10px; height: 10px; border-radius: 50%; }
-    .chart-sidebar { display: flex; flex-direction: column; gap: 20px; }
-    
-    /* Compatibility Tab */
-    .compat-form { max-width: 640px; margin: 0 auto; grid-column: 1 / -1; display: flex; flex-direction: column; gap: 20px; }
-    .compat-form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-    .compat-score-banner {
-      grid-column: 1 / -1; background: var(--panel); border: 1px solid var(--violet-soft);
-      border-radius: 16px; padding: 32px; display: grid; grid-template-columns: auto 1fr 1fr;
-      gap: 32px; align-items: center; text-align: center;
-    }
-    .compat-avatars { display: flex; align-items: center; justify-content: center; gap: 12px; }
-    .avatar-circle { width: 64px; height: 64px; border-radius: 50%; background: var(--layer); border: 1px solid var(--rim); display: flex; align-items: center; justify-content: center; font-family: 'Cormorant Garamond'; font-size: 1.5rem; color: var(--gold); }
-    .heart-icon { color: var(--danger); font-size: 1.5rem; }
-    .score-huge { font-size: 4rem; background: linear-gradient(180deg, var(--gold), #ff9eb5); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; line-height: 1; margin-bottom: 8px; }
-    .compat-bars { text-align: left; }
-    
-    /* Daily Oracle Tab */
-    .oracle-header { grid-column: 1 / -1; display: flex; justify-content: space-between; align-items: center; background: var(--panel); border-radius: 12px; padding: 20px 32px; border: 1px solid var(--cyan-soft); }
-    .oracle-dateinfo { font-size: 1.1rem; color: var(--text-bright); display: flex; align-items: center; gap: 12px; }
-    .oracle-quote { font-size: clamp(1.4rem, 4vw, 2rem); color: var(--gold); text-align: center; margin: 24px 0; padding: 0 20px; line-height: 1.4; grid-column: 1/-1;}
-    .focus-word { font-size: clamp(2.5rem, 6vw, 3.5rem); background: linear-gradient(90deg, var(--gold), var(--cyan)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; line-height: 1.2; text-align: center; margin-bottom: 16px; }
+      .btn-danger {
+        background: transparent;
+        color: var(--danger);
+        border: 1px solid rgba(248, 113, 113, 0.3);
+      }
+      .btn-danger:hover {
+        background: rgba(248, 113, 113, 0.1);
+      }
 
-    /* Toast Notification */
-    .toast {
-      position: fixed; bottom: -100px; left: 50%; transform: translateX(-50%);
-      background: var(--panel); border: 1px solid var(--gold-glow);
-      color: var(--gold); padding: 12px 24px; border-radius: 99px;
-      font-size: 0.95rem; box-shadow: var(--shadow-deep); z-index: 1000;
-      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-      backdrop-filter: blur(10px); display: flex; align-items: center; gap: 12px;
-    }
-    .toast.show { bottom: 32px; }
-    
-    @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
-    }
-    
-    /* Responsive Adjustments */
-    @media (max-width: 900px) {
-      .chart-layout { grid-template-columns: 1fr; }
-      .chart-left { padding: 20px; }
-      .compat-score-banner { grid-template-columns: 1fr; }
-    }
-    @media (max-width: 768px) {
-      .navbar { padding: 20px 24px; }
-      .hero h1 { font-size: 3rem; }
-      .identity-banner { flex-direction: column; align-items: flex-start; padding: 28px 24px; }
-      .identity-right { align-items: flex-start; }
-      .stats-bar { grid-template-columns: 1fr 1fr; }
-      .stat-item:nth-child(2)::after { display: none; }
-      .stat-item:nth-child(1)::after, .stat-item:nth-child(2)::after { border-bottom: 1px solid var(--rim); right: -100%; width: 200%; height: 1px; top:auto; bottom:0;}
-      .tab-content { grid-template-columns: 1fr; }
-      .card-wide { grid-column: 1 / -1; }
-      .form-row, .compat-form-grid { grid-template-columns: 1fr; }
-      .oracle-header { flex-direction: column; gap: 16px; text-align: center; }
-      .view { padding: 24px 16px; }
-      .glass-card { padding: 24px; }
-    }
-  </style>
-</head>
-<body>
-  <a href="#view-landing" class="skip-link">Skip to main content</a>
-  <!-- Background Elements -->
-  <canvas id="cosmos-canvas" aria-hidden="true"></canvas>
-  <div class="nebula-bg nebula-1" aria-hidden="true"></div>
-  <div class="nebula-bg nebula-2" aria-hidden="true"></div>
-  <div class="nebula-bg nebula-3" aria-hidden="true"></div>
-  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+      .btn-lg {
+        padding: 1rem 2.5rem;
+        font-size: 1.125rem;
+      }
+      .btn-sm {
+        padding: 6px 16px;
+        font-size: 0.82rem;
+      }
 
-  <!-- VIEW 1: LANDING -->
-  <main id="view-landing" class="view active">
-    <nav class="navbar" aria-label="Primary navigation">
-      <div class="logo" aria-label="KnowYou home">✦ KnowYou</div>
-      <div class="pill pill-gold">AI Identity Engine</div>
-    </nav>
-    <div class="hero">
-      <svg class="pulse-eye" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" role="img">
-        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-        <circle cx="12" cy="12" r="3"></circle>
-      </svg>
-      <h1>Know <i>who</i> you really are.</h1>
-      <p>A cosmic identity engine that weaves numerology, astrology, and artificial intelligence into a deep psychological mirror.</p>
-      
-      <div class="feature-pills">
-        <span class="pill pill-gold">✦ Life Path Number</span>
-        <span class="pill pill-cyan">☽ Vedic Astrology</span>
-        <span class="pill pill-violet">龍 Chinese Zodiac</span>
-        <span class="pill">🔮 AI Personality</span>
-        <span class="pill">📈 Career Intelligence</span>
-        <span class="pill">💎 Lucky Gemstone</span>
-      </div>
-      
-      <div class="cta-row">
-        <button class="btn btn-ghost" onclick="switchView('view-prank')">Login</button>
-        <button class="btn btn-primary" onclick="switchView('view-terms')">Begin Analysis →</button>
-      </div>
-      <div class="disclaimer">No database · No tracking · Data vanishes on refresh</div>
-      
-      <div id="restore-notice" class="restore-notice hidden">
-        <span>💾 You have a saved session</span>
-        <button class="btn btn-primary btn-sm" onclick="restoreSession()">Restore it →</button>
-        <button class="restore-close" onclick="clearStorage(true)" aria-label="Dismiss saved session notice">✕</button>
-      </div>
-    </div>
-  </main>
+      /* TAGS & PILLS */
+      .pill {
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        padding: 4px 12px;
+        border-radius: 999px;
+        font-weight: 600;
+        border: 1px solid var(--rim);
+        color: var(--text-mid);
+      }
+      .pill-gold {
+        color: var(--brand);
+        border-color: var(--brand-glow);
+        background: var(--brand-soft);
+      }
+      .pill-cyan {
+        color: var(--cyan);
+        border-color: var(--cyan-soft);
+        background: rgba(56, 196, 212, 0.15);
+      }
+      .pill-violet {
+        color: var(--violet);
+        border-color: var(--violet-soft);
+        background: rgba(139, 92, 246, 0.15);
+      }
+      .pill-green {
+        color: var(--success);
+        border-color: rgba(52, 211, 153, 0.2);
+        background: rgba(52, 211, 153, 0.1);
+      }
 
-  <!-- VIEW 2: PRANK -->
-  <section id="view-prank" class="view">
-    <div class="glass-card">
-      <img src="https://media.giphy.com/media/10yXFkBJ0MwGQ0/giphy.gif" alt="Animated reaction GIF — there is no database to log into" loading="lazy">
-      <h2 class="serif">Login? We don't have a database!</h2>
-      <p>We are too broke for cloud storage... redirecting you back.</p>
-    </div>
-  </section>
+      /* ====== LANDING ====== */
+      .navbar {
+        width: 100%;
+        max-width: 1200px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px 40px;
+      }
+      .logo {
+        color: var(--brand);
+        font-size: 1.8rem;
+        font-weight: 600;
+        letter-spacing: -0.02em;
+      }
+      .hero {
+        max-width: 800px;
+        text-align: center;
+        margin-top: 8vh;
+        padding: 0 20px;
+      }
+      .pulse-eye {
+        width: 64px;
+        height: 64px;
+        animation: pulsePulse 3s infinite ease-in-out;
+        margin-bottom: 24px;
+        filter: drop-shadow(0 0 10px var(--brand));
+      }
+      .hero h1 {
+        font-size: clamp(3.5rem, 8vw, 7rem);
+        font-weight: 300;
+        letter-spacing: -0.02em;
+        line-height: 1.1;
+        margin-bottom: 24px;
+      }
+      .hero h1 i {
+        color: var(--brand);
+        font-style: italic;
+      }
+      .hero p {
+        font-size: 1.15rem;
+        color: var(--text-mid);
+        max-width: 520px;
+        margin: 0 auto 40px;
+      }
+      .feature-pills {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 12px;
+        margin-bottom: 48px;
+      }
+      .cta-row {
+        display: flex;
+        justify-content: center;
+        gap: 16px;
+        margin-bottom: 32px;
+      }
+      .disclaimer {
+        font-size: 0.85rem;
+        color: var(--text-dim);
+      }
 
-  <!-- VIEW 3: TERMS -->
-  <section id="view-terms" class="view">
-    <div class="glass-card">
-      <h2 class="serif"><i>Conditions</i> of the Cosmos</h2>
-      <p>Please review before proceeding.</p>
-      <div class="terms-box">
-        <h4>🚫 No Database, No Money</h4>
-        <p>Your data never touches a backend database. It's processed and instantly forgotten unless you explicitly save it to your local browser.</p>
-        <h4>🧂 A Pinch of Salt</h4>
-        <p>AI can hallucinate. The cosmos is vast. Do not make major life decisions based on a web app.</p>
-        <h4>🤖 AI Disclaimer</h4>
-        <p>This application synthesizes established astrological rules with Gemini LLM interpretations.</p>
-        <h4>🌪️ Data Vanishing Act</h4>
-        <p>If you close this tab without hitting "Save", the universe will forget you were here.</p>
-        <h4>😄 Have Fun</h4>
-        <p>Embark on this journey with an open mind.</p>
-      </div>
-      <label class="checkbox-row">
-        <input type="checkbox" id="terms-check" onchange="document.getElementById('btn-proceed-terms').disabled = !this.checked">
-        <span>I agree to take this with a grain of cosmic salt</span>
-      </label>
-      <button id="btn-proceed-terms" class="btn btn-primary" style="width:100%" disabled onclick="switchView('view-form')">Proceed to Destiny →</button>
-    </div>
-  </section>
+      .restore-notice {
+        margin-top: 24px;
+        padding: 12px 24px;
+        border-radius: 99px;
+        background: var(--layer);
+        border: 1px solid var(--rim);
+        display: inline-flex;
+        align-items: center;
+        gap: 16px;
+        font-size: 0.9rem;
+      }
+      .restore-notice .btn-sm {
+        font-size: 0.75rem;
+        padding: 4px 12px;
+      }
+      .restore-close {
+        background: none;
+        border: none;
+        color: var(--text-dim);
+        cursor: pointer;
+        font-size: 1rem;
+      }
 
-  <!-- VIEW 4: MAIN FLOW (Form + Loading + Results) -->
-  <section id="view-form" class="view">
-    
-    <!-- STATE A: INPUT FORM -->
-    <div id="form-state-card" class="glass-card">
-      <div class="progress-dots">
-        <div class="dot active"></div><div class="dot"></div><div class="dot"></div>
-      </div>
-      <span class="step-tag">Step 1 of 3 — Identity Input</span>
-      <h2 class="serif">Initialize Analysis</h2>
-      <p style="margin-bottom:24px">Your birth data is the key to the celestial map.</p>
-      
-      <div class="form-group">
-        <label for="inp-name">Full Name</label>
-        <input type="text" id="inp-name" autocomplete="name" placeholder="e.g. Nicola Tesla">
-      </div>
-      <div class="form-row">
-        <div class="form-group">
-          <label for="inp-dob">Date of Birth <span aria-hidden="true">*</span><span class="sr-only"> (required)</span></label>
-          <input type="date" id="inp-dob" required aria-required="true">
-        </div>
-        <div class="form-group">
-          <label for="inp-time">Time of Birth (Optional)</label>
-          <input type="time" id="inp-time">
-        </div>
-      </div>
-      <div class="form-group">
-        <label for="inp-place">Place of Birth (Optional)</label>
-        <input type="text" id="inp-place" placeholder="e.g. Smiljan, Croatia">
-      </div>
-      <div class="form-group">
-        <label for="inp-focus">What's most on your mind? (Optional)</label>
-        <input type="text" id="inp-focus" placeholder="e.g. Career transition, love, etc.">
-      </div>
-      
-      <div class="form-actions">
-        <button class="btn btn-ghost" onclick="resetForm()">Reset</button>
-        <button class="btn btn-primary" onclick="startAnalysis()">Decode My Identity ✦</button>
-      </div>
-    </div>
+      /* ====== PRANK & TERMS ====== */
+      #view-prank .glass-card {
+        max-width: 460px;
+        text-align: center;
+      }
+      #view-prank img {
+        width: 100%;
+        border-radius: 8px;
+        margin-bottom: 24px;
+      }
+      #view-terms .glass-card {
+        max-width: 600px;
+      }
+      .terms-box {
+        background: var(--deep);
+        border: 1px solid var(--rim);
+        border-radius: 8px;
+        padding: 20px;
+        max-height: 280px;
+        overflow-y: auto;
+        margin: 24px 0;
+        font-size: 0.9rem;
+        color: var(--text-mid);
+      }
+      .terms-box::-webkit-scrollbar {
+        width: 6px;
+      }
+      .terms-box::-webkit-scrollbar-track {
+        background: var(--deep);
+      }
+      .terms-box::-webkit-scrollbar-thumb {
+        background: var(--rim);
+        border-radius: 3px;
+      }
+      .terms-box h4 {
+        color: var(--text-bright);
+        margin: 16px 0 8px;
+      }
+      .terms-box h4:first-child {
+        margin-top: 0;
+      }
+      .checkbox-row {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 24px;
+        cursor: pointer;
+        user-select: none;
+      }
+      .checkbox-row input[type='checkbox'] {
+        width: 18px;
+        height: 18px;
+        accent-color: var(--brand);
+      }
 
-    <!-- STATE B: LOADING -->
-    <div id="loading-state-card" class="glass-card hidden" role="status" aria-live="polite" aria-label="Analysis in progress">
-      <div class="spinner-box">
-        <div class="ring ring1"></div>
-        <div class="ring ring2"></div>
-        <div class="ring ring3"></div>
-        <div class="spinner-dot"></div>
-      </div>
-      <h3 id="loading-text">Triangulating star positions...</h3>
-      <p class="loading-sub">This may take up to 20 seconds. Do not refresh.</p>
-      <div class="fact-panel">
-        <span id="loading-fact" class="fact-text">Did you know? The moon phase deeply impacts emotional rhythms in Vedic astrology.</span>
-      </div>
-    </div>
+      /* ====== FORM ====== */
+      #form-state-card {
+        max-width: 520px;
+        width: 100%;
+      }
+      .progress-dots {
+        display: flex;
+        gap: 8px;
+        margin-bottom: 12px;
+      }
+      .dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: var(--rim);
+        transition: 0.3s;
+      }
+      .dot.active {
+        background: var(--brand);
+      }
+      .step-tag {
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: var(--brand);
+        margin-bottom: 24px;
+        display: block;
+      }
+      .form-group {
+        margin-bottom: 20px;
+      }
+      .form-group label {
+        display: block;
+        font-size: 0.85rem;
+        font-weight: 500;
+        color: var(--text-bright);
+        margin-bottom: 8px;
+      }
+      .form-group label span {
+        color: var(--danger);
+        font-size: 1.1rem;
+      }
+      .form-group input,
+      .form-group select {
+        width: 100%;
+        padding: 14px 16px;
+        background: var(--layer);
+        border: 1px solid var(--rim);
+        border-radius: 8px;
+        color: var(--text-bright);
+        font-family: 'Inter';
+        font-size: 1rem;
+        outline: none;
+        transition: 0.2s;
+      }
+      .form-group input:focus,
+      .form-group select:focus {
+        border-color: var(--brand-glow);
+        box-shadow: inset 0 0 0 1px var(--brand-glow);
+      }
+      .form-group input[type='date'],
+      .form-group input[type='time'] {
+        color-scheme: dark;
+      }
+      .form-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+      }
+      .form-actions {
+        display: flex;
+        justify-content: flex-end;
+        gap: 12px;
+        margin-top: 32px;
+      }
 
-    <!-- STATE C: RESULTS DASHBOARD -->
-    <div id="results-area" class="hidden">
-      
-      <div id="save-restore-bar">
-        <span>✅ Session restored successfully. Data is kept offline in your browser.</span>
-      </div>
+      /* ====== LOADING SPINNER ====== */
+      #loading-state-card {
+        max-width: 520px;
+        text-align: center;
+        background: transparent;
+        box-shadow: none;
+        border: none;
+        padding-top: 60px;
+      }
+      .spinner-box {
+        width: 140px;
+        height: 140px;
+        position: relative;
+        margin: 0 auto 40px;
+      }
+      .ring {
+        position: absolute;
+        border-radius: 50%;
+        border: 2px solid transparent;
+      }
+      .ring1 {
+        inset: 0;
+        border-top-color: var(--brand);
+        animation: spinnerRing1 1.2s linear infinite;
+      }
+      .ring2 {
+        inset: 10px;
+        border-right-color: var(--cyan);
+        animation: spinnerRing2 0.9s linear infinite;
+      }
+      .ring3 {
+        inset: 22px;
+        border-bottom-color: var(--violet);
+        animation: spinnerRing1 0.7s linear infinite;
+      }
+      .spinner-dot {
+        position: absolute;
+        inset: 60px;
+        background: var(--brand);
+        border-radius: 50%;
+        animation: pulsePulse 1s infinite alternate;
+        box-shadow: 0 0 20px var(--brand);
+      }
+      #loading-text {
+        font-family: 'Fraunces';
+        font-size: 1.8rem;
+        color: var(--brand);
+        margin-bottom: 8px;
+        height: 2.2rem;
+      }
+      .loading-sub {
+        color: var(--text-dim);
+        font-size: 0.9rem;
+        margin-bottom: 40px;
+      }
+      .fact-panel {
+        background: rgba(0, 0, 0, 0.2);
+        border: 1px solid var(--rim);
+        border-radius: 8px;
+        padding: 20px;
+        font-size: 0.95rem;
+        color: var(--text-mid);
+        min-height: 80px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .fact-text {
+        animation: floatFact 4s infinite;
+      }
 
-      <!-- Identity Banner -->
-      <div class="identity-banner">
-        <div class="banner-bg-pattern"></div>
-        <div class="identity-left">
-          <span id="res-tag">COSMIC PROFILE</span>
-          <h2 id="res-name" class="serif">Name</h2>
-          <div id="res-meta">Date · Time · Place</div>
-        </div>
-        <div class="identity-right">
-          <div class="banner-pills" id="res-pills"></div>
-          <div class="banner-actions">
-            <button class="btn btn-outline-gold btn-sm" onclick="saveToStorage()">💾 Save</button>
-            <button class="btn btn-ghost btn-sm" onclick="shareResults()">⬆ Share</button>
-            <button class="btn btn-danger btn-sm" onclick="location.reload()">↺ Start Over</button>
-          </div>
-        </div>
-      </div>
+      /* ====== RESULTS DASHBOARD ====== */
+      #results-area {
+        width: 100%;
+        max-width: 1100px;
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+        padding-bottom: 80px;
+      }
 
-      <!-- Cosmic Stats -->
-      <div class="stats-bar">
-        <div class="stat-item"><div class="stat-label">Life Path</div><div class="stat-val serif" id="stat-lp">-</div></div>
-        <div class="stat-item"><div class="stat-label">Zodiac</div><div class="stat-val serif" id="stat-zodiac">-</div></div>
-        <div class="stat-item"><div class="stat-label">Moon Sign</div><div class="stat-val serif" id="stat-moon">-</div></div>
-        <div class="stat-item"><div class="stat-label">Nakshatra</div><div class="stat-val serif" id="stat-nak">-</div></div>
-      </div>
+      /* Save/Restore Notice in Results */
+      #save-restore-bar {
+        background: var(--brand-soft);
+        border: 1px solid var(--brand-glow);
+        border-radius: 8px;
+        padding: 12px 20px;
+        font-size: 0.9rem;
+        color: var(--text-bright);
+        display: none;
+        justify-content: space-between;
+        align-items: center;
+      }
 
-      <!-- Tabs Bar -->
-      <nav class="tabs-nav" role="tablist" aria-label="Analysis result tabs">
-        <button class="tab-btn active" data-target="tab-overview" onclick="switchTab(this)" role="tab" aria-selected="true">Overview</button>
-        <button class="tab-btn" data-target="tab-personality" onclick="switchTab(this)" role="tab" aria-selected="false">Personality</button>
-        <button class="tab-btn" data-target="tab-cosmic" onclick="switchTab(this)" role="tab" aria-selected="false">Cosmic</button>
-        <button class="tab-btn" data-target="tab-timeline" onclick="switchTab(this)" role="tab" aria-selected="false">Timeline</button>
-        <button class="tab-btn" data-target="tab-future" onclick="switchTab(this)" role="tab" aria-selected="false">Future Focus</button>
-        <button class="tab-btn" data-target="tab-chart" onclick="switchTab(this)" role="tab" aria-selected="false">Birth Chart</button>
-        <button class="tab-btn" data-target="tab-compat" onclick="switchTab(this)" role="tab" aria-selected="false">Compatibility</button>
-        <button class="tab-btn" data-target="tab-oracle" onclick="switchTab(this)" role="tab" aria-selected="false">Daily Oracle</button>
+      /* Identity Banner */
+      .identity-banner {
+        background: linear-gradient(135deg, var(--layer), rgba(139, 92, 246, 0.05));
+        border: var(--border-glow);
+        border-radius: 16px;
+        padding: 32px 40px;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        flex-wrap: wrap;
+        gap: 24px;
+        position: relative;
+        overflow: hidden;
+      }
+      .banner-bg-pattern {
+        position: absolute;
+        inset: 0;
+        opacity: 0.05;
+        pointer-events: none;
+        background-image: radial-gradient(var(--brand) 1px, transparent 1px);
+        background-size: 20px 20px;
+      }
+      .identity-left {
+        position: relative;
+        z-index: 1;
+      }
+      #res-tag {
+        font-size: 0.8rem;
+        text-transform: uppercase;
+        letter-spacing: 0.15em;
+        color: var(--text-mid);
+        margin-bottom: 8px;
+        display: block;
+      }
+      #res-name {
+        font-size: clamp(2rem, 5vw, 2.8rem);
+        line-height: 1.1;
+        margin-bottom: 8px;
+        color: var(--text-bright);
+      }
+      #res-meta {
+        font-size: 1rem;
+        color: var(--text-dim);
+      }
+      .identity-right {
+        position: relative;
+        z-index: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 16px;
+      }
+      .banner-pills {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+      }
+      .banner-actions {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+      }
+
+      /* Cosmic Stats Bar */
+      .stats-bar {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        background: var(--glass);
+        border: var(--border-glow);
+        border-radius: 12px;
+        backdrop-filter: blur(10px);
+      }
+      .stat-item {
+        padding: 20px;
+        text-align: center;
+        position: relative;
+      }
+      .stat-item:not(:last-child)::after {
+        content: '';
+        position: absolute;
+        right: 0;
+        top: 20%;
+        bottom: 20%;
+        width: 1px;
+        background: var(--rim);
+      }
+      .stat-label {
+        font-size: 0.7rem;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: var(--text-dim);
+        margin-bottom: 8px;
+      }
+      .stat-val {
+        font-size: 1.5rem;
+        color: var(--brand);
+      }
+
+      /* Tabs Bar */
+      .tabs-nav {
+        position: sticky;
+        top: 0;
+        z-index: 50;
+        display: flex;
+        gap: 8px;
+        background: rgba(4, 10, 20, 0.85);
+        backdrop-filter: blur(16px);
+        padding: 16px 0;
+        overflow-x: auto;
+        scrollbar-width: none;
+        border-bottom: 1px solid var(--rim);
+      }
+      .tabs-nav::-webkit-scrollbar {
+        display: none;
+      }
+      .tab-btn {
+        background: transparent;
+        border: none;
+        color: var(--text-mid);
+        font-family: 'Inter';
+        font-size: 0.95rem;
+        font-weight: 500;
+        padding: 8px 16px;
+        border-radius: 99px;
+        cursor: pointer;
+        white-space: nowrap;
+        transition: 0.3s;
+      }
+      .tab-btn:hover {
+        color: var(--text-bright);
+        background: var(--layer);
+      }
+      .tab-btn.active {
+        color: var(--brand);
+        background: var(--brand-soft);
+      }
+      .tab-btn[data-target='tab-compat'].active {
+        color: var(--violet);
+        background: var(--violet-soft);
+      }
+      .tab-btn[data-target='tab-oracle'].active {
+        color: var(--cyan);
+        background: var(--cyan-soft);
+      }
+
+      .tab-content {
+        display: none;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+        opacity: 0;
+      }
+      .tab-content.active {
+        display: grid;
+        animation: cosmicFade 0.5s ease forwards;
+      }
+
+      /* Analysis Card */
+      .analysis-card {
+        background: var(--panel);
+        border: 1px solid var(--rim);
+        border-radius: 12px;
+        padding: 24px;
+        opacity: 0;
+        animation: cardReveal 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        transition: transform 0.3s;
+      }
+      .analysis-card:hover {
+        transform: translateY(-3px);
+        border-color: rgba(255, 255, 255, 0.1);
+      }
+      .card-icon {
+        font-size: 1.5rem;
+        margin-bottom: 16px;
+        display: inline-block;
+      }
+      .card-label {
+        font-size: 0.7rem;
+        text-transform: uppercase;
+        letter-spacing: 0.15em;
+        color: var(--brand);
+        margin-bottom: 8px;
+      }
+      .card-title {
+        font-size: 1.6rem;
+        color: var(--text-bright);
+        margin-bottom: 16px;
+        line-height: 1.2;
+      }
+      .card-body {
+        font-size: 0.95rem;
+        color: var(--text-mid);
+        line-height: 1.6;
+        flex-grow: 1;
+      }
+
+      .card-highlight {
+        background: linear-gradient(145deg, var(--panel), rgba(139, 92, 246, 0.1));
+        border-color: var(--brand-glow);
+        box-shadow: var(--shadow-brand);
+      }
+      .card-wide {
+        grid-column: span 2;
+      }
+      .card-full {
+        grid-column: 1 / -1;
+      }
+
+      /* Custom Content Renderers */
+      .timeline-list {
+        list-style: none;
+        padding-left: 12px;
+        border-left: 2px solid var(--rim);
+      }
+      .timeline-list li {
+        position: relative;
+        padding-left: 20px;
+        padding-bottom: 24px;
+        color: var(--text-mid);
+      }
+      .timeline-list li::before {
+        content: '';
+        position: absolute;
+        left: -17px;
+        top: 6px;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: var(--brand);
+        box-shadow: 0 0 10px var(--brand);
+        border: 24px solid var(--void);
+        border-width: 4px;
+      }
+      .timeline-list li:last-child {
+        padding-bottom: 0;
+      }
+
+      .score-bar-wrap {
+        margin-bottom: 16px;
+      }
+      .score-bar-labels {
+        display: flex;
+        justify-content: space-between;
+        font-size: 0.85rem;
+        margin-bottom: 6px;
+        color: var(--text-bright);
+      }
+      .score-bar-bg {
+        height: 6px;
+        background: var(--layer);
+        border-radius: 3px;
+        overflow: hidden;
+      }
+      .score-bar-fill {
+        height: 100%;
+        border-radius: 3px;
+        width: 0%;
+        transition: width 1.5s cubic-bezier(0.1, 0.7, 0.1, 1);
+        background: linear-gradient(90deg, var(--brand), var(--cyan));
+      }
+
+      .gem-display {
+        text-align: center;
+        padding: 20px;
+        background: var(--layer);
+        border-radius: 8px;
+        margin-bottom: 16px;
+      }
+      .gem-name {
+        font-size: 1.8rem;
+        color: var(--brand);
+      }
+      .mantra-text {
+        font-size: 1.6rem;
+        color: var(--brand);
+        text-align: center;
+        margin: 20px 0;
+      }
+
+      /* Birth Chart Layout */
+      .chart-layout {
+        display: grid;
+        grid-template-columns: 460px 1fr;
+        gap: 32px;
+        grid-column: 1 / -1;
+        align-items: start;
+      }
+      .chart-left {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background: var(--panel);
+        border: 1px solid var(--rim);
+        border-radius: 16px;
+        padding: 32px;
+      }
+      .chart-wheel-container {
+        width: 100%;
+        max-width: 420px;
+        aspect-ratio: 1/1;
+        position: relative;
+      }
+      #chart-canvas {
+        width: 100%;
+        height: 100%;
+      }
+      .chart-legend {
+        display: flex;
+        gap: 16px;
+        margin-top: 24px;
+        font-size: 0.85rem;
+      }
+      .legend-item {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        color: var(--text-mid);
+      }
+      .legend-dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+      }
+      .chart-sidebar {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      /* Compatibility Tab */
+      .compat-form {
+        max-width: 640px;
+        margin: 0 auto;
+        grid-column: 1 / -1;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
+      .compat-form-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+      }
+      .compat-score-banner {
+        grid-column: 1 / -1;
+        background: var(--panel);
+        border: 1px solid var(--violet-soft);
+        border-radius: 16px;
+        padding: 32px;
+        display: grid;
+        grid-template-columns: auto 1fr 1fr;
+        gap: 32px;
+        align-items: center;
+        text-align: center;
+      }
+      .compat-avatars {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+      }
+      .avatar-circle {
+        width: 64px;
+        height: 64px;
+        border-radius: 50%;
+        background: var(--layer);
+        border: 1px solid var(--rim);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: 'Fraunces';
+        font-size: 1.5rem;
+        color: var(--brand);
+      }
+      .heart-icon {
+        color: var(--danger);
+        font-size: 1.5rem;
+      }
+      .score-huge {
+        font-size: 4rem;
+        background: linear-gradient(180deg, var(--brand), #ff9eb5);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        line-height: 1;
+        margin-bottom: 8px;
+      }
+      .compat-bars {
+        text-align: left;
+      }
+
+      /* Daily Oracle Tab */
+      .oracle-header {
+        grid-column: 1 / -1;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: var(--panel);
+        border-radius: 12px;
+        padding: 20px 32px;
+        border: 1px solid var(--cyan-soft);
+      }
+      .oracle-dateinfo {
+        font-size: 1.1rem;
+        color: var(--text-bright);
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+      .oracle-quote {
+        font-size: clamp(1.4rem, 4vw, 2rem);
+        color: var(--brand);
+        text-align: center;
+        margin: 24px 0;
+        padding: 0 20px;
+        line-height: 1.4;
+        grid-column: 1/-1;
+      }
+      .focus-word {
+        font-size: clamp(2.5rem, 6vw, 3.5rem);
+        background: linear-gradient(90deg, var(--brand), var(--cyan));
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        line-height: 1.2;
+        text-align: center;
+        margin-bottom: 16px;
+      }
+
+      /* Toast Notification */
+      .toast {
+        position: fixed;
+        bottom: -100px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: var(--panel);
+        border: 1px solid var(--brand-glow);
+        color: var(--brand);
+        padding: 12px 24px;
+        border-radius: 99px;
+        font-size: 0.95rem;
+        box-shadow: var(--shadow-deep);
+        z-index: 1000;
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        backdrop-filter: blur(10px);
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+      .toast.show {
+        bottom: 32px;
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+          animation-duration: 0.01ms !important;
+          animation-iteration-count: 1 !important;
+          transition-duration: 0.01ms !important;
+        }
+      }
+
+      /* Responsive Adjustments */
+      @media (max-width: 900px) {
+        .chart-layout {
+          grid-template-columns: 1fr;
+        }
+        .chart-left {
+          padding: 20px;
+        }
+        .compat-score-banner {
+          grid-template-columns: 1fr;
+        }
+      }
+      @media (max-width: 768px) {
+        .navbar {
+          padding: 20px 24px;
+        }
+        .hero h1 {
+          font-size: 3rem;
+        }
+        .identity-banner {
+          flex-direction: column;
+          align-items: flex-start;
+          padding: 28px 24px;
+        }
+        .identity-right {
+          align-items: flex-start;
+        }
+        .stats-bar {
+          grid-template-columns: 1fr 1fr;
+        }
+        .stat-item:nth-child(2)::after {
+          display: none;
+        }
+        .stat-item:nth-child(1)::after,
+        .stat-item:nth-child(2)::after {
+          border-bottom: 1px solid var(--rim);
+          right: -100%;
+          width: 200%;
+          height: 1px;
+          top: auto;
+          bottom: 0;
+        }
+        .tab-content {
+          grid-template-columns: 1fr;
+        }
+        .card-wide {
+          grid-column: 1 / -1;
+        }
+        .form-row,
+        .compat-form-grid {
+          grid-template-columns: 1fr;
+        }
+        .oracle-header {
+          flex-direction: column;
+          gap: 16px;
+          text-align: center;
+        }
+        .view {
+          padding: 24px 16px;
+        }
+        .glass-card {
+          padding: 24px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <a href="#view-landing" class="skip-link">Skip to main content</a>
+    <!-- Background Elements -->
+    <canvas id="cosmos-canvas" aria-hidden="true"></canvas>
+    <div class="nebula-bg nebula-1" aria-hidden="true"></div>
+    <div class="nebula-bg nebula-2" aria-hidden="true"></div>
+    <div class="nebula-bg nebula-3" aria-hidden="true"></div>
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+    <!-- VIEW 1: LANDING -->
+    <main id="view-landing" class="view active">
+      <nav class="navbar" aria-label="Primary navigation">
+        <div class="logo" aria-label="KnowYou home">✦ KnowYou</div>
+        <div class="pill pill-gold">AI Identity Engine</div>
       </nav>
+      <div class="hero">
+        <svg
+          class="pulse-eye"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="var(--brand)"
+          stroke-width="1.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+          role="img"
+        >
+          <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+          <circle cx="12" cy="12" r="3"></circle>
+        </svg>
+        <h1>Know <i>who</i> you really are.</h1>
+        <p>
+          A cosmic identity engine that weaves numerology, astrology, and artificial intelligence
+          into a deep psychological mirror.
+        </p>
 
-      <!-- TAB: Overview -->
-      <div id="tab-overview" class="tab-content active" role="tabpanel"></div>
-      <!-- TAB: Personality -->
-      <div id="tab-personality" class="tab-content" role="tabpanel"></div>
-      <!-- TAB: Cosmic -->
-      <div id="tab-cosmic" class="tab-content" role="tabpanel"></div>
-      <!-- TAB: Timeline -->
-      <div id="tab-timeline" class="tab-content" role="tabpanel"></div>
-      <!-- TAB: Future Focus -->
-      <div id="tab-future" class="tab-content" role="tabpanel"></div>
-      
-      <!-- TAB: Birth Chart -->
-      <div id="tab-chart" class="tab-content">
-        <div class="chart-layout">
-          <div class="chart-left">
-            <div class="chart-wheel-container"><canvas id="chart-canvas" width="840" height="840"></canvas></div>
-            <div class="chart-legend" id="chart-legend"></div>
+        <div class="feature-pills">
+          <span class="pill pill-gold">✦ Life Path Number</span>
+          <span class="pill pill-cyan">☽ Vedic Astrology</span>
+          <span class="pill pill-violet">龍 Chinese Zodiac</span>
+          <span class="pill">🔮 AI Personality</span>
+          <span class="pill">📈 Career Intelligence</span>
+          <span class="pill">💎 Lucky Gemstone</span>
+        </div>
+
+        <div class="cta-row">
+          <button class="btn btn-ghost" onclick="switchView('view-prank')">Login</button>
+          <button class="btn btn-primary" onclick="switchView('view-terms')">
+            Begin Analysis →
+          </button>
+        </div>
+        <div class="disclaimer">No database · No tracking · Data vanishes on refresh</div>
+
+        <div id="restore-notice" class="restore-notice hidden">
+          <span>💾 You have a saved session</span>
+          <button class="btn btn-primary btn-sm" onclick="restoreSession()">Restore it →</button>
+          <button
+            class="restore-close"
+            onclick="clearStorage(true)"
+            aria-label="Dismiss saved session notice"
+          >
+            ✕
+          </button>
+        </div>
+      </div>
+    </main>
+
+    <!-- VIEW 2: PRANK -->
+    <section id="view-prank" class="view">
+      <div class="glass-card">
+        <img
+          src="https://media.giphy.com/media/10yXFkBJ0MwGQ0/giphy.gif"
+          alt="Animated reaction GIF — there is no database to log into"
+          loading="lazy"
+        />
+        <h2 class="serif">Login? We don't have a database!</h2>
+        <p>We are too broke for cloud storage... redirecting you back.</p>
+      </div>
+    </section>
+
+    <!-- VIEW 3: TERMS -->
+    <section id="view-terms" class="view">
+      <div class="glass-card">
+        <h2 class="serif"><i>Conditions</i> of the Cosmos</h2>
+        <p>Please review before proceeding.</p>
+        <div class="terms-box">
+          <h4>🚫 No Database, No Money</h4>
+          <p>
+            Your data never touches a backend database. It's processed and instantly forgotten
+            unless you explicitly save it to your local browser.
+          </p>
+          <h4>🧂 A Pinch of Salt</h4>
+          <p>
+            AI can hallucinate. The cosmos is vast. Do not make major life decisions based on a web
+            app.
+          </p>
+          <h4>🤖 AI Disclaimer</h4>
+          <p>
+            This application synthesizes established astrological rules with Gemini LLM
+            interpretations.
+          </p>
+          <h4>🌪️ Data Vanishing Act</h4>
+          <p>
+            If you close this tab without hitting "Save", the universe will forget you were here.
+          </p>
+          <h4>😄 Have Fun</h4>
+          <p>Embark on this journey with an open mind.</p>
+        </div>
+        <label class="checkbox-row">
+          <input
+            type="checkbox"
+            id="terms-check"
+            onchange="document.getElementById('btn-proceed-terms').disabled = !this.checked"
+          />
+          <span>I agree to take this with a grain of cosmic salt</span>
+        </label>
+        <button
+          id="btn-proceed-terms"
+          class="btn btn-primary"
+          style="width: 100%"
+          disabled
+          onclick="switchView('view-form')"
+        >
+          Proceed to Destiny →
+        </button>
+      </div>
+    </section>
+
+    <!-- VIEW 4: MAIN FLOW (Form + Loading + Results) -->
+    <section id="view-form" class="view">
+      <!-- STATE A: INPUT FORM -->
+      <div id="form-state-card" class="glass-card">
+        <div class="progress-dots">
+          <div class="dot active"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+        </div>
+        <span class="step-tag">Step 1 of 3 — Identity Input</span>
+        <h2 class="serif">Initialize Analysis</h2>
+        <p style="margin-bottom: 24px">Your birth data is the key to the celestial map.</p>
+
+        <div class="form-group">
+          <label for="inp-name">Full Name</label>
+          <input type="text" id="inp-name" autocomplete="name" placeholder="e.g. Nicola Tesla" />
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="inp-dob"
+              >Date of Birth <span aria-hidden="true">*</span
+              ><span class="sr-only"> (required)</span></label
+            >
+            <input type="date" id="inp-dob" required aria-required="true" />
           </div>
-          <div class="chart-sidebar" id="chart-sidebar"></div>
+          <div class="form-group">
+            <label for="inp-time">Time of Birth (Optional)</label>
+            <input type="time" id="inp-time" />
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="inp-place">Place of Birth (Optional)</label>
+          <input type="text" id="inp-place" placeholder="e.g. Smiljan, Croatia" />
+        </div>
+        <div class="form-group">
+          <label for="inp-focus">What's most on your mind? (Optional)</label>
+          <input type="text" id="inp-focus" placeholder="e.g. Career transition, love, etc." />
+        </div>
+
+        <div class="form-actions">
+          <button class="btn btn-ghost" onclick="resetForm()">Reset</button>
+          <button class="btn btn-primary" onclick="startAnalysis()">Decode My Identity ✦</button>
         </div>
       </div>
 
-      <!-- TAB: Compatibility -->
-      <div id="tab-compat" class="tab-content">
-        <div id="compat-form-area" class="glass-card compat-form">
-          <h2 class="serif">⚭ Chemistry Analysis</h2>
-          <p>Test your cosmic resonance with another soul.</p>
-          <div class="compat-form-grid">
-            <div class="form-group"><label for="comp-name">Their Name</label><input type="text" id="comp-name"></div>
-            <div class="form-group"><label for="comp-dob">Their DOB <span aria-hidden="true">*</span></label><input type="date" id="comp-dob" required aria-required="true"></div>
-            <div class="form-group card-wide"><label for="comp-type">Relationship Type</label>
-              <select id="comp-type">
-                <option value="Romantic Partner">💑 Romantic Partner</option>
-                <option value="Close Friend">🤝 Close Friend</option>
-                <option value="Colleague">💼 Colleague</option>
-                <option value="Family Member">👨‍👩‍👧 Family Member</option>
-              </select>
+      <!-- STATE B: LOADING -->
+      <div
+        id="loading-state-card"
+        class="glass-card hidden"
+        role="status"
+        aria-live="polite"
+        aria-label="Analysis in progress"
+      >
+        <div class="spinner-box">
+          <div class="ring ring1"></div>
+          <div class="ring ring2"></div>
+          <div class="ring ring3"></div>
+          <div class="spinner-dot"></div>
+        </div>
+        <h3 id="loading-text">Triangulating star positions...</h3>
+        <p class="loading-sub">This may take up to 20 seconds. Do not refresh.</p>
+        <div class="fact-panel">
+          <span id="loading-fact" class="fact-text"
+            >Did you know? The moon phase deeply impacts emotional rhythms in Vedic astrology.</span
+          >
+        </div>
+      </div>
+
+      <!-- STATE C: RESULTS DASHBOARD -->
+      <div id="results-area" class="hidden">
+        <div id="save-restore-bar">
+          <span>✅ Session restored successfully. Data is kept offline in your browser.</span>
+        </div>
+
+        <!-- Identity Banner -->
+        <div class="identity-banner">
+          <div class="banner-bg-pattern"></div>
+          <div class="identity-left">
+            <span id="res-tag">COSMIC PROFILE</span>
+            <h2 id="res-name" class="serif">Name</h2>
+            <div id="res-meta">Date · Time · Place</div>
+          </div>
+          <div class="identity-right">
+            <div class="banner-pills" id="res-pills"></div>
+            <div class="banner-actions">
+              <button class="btn btn-outline-gold btn-sm" onclick="saveToStorage()">💾 Save</button>
+              <button class="btn btn-ghost btn-sm" onclick="shareResults()">⬆ Share</button>
+              <button class="btn btn-danger btn-sm" onclick="location.reload()">
+                ↺ Start Over
+              </button>
             </div>
           </div>
-          <button class="btn btn-primary" onclick="runCompatibility(this)">Analyze Compatibility ✦</button>
         </div>
-        <div id="compat-loading" class="hidden card-wide" style="text-align:center; padding:40px;">
-          <div class="spinner-box" style="transform:scale(0.6); margin:0 auto;"><div class="ring ring1"></div><div class="ring ring2"></div><div class="ring ring3"></div><div class="spinner-dot"></div></div>
-          <p style="color:var(--gold)">Aligning frequencies...</p>
-        </div>
-        <div id="compat-results" class="hidden card-wide" style="display:grid; grid-template-columns:1fr 1fr; gap:20px;"></div>
-      </div>
 
-      <!-- TAB: Daily Oracle -->
-      <div id="tab-oracle" class="tab-content">
-        <div class="oracle-header">
-          <div class="oracle-dateinfo">
-            <span id="oracle-date">Today</span>
-            <span id="oracle-moon">🌕</span>
+        <!-- Cosmic Stats -->
+        <div class="stats-bar">
+          <div class="stat-item">
+            <div class="stat-label">Life Path</div>
+            <div class="stat-val serif" id="stat-lp">-</div>
           </div>
-          <button id="btn-oracle" class="btn btn-outline-gold" onclick="runDailyOracle(this)">🔮 Generate Today's Reading</button>
+          <div class="stat-item">
+            <div class="stat-label">Zodiac</div>
+            <div class="stat-val serif" id="stat-zodiac">-</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-label">Moon Sign</div>
+            <div class="stat-val serif" id="stat-moon">-</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-label">Nakshatra</div>
+            <div class="stat-val serif" id="stat-nak">-</div>
+          </div>
         </div>
-        <div id="oracle-loading" class="hidden card-wide" style="text-align:center; padding:40px;">
-          <div class="spinner-box" style="transform:scale(0.6); margin:0 auto;"><div class="ring ring1"></div><div class="ring ring2"></div><div class="ring ring3"></div><div class="spinner-dot"></div></div>
-          <p style="color:var(--cyan)">Consulting the cosmic currents...</p>
+
+        <!-- Tabs Bar -->
+        <nav class="tabs-nav" role="tablist" aria-label="Analysis result tabs">
+          <button
+            class="tab-btn active"
+            data-target="tab-overview"
+            onclick="switchTab(this)"
+            role="tab"
+            aria-selected="true"
+          >
+            Overview
+          </button>
+          <button
+            class="tab-btn"
+            data-target="tab-personality"
+            onclick="switchTab(this)"
+            role="tab"
+            aria-selected="false"
+          >
+            Personality
+          </button>
+          <button
+            class="tab-btn"
+            data-target="tab-cosmic"
+            onclick="switchTab(this)"
+            role="tab"
+            aria-selected="false"
+          >
+            Cosmic
+          </button>
+          <button
+            class="tab-btn"
+            data-target="tab-timeline"
+            onclick="switchTab(this)"
+            role="tab"
+            aria-selected="false"
+          >
+            Timeline
+          </button>
+          <button
+            class="tab-btn"
+            data-target="tab-future"
+            onclick="switchTab(this)"
+            role="tab"
+            aria-selected="false"
+          >
+            Future Focus
+          </button>
+          <button
+            class="tab-btn"
+            data-target="tab-chart"
+            onclick="switchTab(this)"
+            role="tab"
+            aria-selected="false"
+          >
+            Birth Chart
+          </button>
+          <button
+            class="tab-btn"
+            data-target="tab-compat"
+            onclick="switchTab(this)"
+            role="tab"
+            aria-selected="false"
+          >
+            Compatibility
+          </button>
+          <button
+            class="tab-btn"
+            data-target="tab-oracle"
+            onclick="switchTab(this)"
+            role="tab"
+            aria-selected="false"
+          >
+            Daily Oracle
+          </button>
+        </nav>
+
+        <!-- TAB: Overview -->
+        <div id="tab-overview" class="tab-content active" role="tabpanel"></div>
+        <!-- TAB: Personality -->
+        <div id="tab-personality" class="tab-content" role="tabpanel"></div>
+        <!-- TAB: Cosmic -->
+        <div id="tab-cosmic" class="tab-content" role="tabpanel"></div>
+        <!-- TAB: Timeline -->
+        <div id="tab-timeline" class="tab-content" role="tabpanel"></div>
+        <!-- TAB: Future Focus -->
+        <div id="tab-future" class="tab-content" role="tabpanel"></div>
+
+        <!-- TAB: Birth Chart -->
+        <div id="tab-chart" class="tab-content">
+          <div class="chart-layout">
+            <div class="chart-left">
+              <div class="chart-wheel-container">
+                <canvas id="chart-canvas" width="840" height="840"></canvas>
+              </div>
+              <div class="chart-legend" id="chart-legend"></div>
+            </div>
+            <div class="chart-sidebar" id="chart-sidebar"></div>
+          </div>
         </div>
-        <div id="oracle-results" class="hidden card-wide" style="display:grid; grid-template-columns:1fr 1fr; gap:20px;"></div>
+
+        <!-- TAB: Compatibility -->
+        <div id="tab-compat" class="tab-content">
+          <div id="compat-form-area" class="glass-card compat-form">
+            <h2 class="serif">⚭ Chemistry Analysis</h2>
+            <p>Test your cosmic resonance with another soul.</p>
+            <div class="compat-form-grid">
+              <div class="form-group">
+                <label for="comp-name">Their Name</label><input type="text" id="comp-name" />
+              </div>
+              <div class="form-group">
+                <label for="comp-dob">Their DOB <span aria-hidden="true">*</span></label
+                ><input type="date" id="comp-dob" required aria-required="true" />
+              </div>
+              <div class="form-group card-wide">
+                <label for="comp-type">Relationship Type</label>
+                <select id="comp-type">
+                  <option value="Romantic Partner">💑 Romantic Partner</option>
+                  <option value="Close Friend">🤝 Close Friend</option>
+                  <option value="Colleague">💼 Colleague</option>
+                  <option value="Family Member">👨‍👩‍👧 Family Member</option>
+                </select>
+              </div>
+            </div>
+            <button class="btn btn-primary" onclick="runCompatibility(this)">
+              Analyze Compatibility ✦
+            </button>
+          </div>
+          <div
+            id="compat-loading"
+            class="hidden card-wide"
+            style="text-align: center; padding: 40px"
+          >
+            <div class="spinner-box" style="transform: scale(0.6); margin: 0 auto">
+              <div class="ring ring1"></div>
+              <div class="ring ring2"></div>
+              <div class="ring ring3"></div>
+              <div class="spinner-dot"></div>
+            </div>
+            <p style="color: var(--brand)">Aligning frequencies...</p>
+          </div>
+          <div
+            id="compat-results"
+            class="hidden card-wide"
+            style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px"
+          ></div>
+        </div>
+
+        <!-- TAB: Daily Oracle -->
+        <div id="tab-oracle" class="tab-content">
+          <div class="oracle-header">
+            <div class="oracle-dateinfo">
+              <span id="oracle-date">Today</span>
+              <span id="oracle-moon">🌕</span>
+            </div>
+            <button id="btn-oracle" class="btn btn-outline-gold" onclick="runDailyOracle(this)">
+              🔮 Generate Today's Reading
+            </button>
+          </div>
+          <div
+            id="oracle-loading"
+            class="hidden card-wide"
+            style="text-align: center; padding: 40px"
+          >
+            <div class="spinner-box" style="transform: scale(0.6); margin: 0 auto">
+              <div class="ring ring1"></div>
+              <div class="ring ring2"></div>
+              <div class="ring ring3"></div>
+              <div class="spinner-dot"></div>
+            </div>
+            <p style="color: var(--cyan)">Consulting the cosmic currents...</p>
+          </div>
+          <div
+            id="oracle-results"
+            class="hidden card-wide"
+            style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px"
+          ></div>
+        </div>
       </div>
+    </section>
 
-    </div>
-  </section>
+    <script>
+      /* ====== INTERNAL LOGIC ====== */
+      // API key removed for security; requests are proxied via backend.
+      const STORE_KEY = 'knowyou_session_v2';
+      const TTL = 604800000;
 
-<script>
-  /* ====== INTERNAL LOGIC ====== */
-  // API key removed for security; requests are proxied via backend.
-  const STORE_KEY = 'knowyou_session_v2';
-  const TTL = 604800000;
-  
-  window._lastParsed = null; window._lastUser = null;
+      window._lastParsed = null;
+      window._lastUser = null;
 
-  /* UTILITY & VIEW */
-  function getEl(id) { return document.getElementById(id); }
-  function escHtml(str) {
-    if(typeof str !== 'string') return '';
-    return str.replace(/[&<>'"]/g, match => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[match]));
-  }
-  function randomScore(min, max) { return Math.floor(Math.random() * (max - min + 1)) + min; }
-  
-  function showToast(msg) {
-    const t = getEl('toast');
-    t.innerHTML = '<span>✦</span> ' + escHtml(msg);
-    t.classList.add('show');
-    setTimeout(() => t.classList.remove('show'), 3000);
-  }
-
-  function switchView(id) {
-    document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
-    getEl(id).classList.add('active');
-  }
-  function switchTab(btnEl) {
-    const parent = btnEl.closest('.view') || document;
-    parent.querySelectorAll('.tab-btn').forEach(b => { b.classList.remove('active'); b.setAttribute('aria-selected', 'false'); });
-    parent.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
-    btnEl.classList.add('active');
-    btnEl.setAttribute('aria-selected', 'true');
-    const target = btnEl.getAttribute('data-target');
-    getEl(target).classList.add('active');
-  }
-  function resetForm() {
-    ['inp-name','inp-dob','inp-time','inp-place','inp-focus'].forEach(id => getEl(id).value='');
-  }
-
-  /* CANVAS STARFIELD */
-  const canvas = getEl('cosmos-canvas');
-  const ctx = canvas.getContext('2d');
-  let stars = [], width = 0, height = 0;
-  function initStars() {
-    width = canvas.width = window.innerWidth;
-    height = canvas.height = window.innerHeight;
-    stars = [];
-    for(let i=0; i<200; i++) {
-      stars.push({
-        x: Math.random() * width, y: Math.random() * height,
-        r: 0.2 + Math.random() * 1.2, speed: 0.05 + Math.random() * 0.1,
-        angle: Math.random() * Math.PI * 2,
-        drift: -0.1 - Math.random() * 0.2
-      });
-    }
-  }
-  function animateStars() {
-    ctx.clearRect(0,0,width,height);
-    stars.forEach(s => {
-      s.angle += s.speed; s.x += s.drift;
-      if(s.x < 0) s.x = width;
-      else if(s.x > width) s.x = 0;
-      let alpha = 0.2 + 0.8 * Math.abs(Math.sin(s.angle));
-      ctx.beginPath(); ctx.arc(s.x, s.y, s.r, 0, Math.PI*2);
-      ctx.fillStyle = `rgba(200, 220, 255, ${alpha})`;
-      ctx.fill();
-    });
-    requestAnimationFrame(animateStars);
-  }
-  window.addEventListener('resize', initStars); 
-  initStars(); animateStars();
-
-  /* LOCAL COMPUTATIONS */
-  function reduceMaster(numStr) {
-    let sum = numStr.split('').reduce((a,b)=>a+parseInt(b),0);
-    while(sum > 9 && sum !== 11 && sum !== 22 && sum !== 33) {
-      sum = sum.toString().split('').reduce((a,b)=>a+parseInt(b),0);
-    }
-    return sum;
-  }
-  function calcLifePathNumber(dob) {
-    const digits = dob.replace(/-/g, '');
-    if(!digits) return 0;
-    return reduceMaster(digits);
-  }
-  function calcNumerologyExpression(name) {
-    let mapping = {A:1,B:2,C:3,D:4,E:5,F:6,G:7,H:8,I:9, J:1,K:2,L:3,M:4,N:5,O:6,P:7,Q:8,R:9, S:1,T:2,U:3,V:4,W:5,X:6,Y:7,Z:8};
-    let clean = name.toUpperCase().replace(/[^A-Z]/g, '');
-    if(!clean) return 0;
-    let sum = clean.split('').reduce((a,c) => a + (mapping[c] || 0), 0);
-    return reduceMaster(sum.toString());
-  }
-  function calcWesternZodiac(dob) {
-    const d = new Date(dob);
-    if(isNaN(d)) return "Unknown";
-    const mo = d.getUTCMonth()+1, day = d.getUTCDate();
-    if((mo==3 && day>=21)||(mo==4 && day<=19)) return "Aries";
-    if((mo==4 && day>=20)||(mo==5 && day<=20)) return "Taurus";
-    if((mo==5 && day>=21)||(mo==6 && day<=20)) return "Gemini";
-    if((mo==6 && day>=21)||(mo==7 && day<=22)) return "Cancer";
-    if((mo==7 && day>=23)||(mo==8 && day<=22)) return "Leo";
-    if((mo==8 && day>=23)||(mo==9 && day<=22)) return "Virgo";
-    if((mo==9 && day>=23)||(mo==10 && day<=22)) return "Libra";
-    if((mo==10 && day>=23)||(mo==11 && day<=21)) return "Scorpio";
-    if((mo==11 && day>=22)||(mo==12 && day<=21)) return "Sagittarius";
-    if((mo==12 && day>=22)||(mo==1 && day<=19)) return "Capricorn";
-    if((mo==1 && day>=20)||(mo==2 && day<=18)) return "Aquarius";
-    return "Pisces";
-  }
-  function calcChineseZodiac(dob) {
-    const year = new Date(dob).getUTCFullYear();
-    if(isNaN(year)) return {animal:"Unknown", element:"Unknown"};
-    const animals = ["Rat","Ox","Tiger","Rabbit","Dragon","Snake","Horse","Goat","Monkey","Rooster","Dog","Pig"];
-    const elements = ["Metal","Metal","Water","Water","Wood","Wood","Fire","Fire","Earth","Earth"];
-    return { animal: animals[(year - 4 + 1200) % 12], element: elements[(year % 10)] };
-  }
-  function getMoonPhase(dateObj) {
-    const anchor = new Date("2000-01-06T00:00:00Z");
-    const msDiff = dateObj - anchor;
-    const days = msDiff / 86400000;
-    let pos = (days % 29.53058867) / 29.53058867;
-    if(pos < 0) pos += 1;
-    if(pos < 0.03) return "New Moon 🌑";
-    if(pos < 0.22) return "Waxing Crescent 🌒";
-    if(pos < 0.28) return "First Quarter 🌓";
-    if(pos < 0.47) return "Waxing Gibbous 🌔";
-    if(pos < 0.53) return "Full Moon 🌕";
-    if(pos < 0.72) return "Waning Gibbous 🌖";
-    if(pos < 0.78) return "Last Quarter 🌗";
-    return "Waning Crescent 🌘";
-  }
-
-  /* STORAGE & SHARE */
-  function saveToStorage() {
-    if(!window._lastParsed || !window._lastUser) return showToast("No session to save.");
-    const data = { parsed: window._lastParsed, user: window._lastUser, savedAt: Date.now() };
-    localStorage.setItem(STORE_KEY, JSON.stringify(data));
-    showToast("Session saved locally for 7 days.");
-  }
-  function clearStorage(hideNotice=false) {
-    localStorage.removeItem(STORE_KEY);
-    if(hideNotice) getEl('restore-notice').classList.add('hidden');
-  }
-  function restoreSession() {
-    try {
-      const data = JSON.parse(localStorage.getItem(STORE_KEY));
-      if(!data) return;
-      switchView('view-form');
-      renderResults(data.parsed, data.user);
-      getEl('save-restore-bar').style.display = 'flex';
-    } catch(_e) {
-      clearStorage();
-      showToast("Saved session was corrupted. Starting fresh.");
-    }
-  }
-  function checkSavedSession() {
-    const raw = localStorage.getItem(STORE_KEY);
-    if(raw) {
-      try {
-        const d = JSON.parse(raw);
-        if(Date.now() - d.savedAt > TTL) clearStorage(true);
-        else getEl('restore-notice').classList.remove('hidden');
-      } catch(e){ clearStorage(); }
-    }
-  }
-  function shareResults() {
-    if(!window._lastUser || !window._lastParsed) return;
-    let u = window._lastUser, p = window._lastParsed;
-    let text = `✦ My Cosmic Identity Report\n${u.name} · ${u.dob} · ${u.place}\n${u.zodiac} · ${u.chinese.element} ${u.chinese.animal} · Life Path ${u.lp}\nNakshatra: ${p.nakshatra} | Moon: ${p.moon_sign}\n\nGenerated by KnowYou — Cosmic Identity Engine`;
-    navigator.clipboard.writeText(text)
-      .then(() => showToast("Copied to clipboard!"))
-      .catch(() => showToast("Could not copy — try manually."));
-  }
-  /* API INTEGRATION */
-  async function getBestModel() {
-    try {
-      const res = await fetch(`/api/models`);
-      if(res.ok) {
-        const data = await res.json();
-        const flash = data.models.find(m => m.name.includes('gemini-2.5-flash') || m.name.includes('gemini-2.0-flash') || m.name.includes('gemini-1.5-flash') || m.name.includes('flash'));
-        if(flash) return flash.name;
+      /* UTILITY & VIEW */
+      function getEl(id) {
+        return document.getElementById(id);
       }
-    } catch(e) {}
-    return 'models/gemini-2.0-flash';
-  }
-  async function fetchGemini(promptText) {
-    const model = await getBestModel();
-    const url = `/api/generate`;
-    const payload = { model, promptText };
-    const res = await fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
-    if(!res.ok) {
-      const errorData = await res.json().catch(() => ({}));
-      const baseMsg = errorData.error || res.statusText || "An error occurred";
-      const fullMsg = errorData.details ? `${baseMsg}: ${errorData.details}` : baseMsg;
-      throw new Error(fullMsg);
-    }
-    const data = await res.json();
-    const textPart = data && data.candidates && data.candidates[0] && data.candidates[0].content && data.candidates[0].content.parts && data.candidates[0].content.parts[0] && data.candidates[0].content.parts[0].text;
-    if(!textPart) {
-      const finishReason = data && data.candidates && data.candidates[0] && data.candidates[0].finishReason;
-      throw new Error(`Gemini returned no content${finishReason ? ` (finishReason: ${finishReason})` : ' (possible safety block)'}`);
-    }
-    const cleaned = textPart.replace(/```json/g, '').replace(/```/g, '').trim();
-    const start = cleaned.indexOf('{'), end = cleaned.lastIndexOf('}');
-    if(start < 0 || end < 0) {
-      throw new Error(`Gemini did not return JSON: ${cleaned.slice(0, 120)}`);
-    }
-    try {
-      return JSON.parse(cleaned.substring(start, end + 1));
-    } catch(_e) {
-      throw new Error(`Malformed JSON from Gemini: ${cleaned.slice(0, 120)}`);
-    }
-  }
+      function escHtml(str) {
+        if (typeof str !== 'string') return '';
+        return str.replace(
+          /[&<>'"]/g,
+          (match) =>
+            ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' })[match],
+        );
+      }
+      function randomScore(min, max) {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+      }
 
-  /* MAIN FLOW */
-  async function startAnalysis() {
-    const name = getEl('inp-name').value.trim();
-    const dob = getEl('inp-dob').value;
-    const time = getEl('inp-time').value;
-    const place = getEl('inp-place').value;
-    const focusItem = getEl('inp-focus').value;
+      function showToast(msg) {
+        const t = getEl('toast');
+        t.innerHTML = '<span>✦</span> ' + escHtml(msg);
+        t.classList.add('show');
+        setTimeout(() => t.classList.remove('show'), 3000);
+      }
 
-    if(!dob) return showToast("Date of Birth is required to decode the cosmos.");
-    
-    getEl('form-state-card').classList.add('hidden');
-    getEl('loading-state-card').classList.remove('hidden');
+      function switchView(id) {
+        document.querySelectorAll('.view').forEach((v) => v.classList.remove('active'));
+        getEl(id).classList.add('active');
+      }
+      function switchTab(btnEl) {
+        const parent = btnEl.closest('.view') || document;
+        parent.querySelectorAll('.tab-btn').forEach((b) => {
+          b.classList.remove('active');
+          b.setAttribute('aria-selected', 'false');
+        });
+        parent.querySelectorAll('.tab-content').forEach((c) => c.classList.remove('active'));
+        btnEl.classList.add('active');
+        btnEl.setAttribute('aria-selected', 'true');
+        const target = btnEl.getAttribute('data-target');
+        getEl(target).classList.add('active');
+      }
+      function resetForm() {
+        ['inp-name', 'inp-dob', 'inp-time', 'inp-place', 'inp-focus'].forEach(
+          (id) => (getEl(id).value = ''),
+        );
+      }
 
-    let cycleTexts = ["Triangulating star positions...","Computing celestial coordinates...","Running AI personality protocols...","Decoding your cosmic fingerprint...","Mapping your life trajectory...","Analysing relationship archetypes...","Calculating life path resonance...","Almost there..."];
-    let cycleFacts = ["Did you know? Numerology's Master Numbers (11, 22, 33) represent profound spiritual potential.", "Nakshatras form the 27 lunar mansions of Vedic astrology.", "The Chinese Zodiac cycles every 60 years, combining animals and elements.", "Your Moon sign governs emotional undercurrents.", "A Life Path number reveals the core mission of your soul timeline."];
-    
-    let textIdx = 0, factIdx = 0;
-    let tInt = setInterval(()=> { textIdx=(textIdx+1)%cycleTexts.length; getEl('loading-text').innerText = cycleTexts[textIdx]; }, 1800);
-    let fInt = setInterval(()=> { factIdx=(factIdx+1)%cycleFacts.length; getEl('loading-fact').innerText = cycleFacts[factIdx]; }, 4000);
+      /* CANVAS STARFIELD */
+      const canvas = getEl('cosmos-canvas');
+      const ctx = canvas.getContext('2d');
+      let stars = [],
+        width = 0,
+        height = 0;
+      function initStars() {
+        width = canvas.width = window.innerWidth;
+        height = canvas.height = window.innerHeight;
+        stars = [];
+        for (let i = 0; i < 200; i++) {
+          stars.push({
+            x: Math.random() * width,
+            y: Math.random() * height,
+            r: 0.2 + Math.random() * 1.2,
+            speed: 0.05 + Math.random() * 0.1,
+            angle: Math.random() * Math.PI * 2,
+            drift: -0.1 - Math.random() * 0.2,
+          });
+        }
+      }
+      function animateStars() {
+        ctx.clearRect(0, 0, width, height);
+        stars.forEach((s) => {
+          s.angle += s.speed;
+          s.x += s.drift;
+          if (s.x < 0) s.x = width;
+          else if (s.x > width) s.x = 0;
+          let alpha = 0.2 + 0.8 * Math.abs(Math.sin(s.angle));
+          ctx.beginPath();
+          ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(200, 220, 255, ${alpha})`;
+          ctx.fill();
+        });
+        requestAnimationFrame(animateStars);
+      }
+      window.addEventListener('resize', initStars);
+      initStars();
+      animateStars();
 
-    const user = { name, dob, time, place, focus: focusItem, lp: calcLifePathNumber(dob), exp: calcNumerologyExpression(name), zodiac: calcWesternZodiac(dob), chinese: calcChineseZodiac(dob) };
+      /* LOCAL COMPUTATIONS */
+      function reduceMaster(numStr) {
+        let sum = numStr.split('').reduce((a, b) => a + parseInt(b), 0);
+        while (sum > 9 && sum !== 11 && sum !== 22 && sum !== 33) {
+          sum = sum
+            .toString()
+            .split('')
+            .reduce((a, b) => a + parseInt(b), 0);
+        }
+        return sum;
+      }
+      function calcLifePathNumber(dob) {
+        const digits = dob.replace(/-/g, '');
+        if (!digits) return 0;
+        return reduceMaster(digits);
+      }
+      function calcNumerologyExpression(name) {
+        let mapping = {
+          A: 1,
+          B: 2,
+          C: 3,
+          D: 4,
+          E: 5,
+          F: 6,
+          G: 7,
+          H: 8,
+          I: 9,
+          J: 1,
+          K: 2,
+          L: 3,
+          M: 4,
+          N: 5,
+          O: 6,
+          P: 7,
+          Q: 8,
+          R: 9,
+          S: 1,
+          T: 2,
+          U: 3,
+          V: 4,
+          W: 5,
+          X: 6,
+          Y: 7,
+          Z: 8,
+        };
+        let clean = name.toUpperCase().replace(/[^A-Z]/g, '');
+        if (!clean) return 0;
+        let sum = clean.split('').reduce((a, c) => a + (mapping[c] || 0), 0);
+        return reduceMaster(sum.toString());
+      }
+      function calcWesternZodiac(dob) {
+        const d = new Date(dob);
+        if (isNaN(d)) return 'Unknown';
+        const mo = d.getUTCMonth() + 1,
+          day = d.getUTCDate();
+        if ((mo == 3 && day >= 21) || (mo == 4 && day <= 19)) return 'Aries';
+        if ((mo == 4 && day >= 20) || (mo == 5 && day <= 20)) return 'Taurus';
+        if ((mo == 5 && day >= 21) || (mo == 6 && day <= 20)) return 'Gemini';
+        if ((mo == 6 && day >= 21) || (mo == 7 && day <= 22)) return 'Cancer';
+        if ((mo == 7 && day >= 23) || (mo == 8 && day <= 22)) return 'Leo';
+        if ((mo == 8 && day >= 23) || (mo == 9 && day <= 22)) return 'Virgo';
+        if ((mo == 9 && day >= 23) || (mo == 10 && day <= 22)) return 'Libra';
+        if ((mo == 10 && day >= 23) || (mo == 11 && day <= 21)) return 'Scorpio';
+        if ((mo == 11 && day >= 22) || (mo == 12 && day <= 21)) return 'Sagittarius';
+        if ((mo == 12 && day >= 22) || (mo == 1 && day <= 19)) return 'Capricorn';
+        if ((mo == 1 && day >= 20) || (mo == 2 && day <= 18)) return 'Aquarius';
+        return 'Pisces';
+      }
+      function calcChineseZodiac(dob) {
+        const year = new Date(dob).getUTCFullYear();
+        if (isNaN(year)) return { animal: 'Unknown', element: 'Unknown' };
+        const animals = [
+          'Rat',
+          'Ox',
+          'Tiger',
+          'Rabbit',
+          'Dragon',
+          'Snake',
+          'Horse',
+          'Goat',
+          'Monkey',
+          'Rooster',
+          'Dog',
+          'Pig',
+        ];
+        const elements = [
+          'Metal',
+          'Metal',
+          'Water',
+          'Water',
+          'Wood',
+          'Wood',
+          'Fire',
+          'Fire',
+          'Earth',
+          'Earth',
+        ];
+        return { animal: animals[(year - 4 + 1200) % 12], element: elements[year % 10] };
+      }
+      function getMoonPhase(dateObj) {
+        const anchor = new Date('2000-01-06T00:00:00Z');
+        const msDiff = dateObj - anchor;
+        const days = msDiff / 86400000;
+        let pos = (days % 29.53058867) / 29.53058867;
+        if (pos < 0) pos += 1;
+        if (pos < 0.03) return 'New Moon 🌑';
+        if (pos < 0.22) return 'Waxing Crescent 🌒';
+        if (pos < 0.28) return 'First Quarter 🌓';
+        if (pos < 0.47) return 'Waxing Gibbous 🌔';
+        if (pos < 0.53) return 'Full Moon 🌕';
+        if (pos < 0.72) return 'Waning Gibbous 🌖';
+        if (pos < 0.78) return 'Last Quarter 🌗';
+        return 'Waning Crescent 🌘';
+      }
 
-    const promptText = `
+      /* STORAGE & SHARE */
+      function saveToStorage() {
+        if (!window._lastParsed || !window._lastUser) return showToast('No session to save.');
+        const data = { parsed: window._lastParsed, user: window._lastUser, savedAt: Date.now() };
+        localStorage.setItem(STORE_KEY, JSON.stringify(data));
+        showToast('Session saved locally for 7 days.');
+      }
+      function clearStorage(hideNotice = false) {
+        localStorage.removeItem(STORE_KEY);
+        if (hideNotice) getEl('restore-notice').classList.add('hidden');
+      }
+      function restoreSession() {
+        try {
+          const data = JSON.parse(localStorage.getItem(STORE_KEY));
+          if (!data) return;
+          switchView('view-form');
+          renderResults(data.parsed, data.user);
+          getEl('save-restore-bar').style.display = 'flex';
+        } catch (_e) {
+          clearStorage();
+          showToast('Saved session was corrupted. Starting fresh.');
+        }
+      }
+      function checkSavedSession() {
+        const raw = localStorage.getItem(STORE_KEY);
+        if (raw) {
+          try {
+            const d = JSON.parse(raw);
+            if (Date.now() - d.savedAt > TTL) clearStorage(true);
+            else getEl('restore-notice').classList.remove('hidden');
+          } catch (e) {
+            clearStorage();
+          }
+        }
+      }
+      function shareResults() {
+        if (!window._lastUser || !window._lastParsed) return;
+        let u = window._lastUser,
+          p = window._lastParsed;
+        let text = `✦ My Cosmic Identity Report\n${u.name} · ${u.dob} · ${u.place}\n${u.zodiac} · ${u.chinese.element} ${u.chinese.animal} · Life Path ${u.lp}\nNakshatra: ${p.nakshatra} | Moon: ${p.moon_sign}\n\nGenerated by KnowYou — Cosmic Identity Engine`;
+        navigator.clipboard
+          .writeText(text)
+          .then(() => showToast('Copied to clipboard!'))
+          .catch(() => showToast('Could not copy — try manually.'));
+      }
+      /* API INTEGRATION */
+      async function getBestModel() {
+        try {
+          const res = await fetch(`/api/models`);
+          if (res.ok) {
+            const data = await res.json();
+            const flash = data.models.find(
+              (m) =>
+                m.name.includes('gemini-2.5-flash') ||
+                m.name.includes('gemini-2.0-flash') ||
+                m.name.includes('gemini-1.5-flash') ||
+                m.name.includes('flash'),
+            );
+            if (flash) return flash.name;
+          }
+        } catch (e) {}
+        return 'models/gemini-2.0-flash';
+      }
+      async function fetchGemini(promptText) {
+        const model = await getBestModel();
+        const url = `/api/generate`;
+        const payload = { model, promptText };
+        const res = await fetch(url, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+        });
+        if (!res.ok) {
+          const errorData = await res.json().catch(() => ({}));
+          const baseMsg = errorData.error || res.statusText || 'An error occurred';
+          const fullMsg = errorData.details ? `${baseMsg}: ${errorData.details}` : baseMsg;
+          throw new Error(fullMsg);
+        }
+        const data = await res.json();
+        const textPart =
+          data &&
+          data.candidates &&
+          data.candidates[0] &&
+          data.candidates[0].content &&
+          data.candidates[0].content.parts &&
+          data.candidates[0].content.parts[0] &&
+          data.candidates[0].content.parts[0].text;
+        if (!textPart) {
+          const finishReason =
+            data && data.candidates && data.candidates[0] && data.candidates[0].finishReason;
+          throw new Error(
+            `Gemini returned no content${finishReason ? ` (finishReason: ${finishReason})` : ' (possible safety block)'}`,
+          );
+        }
+        const cleaned = textPart
+          .replace(/```json/g, '')
+          .replace(/```/g, '')
+          .trim();
+        const start = cleaned.indexOf('{'),
+          end = cleaned.lastIndexOf('}');
+        if (start < 0 || end < 0) {
+          throw new Error(`Gemini did not return JSON: ${cleaned.slice(0, 120)}`);
+        }
+        try {
+          return JSON.parse(cleaned.substring(start, end + 1));
+        } catch (_e) {
+          throw new Error(`Malformed JSON from Gemini: ${cleaned.slice(0, 120)}`);
+        }
+      }
+
+      /* MAIN FLOW */
+      async function startAnalysis() {
+        const name = getEl('inp-name').value.trim();
+        const dob = getEl('inp-dob').value;
+        const time = getEl('inp-time').value;
+        const place = getEl('inp-place').value;
+        const focusItem = getEl('inp-focus').value;
+
+        if (!dob) return showToast('Date of Birth is required to decode the cosmos.');
+
+        getEl('form-state-card').classList.add('hidden');
+        getEl('loading-state-card').classList.remove('hidden');
+
+        let cycleTexts = [
+          'Triangulating star positions...',
+          'Computing celestial coordinates...',
+          'Running AI personality protocols...',
+          'Decoding your cosmic fingerprint...',
+          'Mapping your life trajectory...',
+          'Analysing relationship archetypes...',
+          'Calculating life path resonance...',
+          'Almost there...',
+        ];
+        let cycleFacts = [
+          "Did you know? Numerology's Master Numbers (11, 22, 33) represent profound spiritual potential.",
+          'Nakshatras form the 27 lunar mansions of Vedic astrology.',
+          'The Chinese Zodiac cycles every 60 years, combining animals and elements.',
+          'Your Moon sign governs emotional undercurrents.',
+          'A Life Path number reveals the core mission of your soul timeline.',
+        ];
+
+        let textIdx = 0,
+          factIdx = 0;
+        let tInt = setInterval(() => {
+          textIdx = (textIdx + 1) % cycleTexts.length;
+          getEl('loading-text').innerText = cycleTexts[textIdx];
+        }, 1800);
+        let fInt = setInterval(() => {
+          factIdx = (factIdx + 1) % cycleFacts.length;
+          getEl('loading-fact').innerText = cycleFacts[factIdx];
+        }, 4000);
+
+        const user = {
+          name,
+          dob,
+          time,
+          place,
+          focus: focusItem,
+          lp: calcLifePathNumber(dob),
+          exp: calcNumerologyExpression(name),
+          zodiac: calcWesternZodiac(dob),
+          chinese: calcChineseZodiac(dob),
+        };
+
+        const promptText = `
       Act as an expert psychological astrologer and numerologist. Return a pure JSON object (no markdown, no backticks).
       Person details: Name: ${user.name}, DOB: ${user.dob}, Time: ${user.time}, Place: ${user.place}, Focus: ${user.focus}.
       Computed details: Life Path: ${user.lp}, Expression Number: ${user.exp}, Western Zodiac: ${user.zodiac}, Chinese: ${user.chinese.element} ${user.chinese.animal}.
@@ -909,214 +2034,386 @@
       }
     `;
 
-    try {
-      const parsed = await fetchGemini(promptText);
-      clearInterval(tInt); clearInterval(fInt);
-      renderResults(parsed, user);
-    } catch(err) {
-      clearInterval(tInt); clearInterval(fInt);
-      getEl('loading-state-card').classList.add('hidden');
-      getEl('form-state-card').classList.remove('hidden');
-      console.error('Gemini call failed:', err);
-      const msg = err && err.message ? `Error: ${String(err.message).slice(0, 160)}` : "Cosmic interference detected. Please try again.";
-      showToast(msg);
-    }
-  }
+        try {
+          const parsed = await fetchGemini(promptText);
+          clearInterval(tInt);
+          clearInterval(fInt);
+          renderResults(parsed, user);
+        } catch (err) {
+          clearInterval(tInt);
+          clearInterval(fInt);
+          getEl('loading-state-card').classList.add('hidden');
+          getEl('form-state-card').classList.remove('hidden');
+          console.error('Gemini call failed:', err);
+          const msg =
+            err && err.message
+              ? `Error: ${String(err.message).slice(0, 160)}`
+              : 'Cosmic interference detected. Please try again.';
+          showToast(msg);
+        }
+      }
 
-  /* RENDER RESULTS */
-  function appendCard(container, {icon, label, title, body, rawBody, cls, hideBodyText}) {
-    let div = document.createElement('div');
-    div.className = `analysis-card ${cls || ''}`;
-    let count = container.children.length;
-    div.style.animationDelay = `${count * 0.1}s`;
-    let html = `<span class="card-icon">${icon}</span><div class="card-label">${escHtml(label)}</div>`;
-    if(title) html += `<div class="card-title serif">${escHtml(title)}</div>`;
-    if(rawBody) html += `<div class="card-body">${rawBody}</div>`;
-    else if(!hideBodyText) html += `<div class="card-body">${escHtml(body)}</div>`;
-    div.innerHTML = html;
-    container.appendChild(div);
-  }
+      /* RENDER RESULTS */
+      function appendCard(container, { icon, label, title, body, rawBody, cls, hideBodyText }) {
+        let div = document.createElement('div');
+        div.className = `analysis-card ${cls || ''}`;
+        let count = container.children.length;
+        div.style.animationDelay = `${count * 0.1}s`;
+        let html = `<span class="card-icon">${icon}</span><div class="card-label">${escHtml(label)}</div>`;
+        if (title) html += `<div class="card-title serif">${escHtml(title)}</div>`;
+        if (rawBody) html += `<div class="card-body">${rawBody}</div>`;
+        else if (!hideBodyText) html += `<div class="card-body">${escHtml(body)}</div>`;
+        div.innerHTML = html;
+        container.appendChild(div);
+      }
 
-  function renderList(text) {
-    if(!text) return "";
-    let items = text.split(/\d+\.\s*/).map(s=>s.trim()).filter(Boolean);
-    if(items.length===0 && text.includes('\n')) items = text.split('\n');
-    return `<ul class="timeline-list">${items.map(i=>`<li>${escHtml(i)}</li>`).join('')}</ul>`;
-  }
+      function renderList(text) {
+        if (!text) return '';
+        let items = text
+          .split(/\d+\.\s*/)
+          .map((s) => s.trim())
+          .filter(Boolean);
+        if (items.length === 0 && text.includes('\n')) items = text.split('\n');
+        return `<ul class="timeline-list">${items.map((i) => `<li>${escHtml(i)}</li>`).join('')}</ul>`;
+      }
 
-  function renderResults(p, u) {
-    window._lastParsed = p; window._lastUser = u;
-    getEl('loading-state-card').classList.add('hidden');
-    getEl('form-state-card').classList.add('hidden');
-    getEl('results-area').classList.remove('hidden');
+      function renderResults(p, u) {
+        window._lastParsed = p;
+        window._lastUser = u;
+        getEl('loading-state-card').classList.add('hidden');
+        getEl('form-state-card').classList.add('hidden');
+        getEl('results-area').classList.remove('hidden');
 
-    getEl('res-name').innerText = u.name || "Starlight Wanderer";
-    getEl('res-meta').innerText = `${u.dob} ${u.time?"· "+u.time:""} ${u.place?"· "+u.place:""}`;
-    getEl('res-pills').innerHTML = `<span class="pill pill-gold">${u.zodiac}</span><span class="pill pill-violet">${u.chinese.element} ${u.chinese.animal}</span><span class="pill pill-cyan">Life Path ${u.lp}</span><span class="pill pill-green">${p.nakshatra} Nakshatra</span>`;
+        getEl('res-name').innerText = u.name || 'Starlight Wanderer';
+        getEl('res-meta').innerText =
+          `${u.dob} ${u.time ? '· ' + u.time : ''} ${u.place ? '· ' + u.place : ''}`;
+        getEl('res-pills').innerHTML =
+          `<span class="pill pill-gold">${u.zodiac}</span><span class="pill pill-violet">${u.chinese.element} ${u.chinese.animal}</span><span class="pill pill-cyan">Life Path ${u.lp}</span><span class="pill pill-green">${p.nakshatra} Nakshatra</span>`;
 
-    getEl('stat-lp').innerText = u.lp; getEl('stat-zodiac').innerText = u.zodiac; getEl('stat-moon').innerText = p.moon_sign; getEl('stat-nak').innerText = p.nakshatra;
+        getEl('stat-lp').innerText = u.lp;
+        getEl('stat-zodiac').innerText = u.zodiac;
+        getEl('stat-moon').innerText = p.moon_sign;
+        getEl('stat-nak').innerText = p.nakshatra;
 
-    let overview = getEl('tab-overview'); overview.innerHTML='';
-    appendCard(overview, {icon:'✦', label:'Soul Archetype', body:p.personality_archetype});
-    appendCard(overview, {icon:'🔢', label:'Numerology Insight', title: `Path ${u.lp} · Expr ${u.exp}`, rawBody: `<b>Path:</b> ${escHtml(p.life_path_meaning)}<br><br><b>Expression:</b> ${escHtml(p.expression_number_meaning)}`});
-    appendCard(overview, {icon:'💎', label:'Lucky Essence', rawBody: `<div class="gem-display"><div class="gem-name serif">${escHtml(p.gemstone)}</div></div>${escHtml(p.gemstone_reason)}`});
-    appendCard(overview, {icon:'🌀', label:'Personal Mantra', rawBody: `<div class="mantra-text serif"><i>"${escHtml(p.mantra)}"</i></div><div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px;"><div><b>Lucky Numbers:</b> ${escHtml(p.lucky_numbers)}</div><div><b>Power Colors:</b> ${escHtml(p.power_colors)}</div></div>`});
-    appendCard(overview, {icon:'🎯', label:'For You Right Now', body:p.focus_insight, cls:'card-highlight card-wide'});
+        let overview = getEl('tab-overview');
+        overview.innerHTML = '';
+        appendCard(overview, { icon: '✦', label: 'Soul Archetype', body: p.personality_archetype });
+        appendCard(overview, {
+          icon: '🔢',
+          label: 'Numerology Insight',
+          title: `Path ${u.lp} · Expr ${u.exp}`,
+          rawBody: `<b>Path:</b> ${escHtml(p.life_path_meaning)}<br><br><b>Expression:</b> ${escHtml(p.expression_number_meaning)}`,
+        });
+        appendCard(overview, {
+          icon: '💎',
+          label: 'Lucky Essence',
+          rawBody: `<div class="gem-display"><div class="gem-name serif">${escHtml(p.gemstone)}</div></div>${escHtml(p.gemstone_reason)}`,
+        });
+        appendCard(overview, {
+          icon: '🌀',
+          label: 'Personal Mantra',
+          rawBody: `<div class="mantra-text serif"><i>"${escHtml(p.mantra)}"</i></div><div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px;"><div><b>Lucky Numbers:</b> ${escHtml(p.lucky_numbers)}</div><div><b>Power Colors:</b> ${escHtml(p.power_colors)}</div></div>`,
+        });
+        appendCard(overview, {
+          icon: '🎯',
+          label: 'For You Right Now',
+          body: p.focus_insight,
+          cls: 'card-highlight card-wide',
+        });
 
-    let person = getEl('tab-personality'); person.innerHTML='';
-    appendCard(person, {icon:'💪', label:'Strengths', body:p.strengths});
-    appendCard(person, {icon:'🌱', label:'Growth Edges', body:p.growth_edges});
-    appendCard(person, {icon:'🧠', label:'Decision Style', body:p.decision_style});
-    appendCard(person, {icon:'💬', label:'Communication', body:p.communication_style});
-    appendCard(person, {icon:'❤️', label:'Relationships', body:p.relationship_dynamics, cls:'card-wide'});
-    appendCard(person, {icon:'⚡', label:'Energy Rhythms', body:p.energy_map});
-    let metricsHtml = ["Intuition","Analytical","Empathy","Resilience","Creativity"].map(t => `<div class="score-bar-wrap"><div class="score-bar-labels"><span>${t}</span><span class="score-percent">0%</span></div><div class="score-bar-bg"><div class="score-bar-fill" data-score="${randomScore(55,95)}%"></div></div></div>`).join('');
-    appendCard(person, {icon:'📊', label:'Personality Metrics', rawBody: metricsHtml});
+        let person = getEl('tab-personality');
+        person.innerHTML = '';
+        appendCard(person, { icon: '💪', label: 'Strengths', body: p.strengths });
+        appendCard(person, { icon: '🌱', label: 'Growth Edges', body: p.growth_edges });
+        appendCard(person, { icon: '🧠', label: 'Decision Style', body: p.decision_style });
+        appendCard(person, { icon: '💬', label: 'Communication', body: p.communication_style });
+        appendCard(person, {
+          icon: '❤️',
+          label: 'Relationships',
+          body: p.relationship_dynamics,
+          cls: 'card-wide',
+        });
+        appendCard(person, { icon: '⚡', label: 'Energy Rhythms', body: p.energy_map });
+        let metricsHtml = ['Intuition', 'Analytical', 'Empathy', 'Resilience', 'Creativity']
+          .map(
+            (t) =>
+              `<div class="score-bar-wrap"><div class="score-bar-labels"><span>${t}</span><span class="score-percent">0%</span></div><div class="score-bar-bg"><div class="score-bar-fill" data-score="${randomScore(55, 95)}%"></div></div></div>`,
+          )
+          .join('');
+        appendCard(person, { icon: '📊', label: 'Personality Metrics', rawBody: metricsHtml });
 
-    let cosmic = getEl('tab-cosmic'); cosmic.innerHTML='';
-    appendCard(cosmic, {icon:'☉', label:'Western Astrology', title: u.zodiac, body:p.sun_sign_deep});
-    appendCard(cosmic, {icon:'龍', label:'Chinese Astrology', title: `${u.chinese.element} ${u.chinese.animal}`, body:p.chinese_zodiac_insight});
-    appendCard(cosmic, {icon:'🌙', label:'Vedic Coordinates', cls:'card-wide', rawBody:`<div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;"><div><b>Tithi:</b> ${escHtml(p.tithi)}<br><b>Yog:</b> ${escHtml(p.yog)}</div><div><b>Moon Sign:</b> ${escHtml(p.moon_sign)}<br><b>Nakshatra:</b> ${escHtml(p.nakshatra)}</div></div>`});
+        let cosmic = getEl('tab-cosmic');
+        cosmic.innerHTML = '';
+        appendCard(cosmic, {
+          icon: '☉',
+          label: 'Western Astrology',
+          title: u.zodiac,
+          body: p.sun_sign_deep,
+        });
+        appendCard(cosmic, {
+          icon: '龍',
+          label: 'Chinese Astrology',
+          title: `${u.chinese.element} ${u.chinese.animal}`,
+          body: p.chinese_zodiac_insight,
+        });
+        appendCard(cosmic, {
+          icon: '🌙',
+          label: 'Vedic Coordinates',
+          cls: 'card-wide',
+          rawBody: `<div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;"><div><b>Tithi:</b> ${escHtml(p.tithi)}<br><b>Yog:</b> ${escHtml(p.yog)}</div><div><b>Moon Sign:</b> ${escHtml(p.moon_sign)}<br><b>Nakshatra:</b> ${escHtml(p.nakshatra)}</div></div>`,
+        });
 
-    let timeline = getEl('tab-timeline'); timeline.innerHTML='';
-    appendCard(timeline, {icon:'📅', label:'Life Milestones', cls:'card-wide', rawBody: renderList(p.life_timeline)});
-    appendCard(timeline, {icon:'🎓', label:'Soul Lessons', cls:'card-wide', rawBody: renderList(p.lessons)});
+        let timeline = getEl('tab-timeline');
+        timeline.innerHTML = '';
+        appendCard(timeline, {
+          icon: '📅',
+          label: 'Life Milestones',
+          cls: 'card-wide',
+          rawBody: renderList(p.life_timeline),
+        });
+        appendCard(timeline, {
+          icon: '🎓',
+          label: 'Soul Lessons',
+          cls: 'card-wide',
+          rawBody: renderList(p.lessons),
+        });
 
-    let future = getEl('tab-future'); future.innerHTML='';
-    appendCard(future, {icon:'💼', label:'Career Paths', cls:'card-wide', rawBody: renderList(p.career_paths)});
-    appendCard(future, {icon:'🎯', label:'For You Right Now', body:p.focus_insight, cls:'card-highlight card-wide'});
-    appendCard(future, {icon:'🌀', label:'Activation Kit', cls:'card-wide', rawBody: `<div class="mantra-text serif" style="font-size:2rem;"><i>"${escHtml(p.mantra)}"</i></div><div><b>Numbers:</b> ${escHtml(p.lucky_numbers)} · <b>Colors:</b> ${escHtml(p.power_colors)}</div>`});
+        let future = getEl('tab-future');
+        future.innerHTML = '';
+        appendCard(future, {
+          icon: '💼',
+          label: 'Career Paths',
+          cls: 'card-wide',
+          rawBody: renderList(p.career_paths),
+        });
+        appendCard(future, {
+          icon: '🎯',
+          label: 'For You Right Now',
+          body: p.focus_insight,
+          cls: 'card-highlight card-wide',
+        });
+        appendCard(future, {
+          icon: '🌀',
+          label: 'Activation Kit',
+          cls: 'card-wide',
+          rawBody: `<div class="mantra-text serif" style="font-size:2rem;"><i>"${escHtml(p.mantra)}"</i></div><div><b>Numbers:</b> ${escHtml(p.lucky_numbers)} · <b>Colors:</b> ${escHtml(p.power_colors)}</div>`,
+        });
 
-    getEl('oracle-results').classList.add('hidden'); getEl('compat-results').classList.add('hidden');
-    getEl('compat-form-area').classList.remove('hidden');
+        getEl('oracle-results').classList.add('hidden');
+        getEl('compat-results').classList.add('hidden');
+        getEl('compat-form-area').classList.remove('hidden');
 
-    setTimeout(() => {
-      document.querySelectorAll('.score-bar-fill').forEach(bar => {
-        let sc = bar.getAttribute('data-score');
-        bar.style.width = sc;
-        bar.parentElement.previousElementSibling.querySelector('.score-percent').innerText = sc;
-      });
-      drawBirthChartWheel(u.zodiac, p.moon_sign, u.name);
-      
-      let side = getEl('chart-sidebar'); side.innerHTML='';
-      appendCard(side, {icon:'☉', label:'Sun Sign', body: `${u.zodiac} — Core identity`});
-      appendCard(side, {icon:'☽', label:'Moon Sign', body: `${p.moon_sign} — Emotional landscape`});
-      appendCard(side, {icon:'⬆', label:'Ascendant', body: `Your outward facade`});
-      appendCard(side, {icon:'🌙', label:'Vedic Snapshot', rawBody: `${p.tithi} · ${p.nakshatra}`});
+        setTimeout(() => {
+          document.querySelectorAll('.score-bar-fill').forEach((bar) => {
+            let sc = bar.getAttribute('data-score');
+            bar.style.width = sc;
+            bar.parentElement.previousElementSibling.querySelector('.score-percent').innerText = sc;
+          });
+          drawBirthChartWheel(u.zodiac, p.moon_sign, u.name);
 
-    }, 300);
-  }
+          let side = getEl('chart-sidebar');
+          side.innerHTML = '';
+          appendCard(side, { icon: '☉', label: 'Sun Sign', body: `${u.zodiac} — Core identity` });
+          appendCard(side, {
+            icon: '☽',
+            label: 'Moon Sign',
+            body: `${p.moon_sign} — Emotional landscape`,
+          });
+          appendCard(side, { icon: '⬆', label: 'Ascendant', body: `Your outward facade` });
+          appendCard(side, {
+            icon: '🌙',
+            label: 'Vedic Snapshot',
+            rawBody: `${p.tithi} · ${p.nakshatra}`,
+          });
+        }, 300);
+      }
 
-  /* BIRTH CHART CANVAS */
-  function drawBirthChartWheel(sunSign, moonSign, userName) {
-    const cvs = getEl('chart-canvas');
-    if(!cvs) return;
-    const cw = cvs.width, ctx = cvs.getContext('2d');
-    ctx.clearRect(0,0,cw,cw);
-    const cx = cw/2, cy = cw/2;
-    const outerR = cw*0.48, midR = cw*0.35, innerR = cw*0.24, coreR = cw*0.12;
+      /* BIRTH CHART CANVAS */
+      function drawBirthChartWheel(sunSign, moonSign, userName) {
+        const cvs = getEl('chart-canvas');
+        if (!cvs) return;
+        const cw = cvs.width,
+          ctx = cvs.getContext('2d');
+        ctx.clearRect(0, 0, cw, cw);
+        const cx = cw / 2,
+          cy = cw / 2;
+        const outerR = cw * 0.48,
+          midR = cw * 0.35,
+          innerR = cw * 0.24,
+          coreR = cw * 0.12;
 
-    const zColors = { "Aries":"#e74c3c", "Taurus":"#27ae60", "Gemini":"#f39c12", "Cancer":"#3498db", "Leo":"#e67e22", "Virgo":"#2ecc71", "Libra":"#9b59b6", "Scorpio":"#c0392b", "Sagittarius":"#1abc9c", "Capricorn":"#34495e", "Aquarius":"#2980b9", "Pisces":"#8e44ad" };
-    const zSymb = ["♈","♉","♊","♋","♌","♍","♎","♏","♐","♑","♒","♓"];
-    const zNames = Object.keys(zColors);
+        const zColors = {
+          Aries: '#e74c3c',
+          Taurus: '#27ae60',
+          Gemini: '#f39c12',
+          Cancer: '#3498db',
+          Leo: '#e67e22',
+          Virgo: '#2ecc71',
+          Libra: '#9b59b6',
+          Scorpio: '#c0392b',
+          Sagittarius: '#1abc9c',
+          Capricorn: '#34495e',
+          Aquarius: '#2980b9',
+          Pisces: '#8e44ad',
+        };
+        const zSymb = ['♈', '♉', '♊', '♋', '♌', '♍', '♎', '♏', '♐', '♑', '♒', '♓'];
+        const zNames = Object.keys(zColors);
 
-    ctx.fillStyle = "rgba(10, 20, 35, 0.8)";
-    ctx.beginPath(); ctx.arc(cx, cy, outerR, 0, Math.PI*2); ctx.fill();
-    ctx.lineWidth = 1; ctx.strokeStyle = "rgba(80,140,220,0.15)";
-    ctx.stroke();
+        ctx.fillStyle = 'rgba(10, 20, 35, 0.8)';
+        ctx.beginPath();
+        ctx.arc(cx, cy, outerR, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.lineWidth = 1;
+        ctx.strokeStyle = 'rgba(80,140,220,0.15)';
+        ctx.stroke();
 
-    let sunAngle = 0, moonAngle = 0;
+        let sunAngle = 0,
+          moonAngle = 0;
 
-    for(let i=0; i<12; i++) {
-      let startA = (i/12)*Math.PI*2 - Math.PI/2;
-      let endA = ((i+1)/12)*Math.PI*2 - Math.PI/2;
-      let midA = (startA + endA)/2;
-      let name = zNames[i];
-      let op = 0.06;
-      if(name === sunSign) { op = 0.35; sunAngle = midA; }
-      else if(name === moonSign) { op = 0.20; moonAngle = midA; }
+        for (let i = 0; i < 12; i++) {
+          let startA = (i / 12) * Math.PI * 2 - Math.PI / 2;
+          let endA = ((i + 1) / 12) * Math.PI * 2 - Math.PI / 2;
+          let midA = (startA + endA) / 2;
+          let name = zNames[i];
+          let op = 0.06;
+          if (name === sunSign) {
+            op = 0.35;
+            sunAngle = midA;
+          } else if (name === moonSign) {
+            op = 0.2;
+            moonAngle = midA;
+          }
 
-      ctx.beginPath();
-      ctx.moveTo(cx, cy);
-      ctx.arc(cx, cy, outerR, startA, endA);
-      ctx.fillStyle = zColors[name] + Math.floor(op*255).toString(16).padStart(2,'0');
-      ctx.fill();
+          ctx.beginPath();
+          ctx.moveTo(cx, cy);
+          ctx.arc(cx, cy, outerR, startA, endA);
+          ctx.fillStyle =
+            zColors[name] +
+            Math.floor(op * 255)
+              .toString(16)
+              .padStart(2, '0');
+          ctx.fill();
 
-      ctx.beginPath(); ctx.moveTo(cx+Math.cos(startA)*innerR, cy+Math.sin(startA)*innerR);
-      ctx.lineTo(cx+Math.cos(startA)*outerR, cy+Math.sin(startA)*outerR);
-      ctx.stroke();
+          ctx.beginPath();
+          ctx.moveTo(cx + Math.cos(startA) * innerR, cy + Math.sin(startA) * innerR);
+          ctx.lineTo(cx + Math.cos(startA) * outerR, cy + Math.sin(startA) * outerR);
+          ctx.stroke();
 
-      ctx.fillStyle = zColors[name]; ctx.font = "24px sans-serif";
-      ctx.textAlign="center"; ctx.textBaseline="middle";
-      ctx.fillText(zSymb[i], cx+Math.cos(midA)*(outerR-24), cy+Math.sin(midA)*(outerR-24));
-    }
+          ctx.fillStyle = zColors[name];
+          ctx.font = '24px sans-serif';
+          ctx.textAlign = 'center';
+          ctx.textBaseline = 'middle';
+          ctx.fillText(
+            zSymb[i],
+            cx + Math.cos(midA) * (outerR - 24),
+            cy + Math.sin(midA) * (outerR - 24),
+          );
+        }
 
-    ctx.beginPath(); ctx.arc(cx, cy, midR, 0, Math.PI*2); ctx.stroke();
-    ctx.beginPath(); ctx.arc(cx, cy, innerR, 0, Math.PI*2); ctx.stroke();
-    
-    ctx.beginPath(); ctx.arc(cx+Math.cos(sunAngle)*midR, cy+Math.sin(sunAngle)*midR, 8, 0, Math.PI*2);
-    ctx.fillStyle="#e8b84b"; ctx.shadowColor="#e8b84b"; ctx.shadowBlur=15; ctx.fill(); ctx.shadowBlur=0;
-    
-    ctx.beginPath(); ctx.arc(cx+Math.cos(moonAngle)*(midR*0.82), cy+Math.sin(moonAngle)*(midR*0.82), 6, 0, Math.PI*2);
-    ctx.fillStyle="#38c4d4"; ctx.shadowColor="#38c4d4"; ctx.shadowBlur=15; ctx.fill(); ctx.shadowBlur=0;
+        ctx.beginPath();
+        ctx.arc(cx, cy, midR, 0, Math.PI * 2);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.arc(cx, cy, innerR, 0, Math.PI * 2);
+        ctx.stroke();
 
-    ctx.beginPath(); ctx.arc(cx-innerR*0.85, cy, 6, 0, Math.PI*2);
-    ctx.fillStyle="#8b5cf6"; ctx.shadowColor="#8b5cf6"; ctx.shadowBlur=15; ctx.fill(); ctx.shadowBlur=0;
+        ctx.beginPath();
+        ctx.arc(cx + Math.cos(sunAngle) * midR, cy + Math.sin(sunAngle) * midR, 8, 0, Math.PI * 2);
+        ctx.fillStyle = '#ff6b1a';
+        ctx.shadowColor = '#ff6b1a';
+        ctx.shadowBlur = 15;
+        ctx.fill();
+        ctx.shadowBlur = 0;
 
-    let rg = ctx.createRadialGradient(cx, cy, 0, cx, cy, coreR);
-    rg.addColorStop(0, "var(--void)"); rg.addColorStop(1, "var(--panel)");
-    ctx.beginPath(); ctx.arc(cx, cy, coreR, 0, Math.PI*2); ctx.fillStyle = rg; ctx.fill();
-    ctx.strokeStyle="#e8b84b"; ctx.lineWidth=1.5; ctx.shadowBlur=10; ctx.stroke(); ctx.shadowBlur=0;
+        ctx.beginPath();
+        ctx.arc(
+          cx + Math.cos(moonAngle) * (midR * 0.82),
+          cy + Math.sin(moonAngle) * (midR * 0.82),
+          6,
+          0,
+          Math.PI * 2,
+        );
+        ctx.fillStyle = '#38c4d4';
+        ctx.shadowColor = '#38c4d4';
+        ctx.shadowBlur = 15;
+        ctx.fill();
+        ctx.shadowBlur = 0;
 
-    let init = (userName||"U").substring(0,2).toUpperCase();
-    ctx.fillStyle="#e8b84b"; ctx.font = "bold 28px 'Cormorant Garamond'"; ctx.fillText(init, cx, cy);
+        ctx.beginPath();
+        ctx.arc(cx - innerR * 0.85, cy, 6, 0, Math.PI * 2);
+        ctx.fillStyle = '#8b5cf6';
+        ctx.shadowColor = '#8b5cf6';
+        ctx.shadowBlur = 15;
+        ctx.fill();
+        ctx.shadowBlur = 0;
 
-    let l = getEl('chart-legend');
-    l.innerHTML = `
-      <div class="legend-item"><div class="legend-dot" style="background:#e8b84b;box-shadow:0 0 10px #e8b84b;"></div> ☉ Sun</div>
+        let rg = ctx.createRadialGradient(cx, cy, 0, cx, cy, coreR);
+        rg.addColorStop(0, 'var(--void)');
+        rg.addColorStop(1, 'var(--panel)');
+        ctx.beginPath();
+        ctx.arc(cx, cy, coreR, 0, Math.PI * 2);
+        ctx.fillStyle = rg;
+        ctx.fill();
+        ctx.strokeStyle = '#ff6b1a';
+        ctx.lineWidth = 1.5;
+        ctx.shadowBlur = 10;
+        ctx.stroke();
+        ctx.shadowBlur = 0;
+
+        let init = (userName || 'U').substring(0, 2).toUpperCase();
+        ctx.fillStyle = '#ff6b1a';
+        ctx.font = "bold 28px 'Fraunces'";
+        ctx.fillText(init, cx, cy);
+
+        let l = getEl('chart-legend');
+        l.innerHTML = `
+      <div class="legend-item"><div class="legend-dot" style="background:#ff6b1a;box-shadow:0 0 10px #ff6b1a;"></div> ☉ Sun</div>
       <div class="legend-item"><div class="legend-dot" style="background:#38c4d4;box-shadow:0 0 10px #38c4d4;"></div> ☽ Moon</div>
       <div class="legend-item"><div class="legend-dot" style="background:#8b5cf6;box-shadow:0 0 10px #8b5cf6;"></div> ⬆ Ascendant</div>
     `;
-  }
+      }
 
-  /* COMPATIBILITY */
-  async function runCompatibility(btn) {
-    const cname = getEl('comp-name').value;
-    const cdob = getEl('comp-dob').value;
-    const ctype = getEl('comp-type').value;
-    if(!cdob) return showToast("Their Date of Birth is required.");
-    
-    getEl('compat-form-area').classList.add('hidden');
-    getEl('compat-loading').classList.remove('hidden');
+      /* COMPATIBILITY */
+      async function runCompatibility(btn) {
+        const cname = getEl('comp-name').value;
+        const cdob = getEl('comp-dob').value;
+        const ctype = getEl('comp-type').value;
+        if (!cdob) return showToast('Their Date of Birth is required.');
 
-    let u1 = window._lastUser;
-    let lcExp = calcLifePathNumber(cdob), cZodiac = calcWesternZodiac(cdob);
+        getEl('compat-form-area').classList.add('hidden');
+        getEl('compat-loading').classList.remove('hidden');
 
-    const promptText = `
+        let u1 = window._lastUser;
+        let lcExp = calcLifePathNumber(cdob),
+          cZodiac = calcWesternZodiac(cdob);
+
+        const promptText = `
       Calculate compatibility. Person A: ${u1.dob}, ${u1.zodiac}, LP:${u1.lp}. Person B: ${cdob}, ${cZodiac}, LP:${lcExp}. Type: ${ctype}.
       Return pure JSON:
       {"score": integer, "headline": "10-word desc", "overall": "...", "strengths_score": integer, "challenges_score": integer, "communication_score": integer, "growth_score": integer, "chemistry": "...", "friction": "...", "growth_together": "...", "best_dynamic": "...", "advice": "...", "numerology_note": "...", "zodiac_note": "..."}
     `;
-    try {
-      const data = await fetchGemini(promptText);
-      renderCompatibility(data, u1.name||"You", cname||"Them", u1.zodiac, cZodiac);
-    } catch(err) {
-      getEl('compat-loading').classList.add('hidden');
-      getEl('compat-form-area').classList.remove('hidden');
-      showToast("Cosmic dissonance, please try again.");
-    }
-  }
+        try {
+          const data = await fetchGemini(promptText);
+          renderCompatibility(data, u1.name || 'You', cname || 'Them', u1.zodiac, cZodiac);
+        } catch (err) {
+          getEl('compat-loading').classList.add('hidden');
+          getEl('compat-form-area').classList.remove('hidden');
+          showToast('Cosmic dissonance, please try again.');
+        }
+      }
 
-  function renderCompatibility(d, n1, n2, z1, z2) {
-    getEl('compat-loading').classList.add('hidden');
-    let res = getEl('compat-results'); res.innerHTML=''; res.classList.remove('hidden');
-    
-    let html = `
+      function renderCompatibility(d, n1, n2, z1, z2) {
+        getEl('compat-loading').classList.add('hidden');
+        let res = getEl('compat-results');
+        res.innerHTML = '';
+        res.classList.remove('hidden');
+
+        let html = `
     <div class="compat-score-banner">
       <div class="compat-avatars">
-        <div class="avatar-circle">${escHtml(n1.substring(0,2))}</div>
+        <div class="avatar-circle">${escHtml(n1.substring(0, 2))}</div>
         <div class="heart-icon">♡</div>
-        <div class="avatar-circle">${escHtml(n2.substring(0,2))}</div>
+        <div class="avatar-circle">${escHtml(n2.substring(0, 2))}</div>
       </div>
       <div>
         <div class="score-huge serif">${d.score}%</div>
@@ -1128,66 +2425,89 @@
         <div class="score-bar-wrap"><div class="score-bar-labels"><span>Growth</span><span>${d.growth_score}%</span></div><div class="score-bar-bg"><div class="score-bar-fill" style="width:${d.growth_score}%"></div></div></div>
       </div>
     </div>`;
-    res.innerHTML = html;
-    
-    appendCard(res, {icon:'✨', label:'Overall Energy', body:d.overall});
-    appendCard(res, {icon:'💫', label:'Natural Chemistry', body:d.chemistry});
-    appendCard(res, {icon:'⚡', label:'Friction Points', body:d.friction});
-    appendCard(res, {icon:'🌱', label:'Growth Together', body:d.growth_together});
-    appendCard(res, {icon:'🌟', label:'Best Dynamic', body:d.best_dynamic});
-    appendCard(res, {icon:'🧭', label:'Relationship Advice', body:d.advice, cls:'card-highlight card-wide'});
-    appendCard(res, {icon:'🔢', label:'Numerology Note', body:d.numerology_note});
-    appendCard(res, {icon:'♈', label:'Zodiac Dynamic', title: `${z1} & ${z2}`, body:d.zodiac_note});
-  }
+        res.innerHTML = html;
 
-  /* DAILY ORACLE */
-  getEl('tab-oracle').addEventListener('click', () => {
-    let d = new Date(), opts = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-    getEl('oracle-date').innerText = d.toLocaleDateString('en-US', opts);
-    getEl('oracle-moon').innerText = getMoonPhase(d);
-  });
+        appendCard(res, { icon: '✨', label: 'Overall Energy', body: d.overall });
+        appendCard(res, { icon: '💫', label: 'Natural Chemistry', body: d.chemistry });
+        appendCard(res, { icon: '⚡', label: 'Friction Points', body: d.friction });
+        appendCard(res, { icon: '🌱', label: 'Growth Together', body: d.growth_together });
+        appendCard(res, { icon: '🌟', label: 'Best Dynamic', body: d.best_dynamic });
+        appendCard(res, {
+          icon: '🧭',
+          label: 'Relationship Advice',
+          body: d.advice,
+          cls: 'card-highlight card-wide',
+        });
+        appendCard(res, { icon: '🔢', label: 'Numerology Note', body: d.numerology_note });
+        appendCard(res, {
+          icon: '♈',
+          label: 'Zodiac Dynamic',
+          title: `${z1} & ${z2}`,
+          body: d.zodiac_note,
+        });
+      }
 
-  async function runDailyOracle(btn) {
-    let u = window._lastUser;
-    
-    getEl('oracle-results').classList.add('hidden');
-    getEl('oracle-loading').classList.remove('hidden');
-    btn.innerText = "🔮 Refresh Reading";
+      /* DAILY ORACLE */
+      getEl('tab-oracle').addEventListener('click', () => {
+        let d = new Date(),
+          opts = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+        getEl('oracle-date').innerText = d.toLocaleDateString('en-US', opts);
+        getEl('oracle-moon').innerText = getMoonPhase(d);
+      });
 
-    let dateLong = getEl('oracle-date').innerText, moon = getEl('oracle-moon').innerText;
+      async function runDailyOracle(btn) {
+        let u = window._lastUser;
 
-    const promptText = `
+        getEl('oracle-results').classList.add('hidden');
+        getEl('oracle-loading').classList.remove('hidden');
+        btn.innerText = '🔮 Refresh Reading';
+
+        let dateLong = getEl('oracle-date').innerText,
+          moon = getEl('oracle-moon').innerText;
+
+        const promptText = `
       Daily Oracle. Today: ${dateLong}, Moon: ${moon}. User: ${u.name}, LP ${u.lp}, ${u.zodiac}, ${u.chinese.animal}.
       Return pure JSON:
       {"oracle_message": "1-sentence poetic 25 words", "energy_today": "...", "focus_today": "ONE_MAXCAPS_WORD", "action": "...", "avoid": "...", "lucky_hour": "...", "affirmation": "10 words", "number_of_day": "...", "cosmic_advice": "..."}
     `;
-    try {
-      const data = await fetchGemini(promptText);
-      renderDailyOracle(data);
-    } catch(err) {
-      getEl('oracle-loading').classList.add('hidden');
-      showToast("The stars are cloudy. Try predicting later.");
-    }
-  }
+        try {
+          const data = await fetchGemini(promptText);
+          renderDailyOracle(data);
+        } catch (err) {
+          getEl('oracle-loading').classList.add('hidden');
+          showToast('The stars are cloudy. Try predicting later.');
+        }
+      }
 
-  function renderDailyOracle(d) {
-    getEl('oracle-loading').classList.add('hidden');
-    let res = getEl('oracle-results'); res.innerHTML=''; res.classList.remove('hidden');
+      function renderDailyOracle(d) {
+        getEl('oracle-loading').classList.add('hidden');
+        let res = getEl('oracle-results');
+        res.innerHTML = '';
+        res.classList.remove('hidden');
 
-    let html = `<div class="oracle-quote serif card-wide"><i>"${escHtml(d.oracle_message)}"</i></div>`;
-    res.innerHTML = html;
+        let html = `<div class="oracle-quote serif card-wide"><i>"${escHtml(d.oracle_message)}"</i></div>`;
+        res.innerHTML = html;
 
-    appendCard(res, {icon:'🎯', label:'Focus Word', cls:'card-highlight card-wide', rawBody: `<div class="focus-word serif">${escHtml(d.focus_today)}</div><p>${escHtml(d.energy_today)}</p>`});
-    appendCard(res, {icon:'✅', label:'Do This Today', body:d.action});
-    appendCard(res, {icon:'🚫', label:'Avoid Today', body:d.avoid});
-    appendCard(res, {icon:'⏰', label:'Power Hour', body:d.lucky_hour});
-    appendCard(res, {icon:'🔢', label:'Daily Number', body:d.number_of_day});
-    appendCard(res, {icon:'🌟', label:'Daily Affirmation', cls:'card-highlight card-wide', rawBody:`<div class="mantra-text serif"><i>"${escHtml(d.affirmation)}"</i></div><p>${escHtml(d.cosmic_advice)}</p>`});
-  }
+        appendCard(res, {
+          icon: '🎯',
+          label: 'Focus Word',
+          cls: 'card-highlight card-wide',
+          rawBody: `<div class="focus-word serif">${escHtml(d.focus_today)}</div><p>${escHtml(d.energy_today)}</p>`,
+        });
+        appendCard(res, { icon: '✅', label: 'Do This Today', body: d.action });
+        appendCard(res, { icon: '🚫', label: 'Avoid Today', body: d.avoid });
+        appendCard(res, { icon: '⏰', label: 'Power Hour', body: d.lucky_hour });
+        appendCard(res, { icon: '🔢', label: 'Daily Number', body: d.number_of_day });
+        appendCard(res, {
+          icon: '🌟',
+          label: 'Daily Affirmation',
+          cls: 'card-highlight card-wide',
+          rawBody: `<div class="mantra-text serif"><i>"${escHtml(d.affirmation)}"</i></div><p>${escHtml(d.cosmic_advice)}</p>`,
+        });
+      }
 
-  // Init
-  document.addEventListener('DOMContentLoaded', checkSavedSession);
-
-</script>
-</body>
+      // Init
+      document.addEventListener('DOMContentLoaded', checkSavedSession);
+    </script>
+  </body>
 </html>

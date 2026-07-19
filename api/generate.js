@@ -1,6 +1,4 @@
-const ALLOWED_ORIGINS = process.env.ALLOWED_ORIGINS
-  ? process.env.ALLOWED_ORIGINS.split(',')
-  : [];
+const ALLOWED_ORIGINS = process.env.ALLOWED_ORIGINS ? process.env.ALLOWED_ORIGINS.split(',') : [];
 
 const MAX_PROMPT_LENGTH = 8000;
 const RATE_LIMIT_WINDOW_MS = 60_000;
@@ -45,9 +43,7 @@ module.exports = async function handler(req, res) {
   }
 
   const clientIp =
-    req.headers['x-forwarded-for']?.split(',')[0]?.trim() ||
-    req.socket?.remoteAddress ||
-    'unknown';
+    req.headers['x-forwarded-for']?.split(',')[0]?.trim() || req.socket?.remoteAddress || 'unknown';
 
   if (rateLimit(clientIp)) {
     return res.status(429).json({ error: 'Too many requests. Please slow down.', status: 429 });
@@ -63,11 +59,15 @@ module.exports = async function handler(req, res) {
     const { model, promptText } = req.body;
 
     if (!promptText || typeof promptText !== 'string') {
-      return res.status(400).json({ error: 'promptText is required and must be a string', status: 400 });
+      return res
+        .status(400)
+        .json({ error: 'promptText is required and must be a string', status: 400 });
     }
 
     if (promptText.length > MAX_PROMPT_LENGTH) {
-      return res.status(400).json({ error: `promptText exceeds maximum length of ${MAX_PROMPT_LENGTH}`, status: 400 });
+      return res
+        .status(400)
+        .json({ error: `promptText exceeds maximum length of ${MAX_PROMPT_LENGTH}`, status: 400 });
     }
 
     const fallbackModels = [
@@ -102,10 +102,7 @@ module.exports = async function handler(req, res) {
       }
 
       const errBody = await response.text().catch(() => '');
-      console.error(
-        `Model ${currentModel} returned ${response.status}:`,
-        errBody.slice(0, 500),
-      );
+      console.error(`Model ${currentModel} returned ${response.status}:`, errBody.slice(0, 500));
 
       if (i < uniqueModels.length - 1) {
         console.warn(`Trying next fallback model after ${currentModel} failure`);
