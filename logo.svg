@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" role="img" aria-label="KnowYou — Cosmic Identity Engine">
+  <!-- Rahul Mark System v2 — Ink field #19140f / orange-500 glyph, 6.4:1
+       The four-point star the app used as an emoji favicon, given the chart it
+       was always implying: one self, one orbit, one transit. Ink field because
+       the night sky is the concept, not a theme choice. -->
+  <rect width="512" height="512" rx="114" fill="#19140f"/>
+  <svg x="84" y="84" width="344" height="344" viewBox="0 0 24 24">
+    <ellipse cx="12" cy="12" rx="11.2" ry="4.4" transform="rotate(-24 12 12)"
+             fill="none" stroke="#ff6b1a" stroke-opacity="0.55" stroke-width="1.7" data-role="accent"/>
+    <path d="M12 1.4c.7 5.1 4.4 8.8 9.5 9.5v2.2c-5.1.7-8.8 4.4-9.5 9.5H9.8c-.7-5.1-4.4-8.8-9.5-9.5v-2.2c5.1-.7 8.8-4.4 9.5-9.5Z" fill="#ff6b1a"/>
+    <circle cx="22.2" cy="7.4" r="1.6" fill="#fbf7f0" data-role="accent"/>
+  </svg>
+</svg>
