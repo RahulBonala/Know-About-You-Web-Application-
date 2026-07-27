@@ -78,9 +78,10 @@ npm run validate    # Run lint + format check together
 │   ├── generate.js     # Serverless: proxies prompts to Gemini API
 │   ├── models.js       # Serverless: lists available Gemini models
 │   └── health.js       # Serverless: health check endpoint
-├── public/
-│   ├── robots.txt      # SEO: crawler directives
-│   └── sitemap.xml     # SEO: sitemap
+├── robots.txt          # SEO: crawler directives (repo root IS the web root)
+├── sitemap.xml         # SEO: sitemap
+├── logo.svg            # Brand mark / favicon
+├── apple-touch-icon.png # Brand mark for iOS home screen
 ├── vercel.json         # Vercel config: security headers
 ├── .env.example        # Environment variable template
 ├── eslint.config.mjs   # ESLint flat config
