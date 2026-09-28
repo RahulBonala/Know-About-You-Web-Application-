@@ -1,0 +1,224 @@
+%%[
+/* ============================================================
+   Trex - Non-Pro Contractors - Welcome Email
+   PLACEHOLDERS: map each AttributeValue() to your sendable DE field
+   ============================================================ */
+SET @FirstName    = AttributeValue("FirstName")
+SET @CompanyName  = AttributeValue("CompanyName")
+SET @AdvisorName  = AttributeValue("AdvisorName")
+SET @AdvisorPhone = AttributeValue("AdvisorPhone")
+SET @AdvisorEmail = AttributeValue("AdvisorEmail")
+SET @RetailerName = AttributeValue("RetailerName")
+SET @RetailerCity = AttributeValue("RetailerCity")
+
+IF Empty(@FirstName)    THEN SET @FirstName    = "there" ENDIF
+IF Empty(@CompanyName)  THEN SET @CompanyName  = "your business" ENDIF
+IF Empty(@AdvisorName)  THEN SET @AdvisorName  = "Your Trex Project Advisor" ENDIF
+IF Empty(@AdvisorPhone) THEN SET @AdvisorPhone = "1-800-BUY-TREX" ENDIF
+IF Empty(@AdvisorEmail) THEN SET @AdvisorEmail = "" ENDIF
+IF Empty(@RetailerName) THEN SET @RetailerName = "a Trex retailer near you" ENDIF
+]%%
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="x-apple-disable-message-reformatting">
+<title>Welcome to Trex</title>
+<style>
+  body{margin:0;padding:0;background:#F7F5F2;}
+  a{color:#00493D;}
+  @media screen and (max-width:620px){
+    .wrap{width:100% !important;}
+    .px{padding-left:20px !important;padding-right:20px !important;}
+    .col{display:block !important;width:100% !important;padding:0 0 20px 0 !important;}
+    .h1{font-size:30px !important;line-height:36px !important;}
+    .stack-img{width:100% !important;height:auto !important;}
+    .hide-m{display:none !important;}
+  }
+</style>
+</head>
+<body style="margin:0;padding:0;background:#F7F5F2;">
+<!-- Preheader -->
+<div style="display:none;max-height:0;overflow:hidden;mso-hide:all;">Welcome to the Trex network, %%=v(@FirstName)=%% &mdash; your samples, your advisor, and your first project start here.&#8199;&#65279;&#847;&#8199;&#65279;&#847;&#8199;&#65279;&#847;</div>
+
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#F7F5F2;">
+<tr><td align="center" style="padding:0 10px;">
+
+<table role="presentation" class="wrap" width="600" cellpadding="0" cellspacing="0" border="0" style="width:600px;max-width:600px;">
+
+  <!-- View in browser -->
+  <tr><td align="right" style="padding:12px 4px;font-family:Arial,Helvetica,sans-serif;font-size:11px;color:#3D3935;">
+    <a href="%%view_email_url%%" style="color:#3D3935;text-decoration:underline;">View in browser</a>
+  </td></tr>
+
+  <!-- Header -->
+  <tr><td style="background:#ffffff;padding:22px 32px;border-bottom:4px solid #D4EB8E;" class="px">
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr>
+      <td align="left"><a href="https://www.trex.com/" target="_blank"><img src="https://image.s7.sfmc-content.com/lib/fe8f1373746d067b71/m/1/6c77298d-4695-4f05-b29a-6e8801522bac.png" width="90" alt="Trex" style="display:block;border:0;width:90px;height:auto;"></a></td>
+      <td align="right" class="hide-m" style="font-family:Arial,Helvetica,sans-serif;font-size:12px;letter-spacing:1.5px;color:#00493D;font-weight:bold;text-transform:uppercase;">Contractor Welcome</td>
+    </tr></table>
+  </td></tr>
+
+  <!-- Hero image -->
+  <tr><td style="background:#ffffff;">
+    <a href="https://www.trex.com/why-trex/" target="_blank"><img class="stack-img" src="https://image.s7.sfmc-content.com/lib/fe8f1373746d067b71/m/1/74e305be-b6b5-4814-9d7c-12b93a3377eb.jpg" width="600" alt="A finished Trex composite deck" style="display:block;border:0;width:600px;height:auto;"></a>
+  </td></tr>
+
+  <!-- Welcome band -->
+  <tr><td class="px" style="background:#00493D;padding:44px 48px 48px 48px;font-family:Arial,Helvetica,sans-serif;">
+    <p style="margin:0 0 14px 0;font-size:12px;letter-spacing:2px;font-weight:bold;color:#D4EB8E;text-transform:uppercase;">Welcome to the Trex network</p>
+    <h1 class="h1" style="margin:0 0 18px 0;font-size:36px;line-height:42px;color:#ffffff;font-weight:bold;">Welcome aboard, %%=v(@FirstName)=%%.<br>Let&rsquo;s build decks that last.</h1>
+    <p style="margin:0 0 28px 0;font-size:16px;line-height:25px;color:#ffffff;">We&rsquo;re glad to have %%=v(@CompanyName)=%% building with Trex. From your first set of samples to your first finished deck, you&rsquo;ve got products your customers already know&nbsp;&mdash; and a team that has your back on every job.</p>
+    <table role="presentation" cellpadding="0" cellspacing="0"><tr>
+      <td style="background:#D4EB8E;border-radius:3px;">
+        <a href="https://www.trex.com/why-trex/" target="_blank" style="display:inline-block;padding:15px 30px;font-family:Arial,Helvetica,sans-serif;font-size:15px;font-weight:bold;color:#00493D;text-decoration:none;">Get Started with Trex &rarr;</a>
+      </td>
+    </tr></table>
+  </td></tr>
+
+  <!-- First 3 steps -->
+  <tr><td class="px" style="background:#ffffff;padding:44px 48px 20px 48px;font-family:Arial,Helvetica,sans-serif;">
+    <h2 style="margin:0 0 6px 0;font-size:24px;line-height:30px;color:#00493D;">Your first three steps</h2>
+    <p style="margin:0 0 26px 0;font-size:15px;line-height:22px;color:#3D3935;">Everything you need to quote, win and install your first Trex job.</p>
+
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
+      <tr>
+        <td width="56" valign="top" style="padding:0 0 22px 0;">
+          <table role="presentation" cellpadding="0" cellspacing="0"><tr><td width="40" height="40" align="center" style="background:#00493D;border-radius:20px;font-family:Arial,Helvetica,sans-serif;font-size:17px;font-weight:bold;color:#D4EB8E;">1</td></tr></table>
+        </td>
+        <td valign="top" style="padding:0 0 22px 0;font-family:Arial,Helvetica,sans-serif;">
+          <p style="margin:0 0 4px 0;font-size:16px;font-weight:bold;color:#3D3935;">Get your decking samples</p>
+          <p style="margin:0 0 6px 0;font-size:15px;line-height:22px;color:#3D3935;">Show customers real colors and textures. A Project Advisor can get samples to you fast.</p>
+          <a href="https://www.trex.com/professionals/contact-us/" target="_blank" style="font-size:14px;font-weight:bold;color:#00493D;">Request samples &rarr;</a>
+        </td>
+      </tr>
+      <tr>
+        <td width="56" valign="top" style="padding:0 0 22px 0;">
+          <table role="presentation" cellpadding="0" cellspacing="0"><tr><td width="40" height="40" align="center" style="background:#00493D;border-radius:20px;font-family:Arial,Helvetica,sans-serif;font-size:17px;font-weight:bold;color:#D4EB8E;">2</td></tr></table>
+        </td>
+        <td valign="top" style="padding:0 0 22px 0;font-family:Arial,Helvetica,sans-serif;">
+          <p style="margin:0 0 4px 0;font-size:16px;font-weight:bold;color:#3D3935;">Line up your local supply</p>
+          <p style="margin:0 0 6px 0;font-size:15px;line-height:22px;color:#3D3935;">Our large distribution network keeps Trex in stock where you need it, so projects stay on schedule.</p>
+          <a href="https://www.trex.com/find-trex/" target="_blank" style="font-size:14px;font-weight:bold;color:#00493D;">Find Trex products &rarr;</a>
+        </td>
+      </tr>
+      <tr>
+        <td width="56" valign="top" style="padding:0 0 22px 0;">
+          <table role="presentation" cellpadding="0" cellspacing="0"><tr><td width="40" height="40" align="center" style="background:#00493D;border-radius:20px;font-family:Arial,Helvetica,sans-serif;font-size:17px;font-weight:bold;color:#D4EB8E;">3</td></tr></table>
+        </td>
+        <td valign="top" style="padding:0 0 22px 0;font-family:Arial,Helvetica,sans-serif;">
+          <p style="margin:0 0 4px 0;font-size:16px;font-weight:bold;color:#3D3935;">Watch the install videos</p>
+          <p style="margin:0 0 6px 0;font-size:15px;line-height:22px;color:#3D3935;">Straightforward installation saves time on every job. See it step by step before you start.</p>
+          <a href="https://www.youtube.com/playlist?list=PLV4bBr1Ca3JABb59UTUKs7k3eR51HFwXe" target="_blank" style="font-size:14px;font-weight:bold;color:#00493D;">Watch install videos &rarr;</a>
+        </td>
+      </tr>
+    </table>
+  </td></tr>
+
+  <!-- Why contractors choose Trex -->
+  <tr><td class="px" style="background:#ffffff;padding:8px 48px 40px 48px;">
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="border-top:1px solid #DCD9D5;">
+      <tr><td colspan="3" style="padding:32px 0 20px 0;font-family:Arial,Helvetica,sans-serif;">
+        <h2 style="margin:0;font-size:24px;line-height:30px;color:#00493D;">What your customers get</h2>
+      </td></tr>
+      <tr>
+        <td class="col" width="33%" valign="top" style="padding:0 12px 0 0;font-family:Arial,Helvetica,sans-serif;">
+          <p style="margin:0 0 6px 0;font-size:15px;font-weight:bold;color:#3D3935;border-left:3px solid #D4EB8E;padding-left:10px;">Low Maintenance</p>
+          <p style="margin:0;font-size:14px;line-height:21px;color:#3D3935;">Clean with soap and water.*</p>
+        </td>
+        <td class="col" width="33%" valign="top" style="padding:0 6px;font-family:Arial,Helvetica,sans-serif;">
+          <p style="margin:0 0 6px 0;font-size:15px;font-weight:bold;color:#3D3935;border-left:3px solid #D4EB8E;padding-left:10px;">Durable Materials</p>
+          <p style="margin:0;font-size:14px;line-height:21px;color:#3D3935;">Performance-Engineered&trade; to be fade and stain resistant.**</p>
+        </td>
+        <td class="col" width="33%" valign="top" style="padding:0 0 0 12px;font-family:Arial,Helvetica,sans-serif;">
+          <p style="margin:0 0 6px 0;font-size:15px;font-weight:bold;color:#3D3935;border-left:3px solid #D4EB8E;padding-left:10px;">Sustainably Made</p>
+          <p style="margin:0;font-size:14px;line-height:21px;color:#3D3935;">Composite decking made with 95% recycled and reclaimed materials.</p>
+        </td>
+      </tr>
+    </table>
+  </td></tr>
+
+  <!-- Project Advisor card -->
+  <tr><td class="px" style="background:#ffffff;padding:0 48px 40px 48px;">
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#F7F5F2;border:1px solid #DCD9D5;border-radius:4px;">
+      <tr><td style="padding:28px 28px;font-family:Arial,Helvetica,sans-serif;">
+        <p style="margin:0 0 6px 0;font-size:12px;letter-spacing:1.5px;font-weight:bold;color:#00493D;text-transform:uppercase;">Your Trex contact</p>
+        <p style="margin:0 0 4px 0;font-size:20px;font-weight:bold;color:#3D3935;">%%=v(@AdvisorName)=%%</p>
+        <p style="margin:0 0 16px 0;font-size:15px;line-height:22px;color:#3D3935;">
+          Questions on product selection, samples or your first quote? Reach out anytime.<br>
+          <strong>Phone:</strong> %%=v(@AdvisorPhone)=%%
+          %%[ IF NOT Empty(@AdvisorEmail) THEN ]%%<br><strong>Email:</strong> <a href="mailto:%%=v(@AdvisorEmail)=%%" style="color:#00493D;">%%=v(@AdvisorEmail)=%%</a>%%[ ENDIF ]%%
+        </p>
+        <table role="presentation" cellpadding="0" cellspacing="0"><tr>
+          <td style="background:#00493D;border-radius:3px;">
+            <a href="https://www.trex.com/professionals/contact-us/" target="_blank" style="display:inline-block;padding:13px 24px;font-family:Arial,Helvetica,sans-serif;font-size:14px;font-weight:bold;color:#ffffff;text-decoration:none;">Connect with a Project Advisor</a>
+          </td>
+        </tr></table>
+      </td></tr>
+    </table>
+  </td></tr>
+
+  <!-- Local retailer -->
+  <tr><td class="px" style="background:#ffffff;padding:0 48px 44px 48px;">
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr>
+      <td class="col" width="220" valign="middle" style="padding:0 24px 0 0;">
+        <img class="stack-img" src="https://image.s7.sfmc-content.com/lib/fe8f1373746d067b71/m/1/211b4d00-5032-4226-8a85-d5014871f4de.jpg" width="220" alt="Trex products at a local retailer" style="display:block;border:0;width:220px;height:auto;">
+      </td>
+      <td class="col" valign="middle" style="font-family:Arial,Helvetica,sans-serif;">
+        <h3 style="margin:0 0 8px 0;font-size:20px;line-height:26px;color:#00493D;">Stock up close to the job</h3>
+        <p style="margin:0 0 14px 0;font-size:15px;line-height:22px;color:#3D3935;">Pick up decking, railing and supplies at %%=v(@RetailerName)=%%%%[ IF NOT Empty(@RetailerCity) THEN ]%% in %%=v(@RetailerCity)=%%%%[ ENDIF ]%%.</p>
+        <a href="https://www.trex.com/find-trex/" target="_blank" style="font-size:14px;font-weight:bold;color:#00493D;">Find Trex Products &rarr;</a>
+      </td>
+    </tr></table>
+  </td></tr>
+
+  <!-- Testimonial -->
+  <tr><td class="px" style="background:#3D3935;padding:40px 48px;font-family:Arial,Helvetica,sans-serif;">
+    <p style="margin:0 0 4px 0;font-size:40px;line-height:40px;color:#D4EB8E;font-family:Georgia,serif;">&ldquo;</p>
+    <p style="margin:0 0 16px 0;font-size:18px;line-height:27px;color:#ffffff;font-style:italic;">You go out to a customer&rsquo;s home and every single composite board in their mind is Trex. That brand recognition is what sets Trex apart from everybody else.</p>
+    <p style="margin:0;font-size:13px;letter-spacing:1px;color:#D4EB8E;font-weight:bold;text-transform:uppercase;">Steve E., Deck Builder (Colorado)</p>
+  </td></tr>
+
+  <!-- Optional placeholder section -->
+  <tr><td class="px" style="background:#ffffff;padding:36px 48px;font-family:Arial,Helvetica,sans-serif;">
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="border:2px dashed #DCD9D5;">
+      <tr><td style="padding:22px;">
+        <p style="margin:0 0 6px 0;font-size:16px;font-weight:bold;color:#00493D;">[PLACEHOLDER: Offer or event headline]</p>
+        <p style="margin:0;font-size:14px;line-height:21px;color:#3D3935;">[PLACEHOLDER: Add a welcome offer, training invite or seasonal message here &mdash; or delete this block.]</p>
+      </td></tr>
+    </table>
+  </td></tr>
+
+  <!-- Tools bar -->
+  <tr><td class="px" style="background:#F7F5F2;padding:28px 32px;border-top:1px solid #DCD9D5;">
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr>
+      <td width="25%" align="center"><a href="https://www.trex.com/build-your-deck/planyourdeck/deck-designer/" target="_blank" style="text-decoration:none;"><img src="https://image.s7.sfmc-content.com/lib/fe8f1373746d067b71/m/1/424854bc-83eb-4fde-a1e1-c11d0bbfc536.png" width="52" alt="" style="display:block;border:0;margin:0 auto 6px auto;"><span style="font-family:Arial,Helvetica,sans-serif;font-size:13px;font-weight:bold;color:#00493D;">Design</span></a></td>
+      <td width="25%" align="center"><a href="https://www.trex.com/products/decking/" target="_blank" style="text-decoration:none;"><img src="https://image.s7.sfmc-content.com/lib/fe8f1373746d067b71/m/1/c3b7add9-5036-47c8-9020-0317379a9c9e.png" width="52" alt="" style="display:block;border:0;margin:0 auto 6px auto;"><span style="font-family:Arial,Helvetica,sans-serif;font-size:13px;font-weight:bold;color:#00493D;">Products</span></a></td>
+      <td width="25%" align="center"><a href="https://www.trex.com/build-your-deck/planyourdeck/" target="_blank" style="text-decoration:none;"><img src="https://image.s7.sfmc-content.com/lib/fe8f1373746d067b71/m/1/839988f8-b4e1-48d4-bb71-31b8a6a7cad6.png" width="52" alt="" style="display:block;border:0;margin:0 auto 6px auto;"><span style="font-family:Arial,Helvetica,sans-serif;font-size:13px;font-weight:bold;color:#00493D;">Tools</span></a></td>
+      <td width="25%" align="center"><a href="https://www.youtube.com/playlist?list=PLV4bBr1Ca3JABb59UTUKs7k3eR51HFwXe" target="_blank" style="text-decoration:none;"><img src="https://image.s7.sfmc-content.com/lib/fe8f1373746d067b71/m/1/a6b1770e-892b-4931-8fe9-a9daccc2cc70.png" width="52" alt="" style="display:block;border:0;margin:0 auto 6px auto;"><span style="font-family:Arial,Helvetica,sans-serif;font-size:13px;font-weight:bold;color:#00493D;">Install</span></a></td>
+    </tr></table>
+  </td></tr>
+
+  <!-- Footer -->
+  <tr><td class="px" align="center" style="background:#00493D;padding:32px 40px;font-family:Arial,Helvetica,sans-serif;">
+    <table role="presentation" cellpadding="0" cellspacing="0" style="margin:0 auto 20px auto;"><tr>
+      <td style="padding:0 5px;"><a href="https://www.facebook.com/TrexCompany/"><img src="https://image.s7.sfmc-content.com/lib/fe8f1373746d067b71/m/1/bca5fd27-6e05-4e0f-85d6-baa9f58b7eb6.png" width="37" alt="Facebook" style="display:block;border:0;"></a></td>
+      <td style="padding:0 5px;"><a href="https://www.instagram.com/trexcompany/"><img src="https://image.s7.sfmc-content.com/lib/fe8f1373746d067b71/m/1/98a01c2b-122b-425d-9c3b-4fa8cdd48754.png" width="37" alt="Instagram" style="display:block;border:0;"></a></td>
+      <td style="padding:0 5px;"><a href="https://www.pinterest.com/trexcompany/"><img src="https://image.s7.sfmc-content.com/lib/fe8f1373746d067b71/m/1/4ec0e433-2b12-4bca-a4c4-2b3199c2c2e4.png" width="37" alt="Pinterest" style="display:block;border:0;"></a></td>
+      <td style="padding:0 5px;"><a href="https://www.youtube.com/user/TheTrexCo"><img src="https://image.s7.sfmc-content.com/lib/fe8f1373746d067b71/m/1/53577253-87fb-4533-ad7d-6266d5df21aa.png" width="37" alt="YouTube" style="display:block;border:0;"></a></td>
+      <td style="padding:0 5px;"><a href="https://www.tiktok.com/@trexcompany"><img src="https://image.s7.sfmc-content.com/lib/fe8f1373746d067b71/m/1/389639d9-5bc0-4b04-a242-e647f08d50ab.png" width="37" alt="TikTok" style="display:block;border:0;"></a></td>
+      <td style="padding:0 5px;"><a href="https://www.linkedin.com/company/trex-company/"><img src="https://image.s7.sfmc-content.com/lib/fe8f1373746d067b71/m/1/bc770609-a31a-4698-883e-4a0aa06118e9.png" width="37" alt="LinkedIn" style="display:block;border:0;"></a></td>
+    </tr></table>
+    <p style="margin:0 0 12px 0;font-size:11px;line-height:17px;color:#DCD9D5;">*For details, visit <a href="https://trex.com/care" style="color:#D4EB8E;">trex.com/care</a>. **For details, visit <a href="https://trex.com/warranty" style="color:#D4EB8E;">trex.com/warranty</a>.</p>
+    <p style="margin:0 0 12px 0;font-size:11px;line-height:17px;color:#DCD9D5;">This email was sent by: %%Member_Busname%%<br>%%Member_Addr%% %%Member_City%%, %%Member_State%%, %%Member_PostalCode%%, %%Member_Country%%<br>1-800-BUY-TREX</p>
+    <p style="margin:0 0 12px 0;font-size:11px;line-height:17px;color:#DCD9D5;">&copy; 2026 Trex Company, Inc. All rights reserved. Trex&reg;, the Trex&reg; logo, Transcend&reg;, Lineage&reg;, and Trex Select&reg; are registered trademarks of Trex Company, Inc., Winchester, Virginia.</p>
+    <p style="margin:0;font-size:12px;color:#ffffff;"><a href="%%profile_center_url%%" style="color:#ffffff;">Update Profile</a> &nbsp;|&nbsp; <a href="%%unsub_center_url%%" style="color:#ffffff;">Unsubscribe</a></p>
+  </td></tr>
+
+</table>
+</td></tr>
+</table>
+<custom name="opencounter" type="tracking">
+</body>
+</html>
