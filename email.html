@@ -1,0 +1,584 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Email Agent Council — KnowYou</title>
+    <meta
+      name="description"
+      content="A team of AI agents that understands an email, drafts tactical, business and diplomatic replies, and picks the best one using a weighted rubric and an expected-value decision model."
+    />
+    <meta name="theme-color" content="#19140f" />
+    <meta name="color-scheme" content="dark" />
+    <link rel="icon" type="image/svg+xml" href="/logo.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:wght@400;600&family=Inter:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --void: #19140f;
+        --layer: #241d16;
+        --panel: #2b2118;
+        --rim: rgba(251, 247, 240, 0.12);
+        --brand: #ff6b1a;
+        --brand-soft: rgba(255, 107, 26, 0.14);
+        --cyan: #38c4d4;
+        --violet: #a78bfa;
+        --text-bright: #fbf7f0;
+        --text-mid: #c9bcab;
+        --text-dim: #a89c8a;
+        --success: #34d399;
+        --danger: #f87171;
+      }
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        background: var(--void);
+        color: var(--text-mid);
+        font:
+          15px/1.6 'Inter',
+          sans-serif;
+        padding: 32px 16px 64px;
+      }
+      main {
+        max-width: 1040px;
+        margin: 0 auto;
+      }
+      h1,
+      h2 {
+        font-family: 'Fraunces', serif;
+        color: var(--text-bright);
+        font-weight: 600;
+      }
+      h1 {
+        font-size: clamp(28px, 5vw, 40px);
+        line-height: 1.15;
+      }
+      h1 span {
+        color: var(--brand);
+      }
+      h2 {
+        font-size: 20px;
+        margin-bottom: 12px;
+      }
+      h3 {
+        color: var(--text-bright);
+        font-size: 15px;
+        font-weight: 600;
+      }
+      .lede {
+        margin: 10px 0 28px;
+        max-width: 680px;
+      }
+      .card {
+        background: var(--panel);
+        border: 1px solid var(--rim);
+        border-radius: 14px;
+        padding: 20px;
+        margin-bottom: 20px;
+      }
+      label {
+        display: block;
+        font-size: 13px;
+        font-weight: 600;
+        color: var(--text-bright);
+        margin: 14px 0 6px;
+      }
+      label:first-child {
+        margin-top: 0;
+      }
+      label small {
+        color: var(--text-dim);
+        font-weight: 400;
+      }
+      textarea,
+      input {
+        width: 100%;
+        background: var(--layer);
+        border: 1px solid var(--rim);
+        border-radius: 10px;
+        color: var(--text-bright);
+        font: inherit;
+        padding: 10px 12px;
+      }
+      textarea:focus,
+      input:focus {
+        outline: 2px solid var(--brand);
+        outline-offset: 1px;
+      }
+      .row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+      }
+      button {
+        background: var(--brand);
+        color: #1a0f05;
+        border: 0;
+        border-radius: 10px;
+        font:
+          600 15px 'Inter',
+          sans-serif;
+        padding: 12px 22px;
+        cursor: pointer;
+        margin-top: 16px;
+      }
+      button:disabled {
+        opacity: 0.6;
+        cursor: wait;
+      }
+      button.ghost {
+        background: transparent;
+        color: var(--brand);
+        border: 1px solid var(--brand);
+        padding: 6px 12px;
+        font-size: 13px;
+        margin: 0;
+      }
+      .pipeline {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 16px;
+      }
+      .chip {
+        font-size: 12px;
+        padding: 4px 10px;
+        border-radius: 999px;
+        border: 1px solid var(--rim);
+        color: var(--text-dim);
+      }
+      .chip.ok {
+        border-color: var(--success);
+        color: var(--success);
+      }
+      .chip.fail {
+        border-color: var(--danger);
+        color: var(--danger);
+      }
+      .chip.run {
+        border-color: var(--brand);
+        color: var(--brand);
+      }
+      .error {
+        color: var(--danger);
+        margin-top: 12px;
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 16px;
+      }
+      .kv dt {
+        font-size: 12px;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        color: var(--text-dim);
+        margin-top: 10px;
+      }
+      .kv dd {
+        color: var(--text-bright);
+      }
+      ul.tight {
+        padding-left: 18px;
+      }
+      .badge {
+        display: inline-block;
+        font-size: 12px;
+        font-weight: 600;
+        padding: 2px 8px;
+        border-radius: 6px;
+        background: var(--brand-soft);
+        color: var(--brand);
+      }
+      .draft {
+        background: var(--layer);
+        border: 1px solid var(--rim);
+        border-radius: 12px;
+        padding: 16px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+      .draft.winner {
+        border-color: var(--brand);
+      }
+      .draft header {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        gap: 8px;
+      }
+      .score {
+        font:
+          600 22px 'Fraunces',
+          serif;
+        color: var(--brand);
+      }
+      pre {
+        white-space: pre-wrap;
+        font:
+          14px/1.55 'Inter',
+          sans-serif;
+        color: var(--text-bright);
+        background: var(--void);
+        border-radius: 8px;
+        padding: 12px;
+      }
+      .bars {
+        display: grid;
+        grid-template-columns: auto 1fr auto;
+        gap: 4px 8px;
+        font-size: 12px;
+        align-items: center;
+      }
+      .bar {
+        height: 6px;
+        background: var(--void);
+        border-radius: 3px;
+        overflow: hidden;
+      }
+      .bar i {
+        display: block;
+        height: 100%;
+        background: var(--cyan);
+      }
+      .muted {
+        color: var(--text-dim);
+        font-size: 13px;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 12px;
+      }
+      td {
+        padding: 2px 0;
+        border-top: 1px solid var(--rim);
+      }
+      td.num {
+        text-align: right;
+        font-variant-numeric: tabular-nums;
+      }
+      .final-head {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 12px;
+        flex-wrap: wrap;
+        margin-bottom: 12px;
+      }
+      [hidden] {
+        display: none !important;
+      }
+      @media (max-width: 640px) {
+        .row {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>Email <span>Agent Council</span></h1>
+      <p class="lede">
+        Paste an email. A team of agents works out what's really being asked, writes tactical,
+        business and diplomatic replies, then a risk reviewer, a judge and an expected-value
+        forecaster score each reply. The highest-scoring reply is polished into a send-ready draft.
+      </p>
+
+      <form id="form" class="card">
+        <label for="email">Incoming email</label>
+        <textarea
+          id="email"
+          rows="10"
+          maxlength="12000"
+          required
+          placeholder="Paste the full email, including any quoted thread…"
+        ></textarea>
+        <div class="row">
+          <div>
+            <label for="background">About you <small>(optional)</small></label>
+            <textarea
+              id="background"
+              rows="3"
+              maxlength="3000"
+              placeholder="Your role, company, constraints, facts the reply can use…"
+            ></textarea>
+          </div>
+          <div>
+            <label for="goal">Your goal for the reply <small>(optional)</small></label>
+            <textarea
+              id="goal"
+              rows="3"
+              maxlength="500"
+              placeholder="e.g. keep the client but push the deadline by a week"
+            ></textarea>
+          </div>
+        </div>
+        <button id="run" type="submit">Run the agent council</button>
+        <div class="pipeline" id="pipeline" aria-live="polite"></div>
+        <p class="error" id="error" role="alert" hidden></p>
+      </form>
+
+      <section id="results" hidden>
+        <div class="card" id="final-card">
+          <div class="final-head">
+            <h2>Best reply</h2>
+            <button class="ghost" id="copy" type="button">Copy reply</button>
+          </div>
+          <p id="decision" class="muted"></p>
+          <pre id="final"></pre>
+          <div class="grid" style="margin-top: 14px">
+            <div>
+              <h3>Before sending</h3>
+              <ul class="tight" id="before"></ul>
+            </div>
+            <div>
+              <h3>Editor's changes</h3>
+              <ul class="tight" id="changes"></ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h2>Context</h2>
+          <div class="grid" id="context"></div>
+        </div>
+
+        <div class="card">
+          <h2>Competing drafts</h2>
+          <p class="muted" id="weights" style="margin-bottom: 12px"></p>
+          <div class="grid" id="drafts"></div>
+        </div>
+      </section>
+    </main>
+
+    <script>
+      const AGENTS = [
+        'Context Analyst',
+        'Tactical Responder',
+        'Business Strategist',
+        'Relationship Diplomat',
+        'Risk Reviewer',
+        'Decision Judge',
+        'EV Forecaster',
+        'Editor',
+      ];
+      const LABELS = {
+        asks_coverage: 'Asks covered',
+        goal_alignment: 'Goal fit',
+        tone_fit: 'Tone fit',
+        clarity: 'Clarity',
+        safety: 'Safety',
+        expected_value: 'Expected value',
+      };
+      const $ = (id) => document.getElementById(id);
+
+      function el(tag, attrs = {}, ...children) {
+        const node = document.createElement(tag);
+        for (const [k, v] of Object.entries(attrs)) {
+          if (k === 'class') node.className = v;
+          else if (k === 'style') node.style.cssText = v;
+          else node.setAttribute(k, v);
+        }
+        for (const c of children.flat()) {
+          if (c === null || c === undefined || c === '') continue;
+          node.append(c instanceof Node ? c : document.createTextNode(String(c)));
+        }
+        return node;
+      }
+
+      function list(items) {
+        const arr = Array.isArray(items) ? items.filter(Boolean) : [];
+        return arr.length
+          ? arr.map((i) => el('li', {}, i))
+          : [el('li', { class: 'muted' }, 'None')];
+      }
+
+      function renderPipeline(trace) {
+        const box = $('pipeline');
+        box.replaceChildren(
+          ...AGENTS.map((name) => {
+            if (!trace) return el('span', { class: 'chip run' }, name);
+            const t = trace.find((x) => x.agent === name);
+            if (!t) return el('span', { class: 'chip' }, name);
+            return el(
+              'span',
+              { class: `chip ${t.ok ? 'ok' : 'fail'}`, title: t.error || `${t.ms} ms` },
+              `${t.ok ? '✓' : '✕'} ${name}`,
+            );
+          }),
+        );
+      }
+
+      function renderContext(c) {
+        const dl = (pairs) =>
+          el(
+            'dl',
+            { class: 'kv' },
+            pairs.flatMap(([k, v]) => [el('dt', {}, k), el('dd', {}, v || '—')]),
+          );
+        const sender = c.sender || {};
+        $('context').replaceChildren(
+          dl([
+            ['Summary', c.summary],
+            ['Intent', c.intent],
+            [
+              'Sender',
+              [sender.name, sender.role_guess, sender.relationship].filter(Boolean).join(' · '),
+            ],
+            ['Tone / sentiment', [c.tone, c.sentiment].filter(Boolean).join(' · ')],
+            ['Urgency', c.urgency],
+            ['Reply should', c.recommended_goal],
+          ]),
+          el(
+            'div',
+            {},
+            el('h3', {}, 'Explicit asks'),
+            el('ul', { class: 'tight' }, list(c.explicit_asks)),
+            el('h3', { style: 'margin-top:10px' }, 'Implicit needs'),
+            el('ul', { class: 'tight' }, list(c.implicit_needs)),
+            el('h3', { style: 'margin-top:10px' }, 'Deadlines'),
+            el('ul', { class: 'tight' }, list(c.deadlines)),
+          ),
+          el(
+            'div',
+            {},
+            el('h3', {}, 'Risk flags'),
+            el('ul', { class: 'tight' }, list(c.risk_flags)),
+            el('h3', { style: 'margin-top:10px' }, 'Missing info'),
+            el('ul', { class: 'tight' }, list(c.missing_info)),
+          ),
+        );
+      }
+
+      function renderDraft(d, winnerId) {
+        const bars = Object.entries(d.scores || {}).flatMap(([k, v]) => [
+          el('span', {}, LABELS[k] || k),
+          el('span', { class: 'bar' }, el('i', { style: `width:${v * 10}%` })),
+          el('span', {}, v),
+        ]);
+        const outcomes = (d.outcomes || []).map((o) =>
+          el(
+            'tr',
+            {},
+            el('td', {}, o.label),
+            el('td', { class: 'num' }, `${Math.round(Number(o.probability) * 100)}%`),
+            el('td', { class: 'num' }, `${Number(o.value) > 0 ? '+' : ''}${o.value}`),
+          ),
+        );
+        return el(
+          'article',
+          { class: `draft${d.id === winnerId ? ' winner' : ''}` },
+          el(
+            'header',
+            {},
+            el(
+              'div',
+              {},
+              el('h3', {}, d.name),
+              d.id === winnerId ? el('span', { class: 'badge' }, 'Winner') : '',
+            ),
+            el('span', { class: 'score', title: 'Weighted score out of 10' }, d.total),
+          ),
+          d.strategy ? el('p', { class: 'muted' }, d.strategy) : '',
+          el('pre', {}, `Subject: ${d.subject || ''}\n\n${d.body || ''}`),
+          el('div', { class: 'bars' }, bars),
+          outcomes.length
+            ? el(
+                'div',
+                {},
+                el(
+                  'h3',
+                  {},
+                  `Expected value: ${d.ev ?? '—'} `,
+                  el('span', { class: 'muted' }, '(−10 … +10)'),
+                ),
+                el('table', {}, el('tbody', {}, outcomes)),
+              )
+            : '',
+          d.verdict ? el('p', { class: 'muted' }, `Judge: ${d.verdict}`) : '',
+          d.issues?.length
+            ? el(
+                'div',
+                {},
+                el('h3', {}, 'Risk issues'),
+                el('ul', { class: 'tight' }, list(d.issues)),
+              )
+            : '',
+        );
+      }
+
+      function render(data) {
+        const { context, drafts, decision, final } = data;
+        $('decision').textContent =
+          `${decision.winner_name} won with ${decision.total}/10` +
+          (decision.expected_value !== null && decision.expected_value !== undefined
+            ? ` (expected value ${decision.expected_value})`
+            : '') +
+          `. ${decision.rationale}`;
+        $('final').textContent = `Subject: ${final.subject || ''}\n\n${final.body || ''}`;
+        $('before').replaceChildren(...list(final.before_sending));
+        $('changes').replaceChildren(...list(final.changes));
+        renderContext(context || {});
+        $('weights').textContent =
+          'Score weights: ' +
+          Object.entries(decision.weights)
+            .map(([k, w]) => `${LABELS[k] || k} ${Math.round(w * 100)}%`)
+            .join(' · ');
+        $('drafts').replaceChildren(...drafts.map((d) => renderDraft(d, decision.winner)));
+        $('results').hidden = false;
+        $('final-card').scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+
+      $('form').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const email = $('email').value.trim();
+        if (!email) return;
+        $('run').disabled = true;
+        $('run').textContent = 'Agents are working…';
+        $('error').hidden = true;
+        renderPipeline(null);
+        try {
+          const res = await fetch('/api/email-agents', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              email,
+              background: $('background').value.trim(),
+              goal: $('goal').value.trim(),
+            }),
+          });
+          const data = await res.json().catch(() => ({}));
+          if (!res.ok) throw new Error(data.error || `Request failed (${res.status})`);
+          renderPipeline(data.trace);
+          render(data);
+        } catch (err) {
+          $('pipeline').replaceChildren();
+          $('error').textContent = err.message;
+          $('error').hidden = false;
+        } finally {
+          $('run').disabled = false;
+          $('run').textContent = 'Run the agent council';
+        }
+      });
+
+      $('copy').addEventListener('click', async () => {
+        try {
+          await navigator.clipboard.writeText($('final').textContent);
+          $('copy').textContent = 'Copied';
+        } catch {
+          $('copy').textContent = 'Copy failed';
+        }
+        setTimeout(() => ($('copy').textContent = 'Copy reply'), 1500);
+      });
+    </script>
+  </body>
+</html>

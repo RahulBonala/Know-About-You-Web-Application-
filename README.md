@@ -22,6 +22,25 @@ A cosmic identity engine that weaves numerology, astrology, and AI into a deep p
 - Daily oracle readings tied to moon phase
 - Local-only session save/restore (localStorage, 7-day TTL)
 - Zero database, zero tracking — data vanishes on refresh
+- **Email Agent Council** (`/email.html`) — a multi-agent team that understands an email and picks the best reply
+
+## Email Agent Council
+
+Paste an incoming email (plus optional background about you and your goal) and a team of Gemini agents works on it:
+
+| Stage | Agent                   | Job                                                                                                       |
+| ----- | ----------------------- | --------------------------------------------------------------------------------------------------------- |
+| 1     | Context Analyst         | Summary, sender intent, explicit asks, implicit needs, deadlines, tone, urgency, risk flags, missing info |
+| 2     | Tactical Responder      | Short, direct, action-first reply                                                                         |
+| 2     | Business Strategist     | Professional, position-aware reply that protects commercial interests                                     |
+| 2     | Relationship Diplomat   | Empathetic, de-escalating, relationship-first reply                                                       |
+| 3     | Risk Reviewer           | Audits each draft for overcommitment, invented facts, legal/financial exposure; scores safety             |
+| 3     | Decision Judge          | Scores each draft on asks covered, goal fit, tone fit, clarity                                            |
+| 3     | EV Forecaster           | Expected-value decision model: predicts recipient outcomes (probability × value) for each draft           |
+| 4     | _(code, deterministic)_ | Weighted score picks the winner                                                                           |
+| 5     | Editor                  | Applies the reviewer's fixes to the winner and lists what to verify before sending                        |
+
+Stage 2 and stage 3 agents run in parallel. Final score weights: asks covered 20%, goal fit 15%, tone fit 15%, clarity 10%, safety 15%, expected value 25%. Expected value is `Σ p·v` over the forecast outcomes (probabilities renormalised, values −10…+10), mapped onto the 1–10 scale. If a drafter or evaluator fails, the run continues without it (a missing score counts as a neutral 5). The email text is treated as untrusted data in every agent prompt.
 
 ## Getting Started
 
@@ -74,7 +93,11 @@ npm run validate    # Run lint + format check together
 
 ```
 ├── index.html          # Single-page frontend (HTML + CSS + JS)
+├── email.html          # Email Agent Council UI
 ├── api/
+│   ├── _lib/gemini.js        # Shared Gemini JSON client (not a route)
+│   ├── _lib/email-agents.js  # Agent definitions + orchestration (not a route)
+│   ├── email-agents.js # Serverless: runs the email agent council
 │   ├── generate.js     # Serverless: proxies prompts to Gemini API
 │   ├── models.js       # Serverless: lists available Gemini models
 │   └── health.js       # Serverless: health check endpoint
@@ -92,11 +115,12 @@ npm run validate    # Run lint + format check together
 
 ## API Endpoints
 
-| Method | Endpoint        | Description                               |
-| ------ | --------------- | ----------------------------------------- |
-| POST   | `/api/generate` | Send a prompt to Gemini, get AI analysis  |
-| GET    | `/api/models`   | List available Gemini models              |
-| GET    | `/api/health`   | Health check (returns `{ status: "ok" }`) |
+| Method | Endpoint            | Description                                                                           |
+| ------ | ------------------- | ------------------------------------------------------------------------------------- |
+| POST   | `/api/generate`     | Send a prompt to Gemini, get AI analysis                                              |
+| GET    | `/api/models`       | List available Gemini models                                                          |
+| GET    | `/api/health`       | Health check (returns `{ status: "ok" }`)                                             |
+| POST   | `/api/email-agents` | Run the email agent council. Body: `{ email, background?, goal? }` (5 req/min per IP) |
 
 ## Deployment
 
