@@ -33,9 +33,7 @@ A cosmic identity engine that weaves numerology, astrology, and AI into a deep p
 ### Setup
 
 ```bash
-# Clone the repository
-git clone https://github.com/RahulBonala/Know-About-You-Web-Application-.git
-cd Know-About-You-Web-Application-
+# From the project directory
 
 # Install dependencies
 npm install

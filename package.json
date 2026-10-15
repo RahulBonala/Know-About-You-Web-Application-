@@ -11,10 +11,6 @@
     "format:check": "npx prettier --check .",
     "validate": "npm run lint && npm run format:check"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/RahulBonala/Know-About-You-Web-Application-.git"
-  },
   "keywords": [
     "astrology",
     "numerology",
@@ -30,10 +26,6 @@
   "engines": {
     "node": "22.x"
   },
-  "bugs": {
-    "url": "https://github.com/RahulBonala/Know-About-You-Web-Application-/issues"
-  },
-  "homepage": "https://github.com/RahulBonala/Know-About-You-Web-Application-#readme",
   "dependencies": {
     "dotenv": "^17.3.1"
   },
